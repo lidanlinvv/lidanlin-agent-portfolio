@@ -1,0 +1,57 @@
+/* Main page: give each section a different rhythm while keeping the mint scrapbook identity. */
+#home .hero{position:relative}
+#home .herotext{position:relative;z-index:2}
+#home .stamp{background:#fbf0d4;border:1px solid #c5a76c;box-shadow:3px 4px #d6c398;transform:rotate(-3deg)}
+#home .hero h1 span{background:linear-gradient(100deg,#c96445 0%,#e49255 42%,#768b61 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+#home .illustration{isolation:isolate}
+#home .sun{background:radial-gradient(circle at 35% 30%,#ffe8ad,#e6ad65);box-shadow:0 0 0 12px rgba(255,255,255,.18),0 0 45px rgba(211,148,75,.25);animation:sun-breathe 5s ease-in-out infinite}
+#home .leaf{filter:drop-shadow(12px 13px 0 rgba(67,97,65,.1));background:linear-gradient(140deg,#90ae75,#557b5e)}
+#home .flower{filter:drop-shadow(0 5px 9px rgba(101,76,34,.15));animation:flower-turn 18s linear infinite}
+#home .sticker{border:1px solid rgba(84,104,75,.25);box-shadow:0 13px 24px rgba(44,63,48,.14);backdrop-filter:blur(9px)}
+#home .sticker.one{background:#fff7df}
+#home .sticker.two{background:#f1e7f6}
+#home .scribble{font-weight:800}
+
+/* Articles become a mixed editorial spread rather than four equal rectangles. */
+#notes .log{grid-template-columns:1.12fr .88fr;grid-template-areas:"lead lead" "left right" "last last";align-items:start;gap:15px 20px}
+#notes .entry{position:relative;isolation:isolate;overflow:hidden;min-height:178px;padding:22px 24px 20px;border:0;border-left:0;border-radius:5px 25px 5px 25px;box-shadow:0 10px 25px rgba(48,63,52,.08);transition:transform .22s,box-shadow .22s}
+#notes .entry:before{content:"";position:absolute;z-index:-1;right:-25px;top:-42px;width:142px;height:142px;border:1px solid currentColor;border-radius:50%;opacity:.15}
+#notes .entry:hover{transform:translateY(-5px) rotate(0);box-shadow:0 17px 30px rgba(48,63,52,.13)}
+#notes .entry:nth-child(1){grid-area:lead;min-height:205px;background:linear-gradient(115deg,#e6efdd,#f2f2df);transform:rotate(-.45deg);padding:26px 30px}
+#notes .entry:nth-child(1):after{content:"FEATURED NOTE";position:absolute;right:28px;top:22px;padding:7px 10px;border:1px solid #91a783;border-radius:20px;color:#597653;font-size:8px;font-weight:800;letter-spacing:.16em}
+#notes .entry:nth-child(2){grid-area:left;background:#f5e5d7;transform:translateY(5px) rotate(.8deg)}
+#notes .entry:nth-child(3){grid-area:right;background:#ece5f2;transform:translateY(-5px) rotate(-.8deg)}
+#notes .entry:nth-child(4){grid-area:last;min-height:132px;background:#e3eeee;transform:rotate(.35deg);padding-right:180px}
+#notes .entry time{display:inline-block;padding:6px 9px;border-radius:12px;background:rgba(255,255,255,.62);color:#8d694d;font-size:9px}
+#notes .entry h3{font-size:17px;line-height:1.55;max-width:620px;margin:12px 0 7px}
+#notes .entry:nth-child(1) h3{font-size:21px;max-width:760px}
+#notes .entry p{max-width:700px;font-size:11px;line-height:1.8}
+#notes .entry a{position:relative;z-index:2;border-bottom:1px solid currentColor}
+
+/* Experiments use scrapbook forms: broad garden note, ticket, field card, route slip. */
+#play .hobbies{grid-template-columns:1.12fr .88fr;grid-template-rows:auto auto;align-items:start;gap:17px 20px}
+#play .hobby{position:relative;overflow:hidden;min-height:154px;justify-content:flex-start;padding:23px 24px;border:1px solid rgba(78,99,76,.12);box-shadow:0 9px 22px rgba(50,65,52,.07);transition:transform .22s,box-shadow .22s}
+#play .hobby:hover{transform:translateY(-5px) rotate(0);box-shadow:0 16px 28px rgba(50,65,52,.12)}
+#play .hobby span{position:relative;z-index:1;display:grid;place-items:center;flex:none;width:54px;height:54px;border-radius:18px;background:rgba(255,255,255,.58);box-shadow:0 6px 14px rgba(50,65,52,.08);font-size:29px;transition:transform .22s}
+#play .hobby:hover span{transform:rotate(-8deg) scale(1.08)}
+#play .hobby h3{font-size:15px}
+#play .hobby p{max-width:380px;font-size:11px;line-height:1.8}
+#play .hobby:after{content:"";position:absolute;right:-31px;bottom:-50px;width:120px;height:120px;border:1px solid rgba(60,78,61,.16);border-radius:50%}
+#play .hobby:nth-child(1){grid-column:1;grid-row:1;min-height:180px;background:linear-gradient(120deg,#e3edda,#cfe2c5);transform:rotate(-.7deg);border-radius:34px 8px 34px 8px}
+#play .hobby:nth-child(1) span{border-radius:50%;background:#f3f4dd}
+#play .hobby:nth-child(2){grid-column:2;grid-row:1;min-height:145px;background:#f4dfd3;transform:translateY(18px) rotate(1.2deg);border-radius:8px 28px 8px 28px}
+#play .hobby:nth-child(2) span{border-radius:15px 5px 15px 5px;background:#fff0df}
+#play .hobby:nth-child(3){grid-column:1;grid-row:2;min-height:145px;background:#e8e0f0;transform:translateY(-4px) rotate(.8deg);border-radius:7px 28px 7px 28px}
+#play .hobby:nth-child(3) span{border-radius:50% 50% 8px 50%;background:#f6eff9}
+#play .hobby:nth-child(4){grid-column:2;grid-row:2;min-height:180px;background:#f1edce;transform:translateY(-20px) rotate(-1deg);border-radius:30px 8px 30px 8px}
+#play .hobby:nth-child(4) span{border-radius:8px 50% 50% 50%;background:#fff8dc}
+
+#contact .contact{position:relative;overflow:hidden;background:radial-gradient(circle at 88% 15%,rgba(199,222,158,.24),transparent 27%),linear-gradient(125deg,#293f34,#385440 65%,#4b6847);box-shadow:0 18px 40px rgba(42,62,47,.16)}
+#contact .contact:after{content:"✳";position:absolute;right:35%;top:-20px;color:rgba(239,220,160,.16);font-size:150px;line-height:1;pointer-events:none}
+#contact .contact>*{position:relative;z-index:1}
+#contact .contact a{border-radius:20px;box-shadow:0 5px 13px rgba(24,39,28,.16);transition:transform .18s}
+#contact .contact a:hover{transform:translateY(-2px)}
+@keyframes sun-breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.045)}}
+@keyframes flower-turn{to{transform:rotate(360deg)}}
+@media(max-width:760px){#notes .log{grid-template-columns:1fr;grid-template-areas:"lead" "left" "right" "last"}#notes .entry,#notes .entry:nth-child(n){grid-area:auto;min-height:0;padding:19px;transform:none}#notes .entry:nth-child(1) h3{font-size:18px}#notes .entry:nth-child(1):after{right:12px;top:12px;font-size:7px}#notes .entry:nth-child(4){padding-right:19px}#play .hobbies{grid-template-columns:1fr;grid-template-rows:auto;gap:13px}#play .hobby,#play .hobby:nth-child(n){grid-column:auto;grid-row:auto;min-height:130px;transform:none;padding:18px;border-radius:20px 6px 20px 6px}#contact .contact:after{right:-20px;top:8px;font-size:100px}}
+@media(prefers-reduced-motion:reduce){#home .sun,#home .flower{animation:none}}

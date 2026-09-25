@@ -1,0 +1,28 @@
+/* Slow, low-contrast light sweeps across colored surfaces. */
+@keyframes surface-sheen{0%,100%{background-position:145% 0,0 0}50%{background-position:-45% 0,0 0}}
+@keyframes page-sheen{0%,100%{background-position:145% 0,0 0}50%{background-position:-45% 0,0 0}}
+
+#notes .entry:nth-child(1),#notes .entry:nth-child(2),#notes .entry:nth-child(3),#notes .entry:nth-child(4){background-size:240% 100%,100% 100%;background-position:145% 0,0 0;animation:surface-sheen 13s ease-in-out infinite}
+#notes .entry:nth-child(1){background-image:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.26) 48%,rgba(255,255,255,.44) 51%,transparent 65%),linear-gradient(115deg,#e6efdd,#f2f2df)}
+#notes .entry:nth-child(2){background-image:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.24) 48%,rgba(255,255,255,.4) 51%,transparent 65%),linear-gradient(115deg,#f5e5d7,#f8ecdf);animation-delay:1.7s}
+#notes .entry:nth-child(3){background-image:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.24) 48%,rgba(255,255,255,.4) 51%,transparent 65%),linear-gradient(115deg,#ece5f2,#f4eef7);animation-delay:3.1s}
+#notes .entry:nth-child(4){background-image:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.24) 48%,rgba(255,255,255,.4) 51%,transparent 65%),linear-gradient(115deg,#e3eeee,#edf5f2);animation-delay:2.4s}
+
+#play .hobby:nth-child(1),#play .hobby:nth-child(2),#play .hobby:nth-child(3),#play .hobby:nth-child(4){background-size:240% 100%,100% 100%;background-position:145% 0,0 0;animation:surface-sheen 14s ease-in-out infinite}
+#play .hobby:nth-child(1){background-image:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.24) 48%,rgba(255,255,255,.38) 51%,transparent 65%),linear-gradient(120deg,#e3edda,#cfe2c5)}
+#play .hobby:nth-child(2){background-image:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.25) 48%,rgba(255,255,255,.4) 51%,transparent 65%),linear-gradient(120deg,#f4dfd3,#f8eae0);animation-delay:2.3s}
+#play .hobby:nth-child(3){background-image:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.22) 48%,rgba(255,255,255,.38) 51%,transparent 65%),linear-gradient(120deg,#e8e0f0,#f0eaf6);animation-delay:1.2s}
+#play .hobby:nth-child(4){background-image:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.24) 48%,rgba(255,255,255,.4) 51%,transparent 65%),linear-gradient(120deg,#f1edce,#f7f2da);animation-delay:3.4s}
+
+#work .project:nth-child(1) .visual,#work .project:nth-child(2) .visual,#work .project:nth-child(3) .visual{background-size:230% 100%,100% 100%;background-position:145% 0,0 0;animation:surface-sheen 10s ease-in-out infinite}
+#work .project:nth-child(1) .visual{background-image:linear-gradient(110deg,transparent 32%,rgba(255,255,255,.22) 48%,rgba(255,255,255,.45) 51%,transparent 67%),linear-gradient(135deg,#cfe2c4 0%,#a8c895 54%,#e7efda 100%)}
+#work .project:nth-child(2) .visual{background-image:linear-gradient(110deg,transparent 32%,rgba(255,255,255,.24) 48%,rgba(255,255,255,.46) 51%,transparent 67%),linear-gradient(135deg,#f4d3ad 0%,#e9b58c 57%,#f8e6d2 100%);animation-delay:2s}
+#work .project:nth-child(3) .visual{background-image:linear-gradient(110deg,transparent 32%,rgba(255,255,255,.2) 48%,rgba(255,255,255,.42) 51%,transparent 67%),linear-gradient(140deg,#d8c9ec 0%,#ab9bd2 52%,#ede5f6 100%);animation-delay:3.5s}
+
+body.detail-about,body.detail-project,body.detail-note,body.detail-hobby{background-image:linear-gradient(115deg,transparent 34%,rgba(255,255,255,.14) 49%,rgba(255,255,255,.22) 52%,transparent 68%),linear-gradient(var(--palette-page),var(--palette-page));background-size:250% 100%,100% 100%;background-attachment:fixed;background-position:145% 0,0 0;animation:page-sheen 18s ease-in-out infinite}
+body[data-item] .fact{background-image:linear-gradient(110deg,transparent 33%,rgba(255,255,255,.2) 49%,rgba(255,255,255,.34) 52%,transparent 68%);background-size:240% 100%;background-position:145% 0;animation:surface-sheen 14s ease-in-out infinite}
+body[data-item] .fact:nth-child(2){animation-delay:1.8s}
+body[data-item] .fact:nth-child(3){animation-delay:3s}
+body[data-item] #intro{background-image:linear-gradient(110deg,transparent 34%,rgba(255,255,255,.18) 49%,rgba(255,255,255,.3) 52%,transparent 68%);background-size:240% 100%;background-position:145% 0;animation:surface-sheen 16s ease-in-out infinite}
+
+@media(prefers-reduced-motion:reduce){#notes .entry,#play .hobby,#work .project .visual,body.detail-about,body.detail-project,body.detail-note,body.detail-hobby,body[data-item] .fact,body[data-item] #intro{animation:none!important;background-position:0 0!important}}

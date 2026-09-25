@@ -1,0 +1,49 @@
+/* Site-wide ambient motion: low-saturation color wash with a few soft leaf shadows. */
+body{isolation:isolate}
+body>.page,body>main.page{position:relative;z-index:1}
+.global-backdrop{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:linear-gradient(118deg,rgba(207,226,198,.46),rgba(247,243,222,.42) 34%,rgba(223,219,236,.38) 67%,rgba(213,231,207,.44));background-size:280% 100%;animation:backdrop-wash 22s ease-in-out infinite alternate}
+.global-backdrop:before{content:"";position:absolute;inset:-8% -35%;background:linear-gradient(112deg,transparent 39%,rgba(255,255,255,.025) 45%,rgba(255,255,255,.2) 50%,rgba(255,255,255,.04) 55%,transparent 62%);transform:translateX(-24%);animation:backdrop-glint 17s ease-in-out infinite;will-change:transform}
+.glow{position:absolute;display:block;width:44vw;height:44vw;max-width:660px;max-height:660px;border-radius:50%;filter:blur(78px);opacity:.38;will-change:transform}
+.glow-one{left:-14vw;top:3vh;background:rgba(160,194,145,.19);animation:glow-drift-one 22s ease-in-out infinite alternate}
+.glow-two{right:-12vw;top:25vh;background:rgba(180,166,204,.14);animation:glow-drift-two 26s ease-in-out infinite alternate}
+.glow-three{left:35vw;bottom:-38vw;width:52vw;height:52vw;background:rgba(233,204,151,.11);animation:glow-drift-three 24s ease-in-out infinite alternate}
+.leaf-shadow{position:absolute;display:block;width:210px;height:390px;opacity:.06;filter:blur(9px);background:linear-gradient(145deg,rgba(59,101,65,.52),rgba(102,143,91,.1));clip-path:polygon(50% 0,61% 17%,76% 25%,94% 29%,78% 39%,66% 48%,89% 54%,68% 61%,57% 76%,50% 100%,43% 76%,32% 61%,11% 54%,34% 48%,22% 39%,6% 29%,24% 25%,39% 17%);transform-origin:center;will-change:transform}
+.leaf-one{left:-52px;top:18vh;animation:leaf-sway-one 18s ease-in-out infinite alternate}
+.leaf-two{right:3vw;bottom:-235px;width:148px;height:300px;opacity:.045;transform:rotate(48deg);animation:leaf-sway-two 22s ease-in-out infinite alternate}
+.botanical-particle{position:absolute;display:block;font-style:normal;font-size:clamp(13px,1.5vw,22px);line-height:1;opacity:.23;filter:brightness(.88) saturate(.82) drop-shadow(0 3px 5px rgba(47,70,49,.12));will-change:transform;user-select:none}
+.botanical-particle.p1{left:13%;top:17vh;animation:particle-drift-a 14s ease-in-out infinite}
+.botanical-particle.p2{left:34%;top:73vh;font-size:19px;animation:particle-drift-b 17s ease-in-out infinite}
+.botanical-particle.p3{right:18%;top:23vh;font-size:22px;animation:particle-drift-c 15s ease-in-out infinite}
+.botanical-particle.p4{right:36%;bottom:12vh;font-size:17px;animation:particle-drift-a 18s ease-in-out infinite reverse}
+.botanical-particle.p5{left:58%;top:9vh;font-size:16px;animation:particle-drift-b 16s ease-in-out infinite reverse}
+.botanical-particle.p6{left:7%;bottom:25vh;font-size:20px;animation:particle-drift-c 19s ease-in-out infinite reverse}
+.botanical-particle.p7{right:7%;top:61vh;font-size:18px;animation:particle-drift-b 14s ease-in-out infinite}
+.botanical-particle.p8{left:78%;bottom:7vh;font-size:23px;animation:particle-drift-a 20s ease-in-out infinite reverse}
+.botanical-particle.p9{left:23%;top:48vh;font-size:17px;animation:particle-drift-c 16s ease-in-out infinite}
+.botanical-particle.p10{right:22%;top:77vh;font-size:24px;animation:particle-drift-b 18s ease-in-out infinite reverse}
+.botanical-particle.p11{left:48%;top:31vh;font-size:16px;animation:particle-drift-a 15s ease-in-out infinite}
+.botanical-particle.p12{right:46%;top:58vh;font-size:21px;animation:particle-drift-c 20s ease-in-out infinite reverse}
+.botanical-particle.p13{right:4%;top:12vh;font-size:19px;animation:particle-drift-b 18s ease-in-out infinite}
+.botanical-particle.p14{left:15%;bottom:6vh;font-size:18px;animation:particle-drift-a 17s ease-in-out infinite}
+.botanical-particle.p15{left:3%;top:43vh;font-size:15px;animation:particle-drift-c 14s ease-in-out infinite reverse}
+.botanical-particle.p16{left:29%;top:6vh;font-size:16px;animation:particle-drift-b 17s ease-in-out infinite}
+.botanical-particle.p17{left:39%;bottom:5vh;font-size:14px;animation:particle-drift-a 19s ease-in-out infinite}
+.botanical-particle.p18{right:2%;top:43vh;font-size:16px;animation:particle-drift-c 15s ease-in-out infinite}
+.botanical-particle.p19{right:29%;top:8vh;font-size:14px;animation:particle-drift-b 18s ease-in-out infinite reverse}
+.botanical-particle.p20{right:13%;bottom:3vh;font-size:16px;animation:particle-drift-a 15s ease-in-out infinite}
+.botanical-particle.p21{left:63%;top:67vh;font-size:14px;animation:particle-drift-c 20s ease-in-out infinite}
+.botanical-particle.p22{left:4%;bottom:4vh;font-size:15px;animation:particle-drift-b 16s ease-in-out infinite}
+.botanical-particle.p23{right:42%;top:19vh;font-size:13px;animation:particle-drift-a 18s ease-in-out infinite reverse}
+.botanical-particle.p24{right:5%;bottom:27vh;font-size:17px;animation:particle-drift-c 16s ease-in-out infinite reverse}
+@keyframes backdrop-wash{from{background-position:0 50%}to{background-position:100% 50%}}
+@keyframes backdrop-glint{0%,14%{transform:translateX(-30%)}78%,100%{transform:translateX(30%)}}
+@keyframes glow-drift-one{from{transform:translate(-1vw,-2vh) scale(.94)}to{transform:translate(7vw,6vh) scale(1.08)}}
+@keyframes glow-drift-two{from{transform:translate(2vw,4vh) scale(1.03)}to{transform:translate(-8vw,-5vh) scale(.92)}}
+@keyframes glow-drift-three{from{transform:translate(-4vw,3vh) scale(.94)}to{transform:translate(4vw,-6vh) scale(1.05)}}
+@keyframes leaf-sway-one{from{transform:rotate(-26deg) translateY(-7px)}to{transform:rotate(-15deg) translateY(16px)}}
+@keyframes leaf-sway-two{from{transform:rotate(39deg) translateY(14px)}to{transform:rotate(54deg) translateY(-8px)}}
+@keyframes particle-drift-a{0%,100%{transform:translate3d(0,0,0) rotate(-10deg)}50%{transform:translate3d(22px,-34px,0) rotate(14deg)}}
+@keyframes particle-drift-b{0%,100%{transform:translate3d(0,0,0) rotate(10deg)}50%{transform:translate3d(-28px,-26px,0) rotate(-14deg)}}
+@keyframes particle-drift-c{0%,100%{transform:translate3d(0,0,0) rotate(-6deg)}50%{transform:translate3d(16px,30px,0) rotate(16deg)}}
+@media(max-width:700px){.glow{width:76vw;height:76vw;filter:blur(58px)}.leaf-shadow{opacity:.04;scale:.72}.leaf-two{right:-55px}.botanical-particle{opacity:.2;font-size:15px}}
+@media(prefers-reduced-motion:reduce){.global-backdrop,.glow,.leaf-shadow,.botanical-particle{animation:none!important;will-change:auto}}

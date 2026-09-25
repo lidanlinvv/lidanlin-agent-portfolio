@@ -1,0 +1,93 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>李丹琳 · LLM Agent 开发</title><style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap');*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:#283b33;background:#f8f7ed;font-family:'DM Sans','Noto Sans SC',sans-serif}a{color:inherit;text-decoration:none}.page{max-width:1160px;margin:auto;padding:20px 32px}.top{display:flex;justify-content:space-between;align-items:center;padding:13px 0 18px;border-bottom:2px solid #293c34}.logo{font-size:13px;font-weight:800;letter-spacing:.05em}.logo span{color:#df805d}.nav{display:flex;gap:19px;font-size:10px;font-weight:700}.hero{margin:29px 0 55px;min-height:500px;border:2px solid #293c34;border-radius:28px;background:#dcedd5;display:grid;grid-template-columns:1.05fr .95fr;position:relative;overflow:hidden}.herotext{padding:60px 0 45px 53px;position:relative;z-index:1}.stamp{display:inline-block;border:1px solid #537158;transform:rotate(-5deg);font-size:10px;letter-spacing:.1em;padding:8px 11px;border-radius:3px;color:#49604b;background:#edf4e8}.hero h1{font-size:clamp(45px,6.5vw,77px);line-height:1.1;letter-spacing:-.07em;margin:30px 0 15px}.hero h1 span{color:#d27152}.hero p{max-width:435px;font-size:13px;line-height:1.9;color:#56675b}.cta{display:inline-block;background:#2e4538;color:white;padding:13px 17px;border-radius:7px;font-size:11px;font-weight:700;margin-top:15px;box-shadow:3px 3px #a9c89f}.illustration{position:relative;display:grid;place-items:center}.sun{position:absolute;width:260px;height:260px;border-radius:50%;background:#f3cc8e;right:60px;top:80px}.leaf{position:absolute;width:190px;height:290px;background:#77966b;border-radius:100% 0 100% 0;transform:rotate(45deg);right:110px;top:130px}.leaf:after{content:'';position:absolute;width:1px;height:225px;background:#d4e2c4;left:80px;top:20px;transform:rotate(-45deg)}.flower{position:absolute;font-size:58px;color:#fff6da;right:43px;top:70px}.bird{position:absolute;font-size:42px;left:50px;bottom:72px;transform:rotate(-20deg)}.sticker{position:absolute;padding:8px 12px;background:#fff8e7;border:1px solid #d4be89;box-shadow:2px 3px 0 #c5b48d;font-size:10px;font-weight:800;transform:rotate(7deg);bottom:55px;right:40px}.sprig{position:absolute;top:29px;right:28px;font-size:25px;color:#557a58}.section{margin:54px 0}.head{display:flex;align-items:end;justify-content:space-between;margin-bottom:22px}.head h2{font-size:28px;margin:5px 0;letter-spacing:-.05em}.label{font-size:9px;letter-spacing:.18em;color:#b66a4c;font-weight:800}.head p{font-size:10px;color:#758276;margin:0}.about{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}.paper{padding:25px;border:1.5px solid #405848;background:#fffdf3;border-radius:3px;box-shadow:4px 4px #dae3d0}.paper:nth-child(2){background:#f4e9d3;transform:rotate(1deg)}.paper h3{font-size:16px;margin:0 0 12px}.paper p{font-size:12px;line-height:1.9;color:#637166;margin:0}.chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:17px}.chips span{border:1px dashed #7e9a78;border-radius:20px;padding:6px 9px;font-size:9px}.bio{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:13px}.bio div{border-top:2px solid #7e9a78;padding-top:12px;font-size:10px;color:#7b8878}.bio b{display:block;color:#304537;font-size:12px;margin-bottom:6px}.projectgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.project{background:#fffdf4;border:1.5px solid #354a3c;border-radius:5px;padding:10px;box-shadow:4px 4px #cbdcc4}.visual{height:130px;background:#dfead8;display:grid;place-items:center;font-size:39px;position:relative}.project:nth-child(2) .visual{background:#f4e3d0}.project:nth-child(3) .visual{background:#e8e2f1}.project small{font-size:9px;color:#b36a4c;font-weight:800;letter-spacing:.13em;display:block;margin:14px 0 6px}.project h3{margin:0;font-size:15px}.project p{font-size:10px;color:#657268;line-height:1.8;min-height:78px}.outcome{border-top:1px dashed #b9c6b1;padding-top:10px;font-size:9px;color:#667367}.outcome b{color:#4c7853}.log{display:grid;grid-template-columns:1fr 1fr;gap:12px}.entry{padding:16px;background:#e8efdf;border-left:4px solid #7e9a78}.entry:nth-child(2){background:#f5eadc;border-color:#d39169}.entry:nth-child(3){background:#f1eaf3;border-color:#ad8cbb}.entry:nth-child(4){background:#e3eeee;border-color:#78a5a1}.entry time{font-size:9px;font-weight:700;color:#8a7961}.entry h3{font-size:14px;margin:7px 0}.entry p{font-size:10px;line-height:1.7;color:#69756c;margin:0}.entry a{font-size:9px;font-weight:800;display:inline-block;margin-top:9px;border-bottom:1px solid}.hobbies{display:grid;grid-template-columns:1.1fr .9fr;gap:13px}.hobby{min-height:137px;padding:19px;background:#e8eedf;border-radius:35px 8px 35px 8px;display:flex;gap:15px;align-items:center}.hobby:nth-child(2){background:#f7e4d9;border-radius:8px 35px 8px 35px}.hobby:nth-child(3){background:#e6e1ef}.hobby:nth-child(4){background:#f3edcf}.hobby span{font-size:30px}.hobby h3{font-size:13px;margin:0 0 5px}.hobby p{font-size:10px;line-height:1.7;color:#707b6d;margin:0}.contact{background:#2e4538;color:#fff7e8;padding:30px;border-radius:8px;display:flex;justify-content:space-between;align-items:center}.contact h2{font-size:28px;margin:5px 0}.contact p{font-size:10px;color:#cad8c7}.contact a{display:inline-block;background:#f3cc8e;color:#364737;padding:12px 14px;font-size:10px;font-weight:800;border-radius:5px;margin:3px}.footer{display:flex;justify-content:space-between;padding:20px 0 5px;font-size:9px;color:#818a7b}.return{position:fixed;bottom:14px;left:14px;background:#fffdf4;border:1px solid #cbd8c4;padding:9px 12px;font-size:10px;z-index:3}
+@media(max-width:720px){.page{padding:14px 16px}.nav{gap:9px;font-size:8px}.hero{grid-template-columns:1fr;margin-top:15px}.herotext{padding:38px 27px 5px}.hero h1{font-size:53px}.illustration{height:285px}.sun{width:190px;height:190px;right:calc(50% - 100px);top:35px}.leaf{width:135px;height:210px;right:calc(50% - 85px);top:75px}.flower{right:calc(50% - 120px);top:20px}.bird{left:calc(50% - 120px);bottom:23px}.sticker{right:calc(50% - 130px);bottom:18px}.about,.bio,.projectgrid,.log,.hobbies{grid-template-columns:1fr}.head{display:block}.head p{margin-top:9px}.project p{min-height:0}.contact{display:block}.footer{gap:8px;flex-direction:column}.section{margin:42px 0}}
+
+
+.paper,.bio > div,.project,.entry,.hobby{cursor:pointer;transition:transform .16s,box-shadow .16s}.paper:hover,.bio > div:hover,.project:hover,.entry:hover,.hobby:hover{transform:translateY(-2px)}.paper:focus-visible,.bio > div:focus-visible,.project:focus-visible,.entry:focus-visible,.hobby:focus-visible{outline:3px solid #d39169;outline-offset:3px}.card-go{display:inline-block;margin-top:10px;border-bottom:1px solid #526b57;padding-bottom:2px;color:#344b3a;font-size:10px;font-weight:800;text-decoration:none}.card-go:hover{color:#b66a4c}</style><link rel="stylesheet" href="mint-about-cards.css"><link rel="stylesheet" href="mint-project-cards.css"><link rel="stylesheet" href="mint-project-effects.css"><link rel="stylesheet" href="mint-home-eclectic.css"><link rel="stylesheet" href="mint-light-flow.css"><link rel="stylesheet" href="mint-global-background.css"><link rel="stylesheet" href="mint-ui-refresh.css"><link rel="stylesheet" href="mint-resume-home.css"><link rel="stylesheet" href="mint-rich-content.css"><link rel="stylesheet" href="mint-project-structure.css"><link rel="stylesheet" href="mint-hero-clarity.css"></head><body><div class="global-backdrop" aria-hidden="true"><i class="glow glow-one"></i><i class="glow glow-two"></i><i class="glow glow-three"></i><i class="leaf-shadow leaf-one"></i><i class="leaf-shadow leaf-two"></i><i class="botanical-particle p1" aria-hidden="true">🌼</i><i class="botanical-particle p2" aria-hidden="true">🌱</i><i class="botanical-particle p3" aria-hidden="true">🌿</i><i class="botanical-particle p4" aria-hidden="true">🌸</i><i class="botanical-particle p5" aria-hidden="true">🌳</i><i class="botanical-particle p6" aria-hidden="true">🍀</i><i class="botanical-particle p7" aria-hidden="true">🌾</i><i class="botanical-particle p8" aria-hidden="true">🌷</i><i class="botanical-particle p9" aria-hidden="true">🌼</i><i class="botanical-particle p10" aria-hidden="true">🌿</i><i class="botanical-particle p11" aria-hidden="true">🌱</i><i class="botanical-particle p12" aria-hidden="true">🌳</i><i class="botanical-particle p13" aria-hidden="true">🌸</i><i class="botanical-particle p14" aria-hidden="true">🍃</i><i class="botanical-particle p15" aria-hidden="true">🌱</i><i class="botanical-particle p16" aria-hidden="true">🌼</i><i class="botanical-particle p17" aria-hidden="true">🍃</i><i class="botanical-particle p18" aria-hidden="true">🌸</i><i class="botanical-particle p19" aria-hidden="true">🌿</i><i class="botanical-particle p20" aria-hidden="true">🌷</i><i class="botanical-particle p21" aria-hidden="true">🌳</i><i class="botanical-particle p22" aria-hidden="true">🍀</i><i class="botanical-particle p23" aria-hidden="true">🌾</i><i class="botanical-particle p24" aria-hidden="true">🌻</i></div>
+<div class="page">
+  <header class="top">
+    <a class="logo" href="#home">✳ 李丹琳 <span>AGENT SYSTEMS</span></a>
+    <nav class="nav" aria-label="页面导航">
+      <a href="#about">关于我</a><a href="#work">项目与实践</a><a href="#research">论文研究</a><a href="#notes">技术方案</a><a href="#play">技术与研究</a><a href="#contact">联系我</a>
+    </nav>
+  </header>
+  <main>
+    <section class="hero" id="home">
+      <div class="herotext">
+        <span class="stamp">个人作品集 · 2027 届人工智能硕士</span>
+        <h1>李丹琳<br><span>企业级 Agent 开发</span></h1>
+        <p>河北大学人工智能硕士在读。曾参与企业级 Agent 平台二次开发，研究多智能体通信拓扑优化；关注能力治理、任务执行与系统评测。</p>
+        <div class="hero-tags"><span>Agent Runtime</span><span>Skill / MCP</span><span>Multi-Agent</span></div>
+        <div class="hero-actions"><a class="cta" href="#work">看项目实践　↗</a><a class="hero-secondary" href="#research">看论文研究　↗</a></div>
+      </div>
+      <div class="illustration"><div class="sun" aria-hidden="true"></div><div class="leaf" aria-hidden="true"></div><div class="hero-proof"><span class="proof-kicker">AT A GLANCE / 一眼了解</span><h2>研究多智能体，<br>也做 Agent 工程</h2><div class="proof-row"><small>工程实践</small><strong>中核华辉 · Agent 开发实习</strong></div><div class="proof-row"><small>研究成果</small><strong>GECCO 2026 第一作者论文已接收</strong></div><div class="proof-row"><small>能力方向</small><strong>运行时治理 · 能力编排 · 任务评测</strong></div></div></div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="head"><div><div class="label">01 · ABOUT ME</div><h2>你好，我是李丹琳</h2></div><p>面向企业场景，设计与实现可治理的 Agent 系统。</p></div>
+      <div class="about">
+        <article class="paper"><h3>👩🏻‍💻 LLM Agent 开发</h3><p>2027 届人工智能硕士，曾在中核华辉参与企业级 Agent 平台二次开发。我的工作覆盖 Agent Runtime、Skill/MCP 能力治理、任务执行与评测，关注模型能力如何稳定落到真实业务流程。</p><div class="chips"><span>Agent Runtime</span><span>Skill / MCP</span><span>RAG / Memory</span><span>多智能体</span></div></article>
+        <article class="paper"><h3>🧩 我关注的工程问题</h3><p>在企业场景中，Agent 需要知道自己能调用什么、任务进行到哪里，以及失败后如何恢复。我围绕能力状态同步、执行事件追踪和可版本化任务运行时，推进这些问题的工程实现。</p><div class="chips"><span>能力治理</span><span>可观测</span><span>任务编排</span></div></article>
+      </div>
+      <div class="bio">
+        <div><b>💼 实习</b>中核华辉 · 大模型 / Agent 开发实习生<br>2026.08—2026.10</div>
+        <div><b>🎓 教育</b>河北大学 · 人工智能（专硕）<br>湖南科技大学 · 计算机科学与技术（本科）</div>
+        <div><b>🧬 研究与荣誉</b>GECCO 2026 第一作者论文已接收<br>校级一等奖学金</div>
+      </div>
+    </section>
+
+    <section class="section" id="work">
+      <div class="head"><div><div class="label">02 · SELECTED WORK</div><h2>一个项目，两项核心模块</h2></div><p>先看整体链路，再看我负责的具体实现。</p></div>
+      <div class="project-structure">
+        <article class="project project-overview">
+          <div class="overview-copy"><span class="module-eyebrow">项目总览 · DeepAgentForce</span><h3>企业级 Agent 工作台二次开发</h3><p>围绕企业知识问答与复杂任务执行，串联模型、Skill/MCP、RAG、Memory 和状态管理。下方两项是这一系统中的工程模块，分别解决能力状态一致性与任务执行治理。</p><div class="overview-meta"><span>FastAPI · WebSocket</span><span>LangGraph / deepagents</span><span>125 条 Benchmark</span></div></div>
+          <div class="architecture" aria-label="项目整体链路：用户请求、Agent 运行时、能力与知识、执行记录与评测"><div class="architecture-label">系统链路示意</div><div class="architecture-steps"><span>用户请求</span><b>→</b><span>Agent Runtime</span><b>→</b><span>Skill / MCP<br>RAG / Memory</span><b>→</b><span>日志与评测</span></div><small>这是根据简历内容整理的结构示意，不是系统界面截图。</small></div>
+        </article>
+        <div class="module-branch"><span>项目总览的两个实现模块</span></div>
+        <div class="module-grid">
+          <article class="project project-module"><span class="module-eyebrow">核心模块 / 01 · 能力治理</span><div class="module-heading"><span class="module-icon">↔</span><h3>运行时能力一致性治理</h3></div><p>用 ResourceReconciliation 对照管理策略与实际可调用状态，处理 Skill/MCP 权限变化和跨会话能力残留。</p><div class="module-flow" aria-label="管理策略与运行时能力的同步流程"><span>管理策略</span><b>↔</b><span>状态校准</span><b>↔</b><span>运行时能力</span></div></article>
+          <article class="project project-module"><span class="module-eyebrow">核心模块 / 02 · 执行治理</span><div class="module-heading"><span class="module-icon">◎</span><h3>任务编排与执行治理</h3></div><p>通过可版本化 TaskRuntime 管理任务定义与运行快照，结合异步执行、节点状态跟踪和 Executor Adapter。</p><div class="module-flow" aria-label="任务从定义到执行与追踪的流程"><span>任务定义</span><b>→</b><span>异步执行</span><b>→</b><span>状态追踪</span></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section research-section" id="research">
+      <div class="head"><div><div class="label">03 · THESIS RESEARCH</div><h2>论文研究：让多智能体找到更好的协作结构</h2></div><p>从固定规模，到节点数量与连接关系共同搜索。</p></div>
+      <p class="research-note">以下方法与图示取自硕士论文草稿；实验数字为草稿表格结果，定稿前仍需核对。GECCO 2026 已接收论文为另一项研究成果。</p>
+      <div class="research-grid">
+        <a class="research-card" href="03-mint-detail.html?item=thesis-fixed"><div class="research-art"><img src="assets/thesis-cgp-framework.png" alt="CGP-MAS 框架图，展示树形多智能体拓扑搜索流程" loading="lazy"></div><div class="research-copy"><span class="research-kicker">01 / 固定节点 · CGP-MAS</span><h3>先固定参与者，再优化他们如何沟通</h3><p>以树形通信拓扑为搜索对象，采用父节点编码、结构约束的交叉与变异，在任务性能反馈中筛选协作结构。</p><div class="research-stat"><strong>69.90</strong><span>四任务平均得分 · 草稿表 3-3</span></div><span class="research-more">阅读方法与实验 ↗</span></div></a>
+        <a class="research-card" href="03-mint-detail.html?item=thesis-variable"><div class="research-art"><img src="assets/thesis-vsp-framework.png" alt="VSP-MAS 方法总体框架图，展示可变规模拓扑进化与代理评价" loading="lazy"></div><div class="research-copy"><span class="research-kicker">02 / 可变节点 · VSP-MAS</span><h3>让参与者数量也成为可搜索的变量</h3><p>联合搜索节点规模与通信连接；加入关键节点保护、结构修复和低成本代理评价，平衡性能、稳定性与搜索成本。</p><div class="research-stat"><strong>72.87</strong><span>四任务平均得分 · 草稿表 4-3</span></div><span class="research-more">阅读方法与实验 ↗</span></div></a>
+      </div>
+    </section>
+
+    <section class="section" id="notes">
+      <div class="head"><div><div class="label">04 · ENGINEERING NOTES</div><h2>关键技术方案</h2></div><p>按执行链路拆开看：控制、能力、追踪、评测。</p></div>
+      <p class="notes-intro">这些是项目与实习工作中的技术专题，不是另外四个独立项目。每张卡片右侧展示对应的流程节点。</p>
+      <div class="log">
+        <article class="entry"><div class="entry-copy"><time>01 / 执行控制 · AGENT RUNTIME</time><h3>MetaController：复杂任务的控制环</h3><p>根据任务状态与预算，决定继续、重试、重新规划或终止。</p><a href="#contact">查看方案 ↗</a></div><div class="note-flow" aria-label="意图路由、执行监控、反思与重规划"><span>意图路由</span><i>↓</i><span>执行监控</span><i>↓</i><span>反思 / Re-plan</span></div></article>
+        <article class="entry"><div class="entry-copy"><time>02 / 能力编排 · SKILL / MCP</time><h3>按需发现能力，控制上下文规模</h3><p>按任务暴露相关 Skill/MCP，并结合 RAG 与 Memory 注入所需信息。</p><a href="#contact">查看方案 ↗</a></div><div class="note-flow" aria-label="能力目录、按需发现、知识注入"><span>能力目录</span><i>↓</i><span>按需发现</span><i>↓</i><span>RAG / Memory</span></div></article>
+        <article class="entry"><div class="entry-copy"><time>03 / 运行追踪 · OBSERVABILITY</time><h3>记录 Agent 能力的生命周期</h3><p>基于 AgentScope Middleware 记录能力暴露、调用、完成和状态校准。</p><a href="#contact">查看方案 ↗</a></div><div class="note-flow" aria-label="能力暴露、调用、完成、状态校准"><span>Exposed</span><i>↓</i><span>Invoked</span><i>↓</i><span>Completed / Reconciled</span></div></article>
+        <article class="entry"><div class="entry-copy"><time>04 / 效果验证 · EVALUATION</time><h3>125 条 Benchmark 的评测闭环</h3><p>统一记录路由、工具、Token、耗时与结果，用基线任务做回归和 A/B 验证。</p><a href="#contact">查看方案 ↗</a></div><div class="note-flow" aria-label="日志采集、基准任务、回归验证"><span>执行日志</span><i>↓</i><span>125 条基线</span><i>↓</i><span>回归 / A-B 验证</span></div></article>
+      </div>
+    </section>
+
+    <section class="section" id="play">
+      <div class="head"><div><div class="label">05 · SKILLS & RESEARCH</div><h2>技术栈与研究</h2></div><p>支撑 Agent 系统从研究走向工程实现。</p></div>
+      <div class="hobbies">
+        <article class="hobby"><span>🤖</span><div><h3>Agent / LLM</h3><p>LangGraph、RAG、MCP、Skill、Tool Calling、Multi-Agent 与 Prompt Engineering。</p></div></article>
+        <article class="hobby"><span>⚙️</span><div><h3>后端与工程</h3><p>Python、FastAPI、WebSocket、Redis、PostgreSQL、Docker 与 vLLM。</p></div></article>
+        <article class="hobby"><span>🧬</span><div><h3>多智能体拓扑优化</h3><p>GECCO 2026 第一作者论文已接收，研究 LLM 多智能体通信拓扑自动优化与进化搜索。</p></div></article>
+        <article class="hobby"><span>💻</span><div><h3>开发工具</h3><p>使用 Codex 与 Claude Code 开展 Vibe Coding 实践。</p></div></article>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="contact"><div><div class="label" style="color:#e7c17f">06 · CONTACT</div><h2>聊聊 Agent 系统与工程实践。</h2><p>技术交流可通过邮箱或电话联系。</p></div><div><a href="mailto:lidanlinvv@gmail.com">✉ lidanlinvv@gmail.com</a><a href="tel:+8618602779778">☎ 186 0277 9778</a><a href="李丹琳_简历.pdf" download>下载简历 PDF ↓</a><p>备用邮箱：2239476409@qq.com</p></div></div>
+    </section>
+  </main>
+  <footer class="footer"><span>© 2026 李丹琳 · 简历、论文草稿与技术笔记</span><span>LLM AGENT · SYSTEM ENGINEERING</span></footer>
+</div>
+<script src="mint-card-links.js"></script><script src="mint-hobby-art.js"></script>
+</body></html>
+
+

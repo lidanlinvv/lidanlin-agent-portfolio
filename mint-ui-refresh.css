@@ -1,0 +1,138 @@
+/* A quieter visual system for the interactive preview. */
+@view-transition{navigation:auto}
+:root{--ink:#293e34;--focus:#bd7351}
+body{background:#f6f7ee}
+.global-backdrop{background:radial-gradient(circle at 12% 12%,rgba(198,222,183,.25),transparent 36%),radial-gradient(circle at 88% 82%,rgba(220,207,231,.22),transparent 39%),#f6f7ee;animation:none}
+.global-backdrop:before{display:none}
+.glow{animation:none;opacity:.18;filter:blur(88px);will-change:auto}
+.glow-three,.leaf-two{display:none}
+.leaf-shadow{animation:none;will-change:auto;opacity:.035}
+.botanical-particle{display:none;animation:none;will-change:auto;opacity:.2}
+.botanical-particle.p1,.botanical-particle.p3,.botanical-particle.p8,.botanical-particle.p14{display:block}
+
+.top{border-bottom-color:#425a49}
+.nav a{transition:color .18s ease}
+.nav a:hover,.nav a:focus-visible{color:#b96f50}
+.hero{border:1px solid #56745c;background:linear-gradient(120deg,#e4f0d9 0%,#deebd3 58%,#cce2bf 100%);box-shadow:0 22px 55px rgba(54,77,57,.1)}
+.hero:before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 70% 39%,rgba(255,255,255,.36),transparent 26%)}
+#home .sun,#home .flower{animation:none}
+#home .illustration:after{content:"";position:absolute;width:340px;height:340px;right:28px;top:44px;border:1px dashed rgba(77,115,73,.22);border-radius:50%;pointer-events:none}
+.cta{transition:transform .18s ease,box-shadow .18s ease}
+.cta:hover,.cta:focus-visible{transform:translateY(-3px);box-shadow:5px 7px #a9c89f}
+.cta:active{transform:translateY(0);box-shadow:2px 2px #a9c89f}
+
+/* Keep color and texture; remove the perpetual light sweeps. */
+#notes .entry:nth-child(n),#play .hobby:nth-child(n),#work .project:nth-child(n) .visual{animation:none;background-position:0 0;background-size:100% 100%}
+#notes .entry:nth-child(1){background-image:linear-gradient(115deg,#e6efdd,#f2f2df)}
+#notes .entry:nth-child(2){background-image:linear-gradient(115deg,#f5e5d7,#f8ecdf)}
+#notes .entry:nth-child(3){background-image:linear-gradient(115deg,#ece5f2,#f4eef7)}
+#notes .entry:nth-child(4){background-image:linear-gradient(115deg,#e3eeee,#edf5f2)}
+#play .hobby:nth-child(1){background-image:linear-gradient(120deg,#e3edda,#cfe2c5)}
+#play .hobby:nth-child(2){background-image:linear-gradient(120deg,#f4dfd3,#f8eae0)}
+#play .hobby:nth-child(3){background-image:linear-gradient(120deg,#e8e0f0,#f0eaf6)}
+#play .hobby:nth-child(4){background-image:linear-gradient(120deg,#f1edce,#f7f2da)}
+#work .project:nth-child(1) .visual{background-image:linear-gradient(135deg,#cfe2c4,#a8c895 54%,#e7efda)}
+#work .project:nth-child(2) .visual{background-image:linear-gradient(135deg,#f4d3ad,#e9b58c 57%,#f8e6d2)}
+#work .project:nth-child(3) .visual{background-image:linear-gradient(140deg,#d8c9ec,#ab9bd2 52%,#ede5f6)}
+#work .cover-emoji,#work .cover-spark,#work .project:nth-child(n) .visual:before{animation:none}
+
+/* The source card rotations must not override hover and keyboard focus. */
+#about .about .paper:nth-child(n):hover,#about .about .paper:nth-child(n):focus-within,
+#work .project:nth-child(n):hover,#work .project:nth-child(n):focus-within,
+#notes .entry:nth-child(n):hover,#notes .entry:nth-child(n):focus-within,
+#play .hobby:nth-child(n):hover,#play .hobby:nth-child(n):focus-within{transform:translateY(-6px) rotate(0deg)}
+#about .about .paper:nth-child(n):active,#work .project:nth-child(n):active,#notes .entry:nth-child(n):active,#play .hobby:nth-child(n):active{transform:translateY(-2px) scale(.99)}
+#about .paper,#work .project,#notes .entry,#play .hobby{transition:transform .22s ease,box-shadow .22s ease}
+#about .paper:hover,#work .project:hover,#notes .entry:hover,#play .hobby:hover{box-shadow:0 20px 34px rgba(42,68,46,.14)}
+#work .project:hover .cover-emoji,#work .project:focus-within .cover-emoji{transform:translateY(-4px) rotate(-3deg) scale(1.05)}
+.card-go{transition:color .18s ease}
+.card-go:hover{color:#b76b4d}
+.card-go:focus-visible,.entry a:focus-visible{outline:3px solid #bd7351;outline-offset:4px;border-radius:2px}
+
+@media(max-width:720px){
+  .top{align-items:flex-start;gap:14px;flex-wrap:wrap}
+  .nav{width:100%;gap:12px 17px;flex-wrap:wrap;font-size:11px}
+  .hero{min-height:0}
+  #home .illustration:after{width:230px;height:230px;right:calc(50% - 115px);top:20px}
+  .botanical-particle{display:none!important}
+}
+@media(prefers-reduced-motion:reduce){.cta,#about .paper,#work .project,#notes .entry,#play .hobby{transition:none}}
+
+/* Observation notes: text and a distinct graphic share each postcard. */
+#notes .log{gap:20px}
+#notes .entry:nth-child(n){display:grid;grid-template-columns:minmax(0,1fr) minmax(175px,30%);align-items:center;gap:22px;min-height:235px;padding:26px 28px;overflow:hidden;border:1px solid rgba(87,112,87,.1);border-radius:18px 34px 18px 18px}
+#notes .entry:nth-child(1){min-height:255px;padding:30px 34px}
+#notes .entry:nth-child(4){min-height:225px;padding-right:28px}
+#notes .entry:nth-child(1):after{top:auto;right:30px;bottom:18px;z-index:3;background:rgba(255,253,245,.9)}
+#notes .entry-copy{position:relative;z-index:2;min-width:0}
+#notes .entry h3{font-size:19px;line-height:1.4;max-width:570px;margin:14px 0 9px}
+#notes .entry:nth-child(1) h3{font-size:25px;max-width:650px}
+#notes .entry p{font-size:12px;line-height:1.75;max-width:500px}
+#notes .entry a{margin-top:16px;font-size:11px}
+#notes .entry .note-visual{align-self:center;justify-self:stretch;z-index:1}
+#notes .entry:nth-child(2) .note-visual{transform:rotate(-3deg)}
+#notes .entry:nth-child(3) .note-visual{transform:rotate(2deg)}
+@media(max-width:760px){
+  #notes .entry:nth-child(n){grid-template-columns:minmax(0,1fr) minmax(135px,32%);min-height:220px;padding:21px;gap:8px}
+  #notes .entry:nth-child(1) h3{font-size:21px}
+  #notes .entry h3{font-size:17px}
+  #notes .entry .note-visual{transform:scale(.78);transform-origin:center right}
+  #notes .entry:nth-child(2) .note-visual,#notes .entry:nth-child(3) .note-visual{transform:scale(.78)}
+}
+@media(max-width:560px){
+  #notes .entry:nth-child(n){display:block;min-height:205px;padding:20px 88px 20px 20px}
+  #notes .entry:nth-child(1):after{right:14px;bottom:12px;font-size:7px}
+  #notes .entry h3,#notes .entry:nth-child(1) h3{font-size:18px}
+  #notes .entry .note-visual,#notes .entry:nth-child(2) .note-visual,#notes .entry:nth-child(3) .note-visual{position:absolute;right:-93px;top:27px;width:185px;height:160px;opacity:.4;transform:scale(.78);transform-origin:center}
+}
+
+/* Interest cards use four small object studies instead of four empty color panels. */
+#play .hobbies{gap:22px 24px}
+#play .hobby:nth-child(n){display:grid;grid-template-columns:58px minmax(0,1fr) minmax(120px,28%);grid-template-rows:auto auto;align-items:center;gap:8px 15px;min-height:215px;padding:22px 20px 22px 24px;overflow:hidden;border:1px solid rgba(76,100,77,.12);box-shadow:0 14px 29px rgba(53,75,54,.09)}
+#play .hobby:after{display:none}
+#play .hobby>span{grid-column:1;grid-row:1/span 2;align-self:center;width:58px;height:58px;box-shadow:0 7px 14px rgba(56,73,54,.09)}
+#play .hobby>div:not(.hobby-art){grid-column:2;grid-row:1;align-self:end;min-width:0}
+#play .hobby h3{font-size:16px;line-height:1.35}
+#play .hobby p{font-size:12px;line-height:1.7}
+#play .hobby>a.card-go{grid-column:2;grid-row:2;align-self:start;justify-self:start;margin:7px 0 0;font-size:11px}
+#play .hobby-art{grid-column:3;grid-row:1/span 2;position:relative;display:block;width:100%;height:160px;align-self:center;justify-self:center;pointer-events:none;transition:transform .25s ease}
+#play .hobby:hover .hobby-art,#play .hobby:focus-within .hobby-art{transform:translateY(-5px) rotate(2deg)}
+#play .hobby-art i{position:absolute;display:block;font-style:normal}
+
+.garden-art .garden-board{inset:13px 5px 6px 2px;border:1px solid rgba(82,121,75,.17);border-radius:14px;background:radial-gradient(circle,rgba(80,118,76,.13) 1px,transparent 1.5px) 0 0/17px 17px,rgba(255,255,255,.46);transform:rotate(6deg)}
+.garden-art .garden-pot{left:22%;top:25px;font-size:68px;filter:drop-shadow(4px 9px 5px rgba(75,104,70,.18));transform:rotate(-4deg)}
+.garden-art .garden-rule{left:10px;bottom:23px;width:55px;height:28px;border-left:2px solid #88ad79;border-bottom:2px solid #88ad79;transform:skewY(-14deg)}
+.garden-art .garden-dot{left:61px;bottom:36px;width:8px;height:8px;border-radius:50%;background:#83a878;box-shadow:17px -9px #83a878,34px -5px #83a878}
+
+.menu-art .menu-plate{width:122px;height:122px;right:8px;top:18px;border:12px solid #fffaf0;border-radius:50%;background:#f0cead;box-shadow:5px 10px 17px rgba(147,104,72,.14),inset 0 0 0 2px rgba(199,143,101,.18)}
+.menu-art .menu-dice{right:45px;top:52px;color:#a77d65;font-size:55px;line-height:1;transform:rotate(-16deg)}
+.menu-art .menu-star{left:1px;top:10px;color:#d59f79;font-size:28px}
+
+.sewing-art .sewing-loop{width:130px;height:92px;right:4px;bottom:20px;border:3px dashed rgba(159,128,178,.65);border-radius:50%;transform:rotate(-22deg)}
+.sewing-art .sewing-spool{left:5px;top:12px;font-size:74px;filter:drop-shadow(5px 9px 5px rgba(111,88,126,.14));transform:rotate(-8deg)}
+.sewing-art .sewing-needle{right:13px;top:22px;width:4px;height:70px;border-radius:3px;background:#a58eaf;box-shadow:3px 1px 0 rgba(255,255,255,.7);transform:rotate(42deg)}
+
+.walks-art .walk-shop{left:12px;right:10px;top:42px;height:96px;border:2px solid #cabd81;border-radius:5px;background:#fff9db;box-shadow:6px 9px 14px rgba(126,117,70,.15)}
+.walks-art .walk-awning{left:7px;right:5px;top:28px;height:36px;border-radius:7px 7px 12px 12px;background:repeating-linear-gradient(90deg,#fffaf1 0 20px,#d9b77d 20px 40px);box-shadow:0 5px 7px rgba(126,117,70,.11);transform:skewY(-3deg)}
+.walks-art .walk-door{left:59px;top:80px;width:40px;height:58px;border:2px solid #b2aa79;border-bottom:0;border-radius:3px 3px 0 0;background:#dce8dc}
+.walks-art .walk-pin{right:0;top:1px;display:grid!important;place-items:center;width:28px;height:28px;border:5px solid #fff8de;border-radius:50%;background:#bd9168;color:#bd9168;font-size:1px;box-shadow:0 4px 8px rgba(118,104,73,.14)}
+@media(max-width:760px){#play .hobby:nth-child(n){min-height:195px}}
+@media(max-width:560px){
+  #play .hobby:nth-child(n){grid-template-columns:48px minmax(0,1fr);gap:7px 12px;min-height:185px;padding:19px 75px 19px 18px}
+  #play .hobby>span{width:48px;height:48px;font-size:27px}
+  #play .hobby-art{position:absolute;right:-46px;top:18px;width:140px;height:140px;opacity:.43;transform:scale(.8)}
+  #play .hobby:hover .hobby-art,#play .hobby:focus-within .hobby-art{transform:scale(.8) translateY(-4px)}
+}
+
+/* Make the three compact profile links readable and visually connected to the about cards. */
+#about .about .paper p{font-size:13px;line-height:1.85}
+#about .about .paper .chips span{font-size:10px}
+#about .about .paper .card-go{font-size:11px}
+#about .bio{gap:14px;margin-top:18px}
+#about .bio>div{min-height:137px;padding:18px 18px 15px;border:1px solid #d8e4d3;border-top:3px solid #8da984;border-radius:13px;background:#fffef7;box-shadow:0 7px 17px rgba(58,78,58,.07);color:#5f6f60;font-size:12px;line-height:1.65;transition:transform .2s ease,box-shadow .2s ease}
+#about .bio>div:nth-child(2){border-color:#e9dacb;border-top-color:#ce9e7c;background:#fff9f0}
+#about .bio>div:nth-child(3){border-color:#e8e1c8;border-top-color:#b5a76d;background:#fffced}
+#about .bio>div:hover,#about .bio>div:focus-within{transform:translateY(-4px);box-shadow:0 14px 24px rgba(58,78,58,.12)}
+#about .bio b{margin:0 0 8px;color:#34493a;font-size:14px}
+#about .bio .card-go{display:block;width:max-content;margin:13px 0 0;font-size:11px;line-height:1.3}
+@media(max-width:720px){#about .bio>div{min-height:0;padding:16px}}

@@ -1,0 +1,25 @@
+/* Small bespoke visual signatures for each project, note, and side-interest page. */
+body[data-item="project-market"] #content:after{content:"✿";position:absolute;right:24px;top:23px;color:#6d9065;font-size:32px;opacity:.45}
+body[data-item="project-market"] #emoji{border-radius:55% 20% 48% 14%;background:radial-gradient(circle at 35% 30%,#f3f6d5,#b5d1a4 68%,#8eae83);box-shadow:0 15px 28px rgba(83,119,77,.2)}
+body[data-item="project-market"] .fact:nth-child(1){border-radius:24px 5px 24px 5px}
+body[data-item="project-toys"] #content{border-radius:6px 28px 6px 28px;transform:rotate(.15deg)}
+body[data-item="project-toys"] #emoji{border-radius:6px 32px 6px 32px;background:linear-gradient(145deg,#f4d9bd,#deaa7d);transform:rotate(-4deg)}
+body[data-item="project-toys"] #result{border-radius:4px 20px 4px 20px}
+body[data-item="project-plants"] #content{background-image:linear-gradient(rgba(255,255,255,.68),rgba(255,255,255,.68)),linear-gradient(90deg,transparent 49.7%,rgba(137,115,168,.12) 50%,transparent 50.3%),linear-gradient(transparent 49.7%,rgba(137,115,168,.12) 50%,transparent 50.3%);background-size:auto,34px 34px,34px 34px}
+body[data-item="project-plants"] #emoji{border-radius:50%;background:radial-gradient(circle at 35% 35%,#f6effa,#bcaed9);box-shadow:inset -10px -12px 20px rgba(104,81,148,.12),0 12px 24px rgba(104,81,148,.18)}
+body[data-item="note-reminders"] #intro{position:relative;padding-left:48px;border-left:0;background:#e9f0df;border-radius:4px 22px 22px 4px}
+body[data-item="note-reminders"] #intro:before{content:"“";position:absolute;left:15px;top:1px;color:#78966e;font:700 44px Georgia,serif}
+body[data-item="note-paper"] #content{background-image:repeating-linear-gradient(transparent 0 34px,rgba(211,145,105,.12) 35px 36px)}
+body[data-item="note-paper"] #emoji{border-radius:7px;background:#f6e7d7;transform:rotate(-5deg)}
+body[data-item="note-nearby"] #intro{background:#f0e9f5;border-left:0;border-radius:22px 4px 22px 4px}
+body[data-item="note-nearby"] #emoji{border-radius:50%;box-shadow:0 0 0 9px rgba(173,140,187,.13)}
+body[data-item="note-design"] #content{border-top:4px solid #78a5a1}
+body[data-item="note-design"] #intro{background:#e8f0ee;border-left:4px solid #78a5a1}
+body[data-item="hobby-plants"] #content{background-image:linear-gradient(90deg,transparent 49%,rgba(113,137,108,.08) 50%,transparent 51%),linear-gradient(transparent 49%,rgba(113,137,108,.08) 50%,transparent 51%);background-size:42px 42px}
+body[data-item="hobby-plants"] #emoji{border-radius:48% 8px 48% 8px}
+body[data-item="hobby-menu"] #content{transform:rotate(-.3deg);border-radius:9px 30px 9px 30px}
+body[data-item="hobby-menu"] #emoji{border-radius:18px 5px 18px 5px;transform:rotate(7deg)}
+body[data-item="hobby-sewing"] #content{background-image:radial-gradient(rgba(150,125,176,.16) .7px,transparent .7px);background-size:12px 12px}
+body[data-item="hobby-sewing"] #emoji{border-radius:50%;box-shadow:0 0 0 8px rgba(150,125,176,.12)}
+body[data-item="hobby-walks"] #content{background-image:linear-gradient(28deg,transparent 48%,rgba(173,147,68,.13) 49%,rgba(173,147,68,.13) 51%,transparent 52%);background-size:52px 52px}
+body[data-item="hobby-walks"] #emoji{border-radius:8px 50% 50% 50%;transform:rotate(-7deg)}

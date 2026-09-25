@@ -1,0 +1,38 @@
+/* Technical diagrams in the three project detail covers. They are concept sketches. */
+body[data-item="about-intro"] #emoji:after{content:'LLM AGENT'}
+body[data-item="about-method"] #category{letter-spacing:.14em}
+.preview-agent-system{background:linear-gradient(135deg,#d4e7cf,#9fc79d)}
+.preview-governance{background:linear-gradient(135deg,#f7d9bd,#e6ae85)}
+.preview-task-runtime{background:linear-gradient(135deg,#ddd2ef,#ab9bd2)}
+.preview-agent-system:after,.preview-governance:after,.preview-task-runtime:after{content:'概念示意';left:auto;right:12px;top:auto;bottom:12px;width:auto;height:auto;padding:5px 8px;border:1px solid rgba(65,82,67,.14);border-radius:12px;background:rgba(255,255,255,.8);color:#617265;font:700 9px 'DM Sans','Noto Sans SC',sans-serif}
+.preview-agent-system .preview-device,.preview-governance .preview-device,.preview-task-runtime .preview-device{width:75%;max-width:295px;height:255px;transform:rotate(-3deg);padding:14px 17px}
+.preview-governance .preview-device{transform:rotate(3deg)}
+.preview-task-runtime .preview-device{transform:rotate(-2deg)}
+.system-node{width:82%;margin:5px auto;padding:8px 10px;border:1px solid #c9dcc7;border-radius:9px;background:#f1f6ec;color:#4e6c56;text-align:center;font:800 12px 'DM Sans',sans-serif}
+.system-node.strong{width:95%;border-color:#86ad8d;background:#e2f0e0;color:#31583e}
+.system-path{height:15px;color:#6a9775;text-align:center;font:700 15px/15px sans-serif}
+.system-chips{display:flex;justify-content:center;gap:5px;margin-top:8px}
+.system-chips span{padding:6px 7px;border-radius:7px;background:#f1f4e9;color:#56735c;font:800 8px 'DM Sans',sans-serif;white-space:nowrap}
+.governance-row{display:flex;align-items:center;justify-content:space-between;margin:8px 1px;padding:8px 10px;border:1px solid #ead9c9;border-radius:8px;background:#fff6eb;color:#895b43;font:800 11px 'DM Sans',sans-serif}
+.governance-row b{display:grid;place-items:center;width:19px;height:19px;border-radius:50%;background:#b9d4b7;color:#426e4a;font-size:11px}
+.governance-sync{margin-top:12px;color:#9c6b50;text-align:center;font:800 10px 'DM Sans',sans-serif;letter-spacing:.04em}
+.task-title{margin:13px 2px 14px;color:#6e5b93;font:800 16px 'DM Sans',sans-serif}
+.task-step{display:flex;align-items:center;gap:11px;margin:8px 2px;padding:8px 11px;border:1px solid #e5dcf0;border-radius:8px;background:#faf7ff;color:#6b5b85;font:800 11px 'DM Sans',sans-serif}
+.task-step b{display:grid;place-items:center;width:22px;height:22px;border-radius:6px;background:#d7c8e9;color:#695187}
+
+/* Technical briefs use compact cards instead of a literary reading layout. */
+body.detail-note .page{max-width:980px}
+body.detail-note #content{margin-top:30px;padding:30px 34px 36px;border:1px solid var(--palette-shadow);border-radius:21px;background:var(--palette-surface);box-shadow:0 20px 44px rgba(52,74,58,.08)}
+body.detail-note #content:before{display:none}
+body.detail-note #category{margin-top:5px}
+body.detail-note #emoji{width:58px;height:58px;margin:19px 0 12px;background:var(--palette-pale)}
+body.detail-note #title{max-width:820px;font-family:'DM Sans','Noto Sans SC',sans-serif;font-size:clamp(33px,4.5vw,50px);font-weight:800;line-height:1.25;letter-spacing:-.045em;color:#304138}
+body.detail-note #subtitle{margin:14px 0 20px;padding:0;border:0;font:500 14px/1.7 'DM Sans','Noto Sans SC',sans-serif;color:#66756a}
+body.detail-note #intro{max-width:none;margin:24px 0;padding:21px 24px;border:0;border-left:4px solid var(--palette-accent);border-radius:8px 22px 22px 8px;background:var(--palette-pale);font:500 15px/1.85 'DM Sans','Noto Sans SC',sans-serif;color:#455b4b}
+body.detail-note #intro:before{display:none}
+body.detail-note #facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:20px 0}
+body.detail-note .fact{min-height:155px;padding:19px;border:1px solid var(--palette-shadow);border-top:3px solid var(--palette-accent);border-radius:11px;background:var(--palette-paper)}
+body.detail-note .fact h2{margin-bottom:10px;font:800 13px 'DM Sans','Noto Sans SC',sans-serif;letter-spacing:0;color:#3e5d49}
+body.detail-note .fact p{font:400 12px/1.8 'DM Sans','Noto Sans SC',sans-serif;color:#5a6d5e}
+body.detail-note #result{border-radius:9px;font:600 11px/1.7 'DM Sans','Noto Sans SC',sans-serif}
+@media(max-width:760px){body.detail-note #content{padding:22px}body.detail-note #facts{grid-template-columns:1fr}body.detail-note .fact{min-height:0}}

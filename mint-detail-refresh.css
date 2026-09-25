@@ -1,0 +1,102 @@
+/* The detail page keeps the homepage palette but gives each section its own layout. */
+@view-transition{navigation:auto}
+::view-transition-old(root){animation:fade-out .18s ease both}
+::view-transition-new(root){animation:fade-in .28s ease both}
+@keyframes fade-out{to{opacity:0;transform:translateY(-5px)}}
+@keyframes fade-in{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
+
+body.detail-about,body.detail-project,body.detail-note,body.detail-hobby{background-image:none;animation:none}
+.global-backdrop{background:radial-gradient(circle at 85% 5%,rgba(220,231,206,.42),transparent 34%),var(--palette-page,#f7f7ef);animation:none}
+.global-backdrop:before,.global-backdrop .glow,.global-backdrop .leaf-shadow,.global-backdrop .botanical-particle{display:none}
+.top{border-bottom:1px solid rgba(65,88,66,.22);padding-bottom:16px}
+.back{border:1px solid rgba(68,92,70,.3);border-radius:20px;padding:9px 15px;background:rgba(255,255,255,.56);transition:transform .18s,background .18s}
+.back:hover,.back:focus-visible{transform:translateX(-3px);background:#fffdf5}
+#content{animation:content-arrive .42s cubic-bezier(.2,.7,.2,1) both}
+@keyframes content-arrive{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+body[data-item] .fact,body[data-item] #intro{animation:none;background-image:none;background-position:0 0}
+
+/* Project pages have a visual stage that extends the selected cover. */
+body.detail-project .page{max-width:1100px}
+body.detail-project #content{grid-template-columns:minmax(0,1fr) minmax(330px,.95fr);column-gap:36px;margin-top:30px;padding:36px;border:1px solid rgba(56,78,59,.36);border-radius:24px;box-shadow:0 25px 55px rgba(53,76,54,.1);background:var(--palette-surface)}
+body.detail-project #category{margin-top:14px}
+body.detail-project #title{align-self:end;margin-top:16px;line-height:1.16}
+body.detail-project #subtitle{align-self:start;margin-bottom:20px}
+body.detail-project #emoji{width:100%;height:310px;min-height:310px;align-self:stretch;overflow:hidden;border-radius:20px;background:var(--palette-pale);font-size:initial;box-shadow:inset 0 1px rgba(255,255,255,.65)}
+body.detail-project #intro{margin:32px 0 14px;padding:22px 26px;border:0;border-radius:13px 30px 13px 13px;background:var(--palette-pale);font-size:15px}
+body.detail-project #facts{gap:15px;margin:12px 0 20px}
+body.detail-project .fact{min-height:180px;padding:23px 20px;border:1px solid rgba(73,95,74,.14);border-top:3px solid var(--palette-accent);border-radius:14px;background:var(--palette-paper)}
+body.detail-project .fact:before{color:var(--palette-accent);font-size:12px}
+body.detail-project .fact h2{font-size:15px}
+body.detail-project #result{border-radius:13px;padding:20px 24px}
+
+.preview-stage{position:relative;width:100%;height:100%;display:grid;place-items:center;overflow:hidden}
+.preview-stage:before,.preview-stage:after{content:"";position:absolute;border:1px solid rgba(255,255,255,.46);border-radius:50%;pointer-events:none}
+.preview-stage:before{width:360px;height:360px;right:-160px;top:-210px}
+.preview-stage:after{width:210px;height:210px;left:-105px;bottom:-135px}
+.preview-device{position:relative;z-index:1;width:67%;min-width:210px;max-width:270px;height:247px;padding:12px;border:1px solid rgba(42,62,43,.13);border-radius:20px;background:#fffef8;box-shadow:15px 21px 32px rgba(46,67,49,.19);transform:rotate(-5deg)}
+.preview-head{height:12px;margin:4px 4px 12px;border-radius:10px;background:linear-gradient(90deg,var(--palette-accent) 0 33%,#e8e9df 33% 80%,transparent 80%)}
+.preview-map{height:139px;position:relative;overflow:hidden;border-radius:12px;background:repeating-linear-gradient(32deg,transparent 0 29px,rgba(255,255,255,.74) 30px 35px),repeating-linear-gradient(126deg,#dcead5 0 36px,#d4e4cd 37px 72px)}
+.preview-map:before{content:"";position:absolute;inset:25px 80px 22px 78px;border-left:4px dashed #d8976d;border-bottom:4px dashed #d8976d;border-radius:0 0 0 30px;transform:rotate(-12deg)}
+.preview-pin{position:absolute;width:17px;height:17px;border:4px solid #fff;border-radius:50%;background:#d37e5c;box-shadow:0 2px 8px rgba(63,80,59,.28)}
+.preview-pin.one{left:21%;top:24%}.preview-pin.two{right:18%;top:38%}.preview-pin.three{left:52%;bottom:15%}
+.preview-bars{display:flex;gap:6px;margin:12px 5px}
+.preview-bars i{height:10px;flex:1;border-radius:8px;background:#dce5d5}.preview-bars i:nth-child(2){flex:1.7}.preview-bars i:nth-child(3){flex:.6}
+.preview-toys{background:linear-gradient(135deg,#f5d8b9,#e9b78f 58%,#f8ead6)}
+.preview-toys .preview-device{transform:rotate(5deg);background:#fffaf1}
+.preview-toy-card{height:147px;display:grid;place-items:center;border-radius:12px;background:linear-gradient(135deg,#f9e3ca,#eacbab);font-size:68px}
+.preview-toys .preview-bars i{background:#e9d6c3}
+.preview-toys .preview-device:after{content:"✓";position:absolute;right:-12px;bottom:29px;width:45px;height:45px;display:grid;place-items:center;border-radius:50%;background:#cb8665;color:white;font:700 22px sans-serif;box-shadow:0 6px 15px rgba(125,75,54,.2)}
+.preview-plants{background:linear-gradient(135deg,#d5c9ea,#ad9ed3 58%,#ede8f7)}
+.preview-plants .preview-device{width:52%;min-width:190px;max-width:220px;height:260px;transform:rotate(-4deg);background:#fbf9ff}
+.preview-plant-art{height:134px;display:grid;place-items:center;border-radius:12px;background:radial-gradient(circle at 50% 70%,#dceacf,#e9e1f2 72%);font-size:75px}
+.preview-weather{display:flex;align-items:center;justify-content:space-between;margin:10px 4px 0;padding:8px 11px;border-radius:10px;background:#eae4f2;color:#66577d;font:700 12px 'DM Sans',sans-serif}
+.preview-weather b{font-size:18px}
+
+/* Notes read like an editorial page, with labels separate from prose. */
+body.detail-note #content{position:relative}
+body.detail-note #content:before{content:"";position:absolute;left:-24px;top:64px;width:2px;height:140px;background:var(--palette-accent);opacity:.5}
+body.detail-note #emoji{margin-top:26px}
+body.detail-note .intro{max-width:650px;margin:34px 0 38px}
+body.detail-note .fact{display:grid;grid-template-columns:125px minmax(0,1fr);gap:18px;padding:24px 0}
+body.detail-note .fact h2{margin:4px 0 0}
+body.detail-note .fact p{font-size:15px;line-height:2}
+body.detail-note .result{margin-top:35px;border-radius:8px;padding:16px 20px}
+
+/* Hobbies retain the scrapbook tone, but the page gets a deliberate collage. */
+body.detail-hobby #content{border:1px solid var(--palette-accent);border-radius:26px;box-shadow:0 22px 50px rgba(58,76,58,.11);padding:34px;background:var(--palette-surface)}
+body.detail-hobby .grid{grid-template-columns:1.08fr .92fr;gap:15px;align-items:stretch}
+body.detail-hobby .fact{min-height:130px;border-radius:15px 27px 15px 15px;box-shadow:none;padding:22px}
+body.detail-hobby .fact:first-child{grid-row:span 2;min-height:275px;display:flex;flex-direction:column;justify-content:flex-end;background:var(--palette-pale)}
+body.detail-hobby .fact:nth-child(n){transform:none}
+body.detail-hobby .fact h2{font-size:15px}
+body.detail-hobby #result{margin-top:6px}
+
+/* Restore a matte paper finish to the working-style detail. */
+body[data-item="about-method"] #content{background:#fffaf2;backdrop-filter:none;-webkit-backdrop-filter:none;border:1px solid #d9b89e;border-radius:16px;box-shadow:10px 12px 0 #ecd4c1}
+body[data-item="about-method"] #emoji{background:#f5ddc7;backdrop-filter:none;border:1px solid #d4a789;box-shadow:4px 5px #ead0ba}
+body[data-item="about-method"] #intro{background:#f7e8d9;box-shadow:none;border:1px solid #e7cdb8}
+body[data-item="about-method"] .fact{background:#fff8ee;backdrop-filter:none;box-shadow:none;border-color:#e0c8b4}
+body[data-item="about-method"] #result{background:#f2ddca}
+
+@media(max-width:760px){
+  body.detail-project #content{display:block;padding:20px;border-radius:18px}
+  body.detail-project #emoji{height:230px;min-height:230px;margin:20px 0}
+  body.detail-project #facts{grid-template-columns:1fr}
+  body.detail-project .fact{min-height:0}
+  body.detail-note #content:before{display:none}
+  body.detail-hobby #content{padding:20px}
+  body.detail-hobby .grid{grid-template-columns:1fr}
+  body.detail-hobby .fact:first-child{grid-row:auto;min-height:160px}
+}
+@media(max-width:540px){body.detail-note .fact{grid-template-columns:1fr;gap:2px}.preview-device{min-width:190px;height:215px}.preview-map{height:112px}.preview-plants .preview-device{height:230px}.preview-plant-art{height:107px}}
+@media(prefers-reduced-motion:reduce){::view-transition-old(root),::view-transition-new(root),#content{animation:none!important}.back{transition:none}}
+
+/* A contextual return path in the familiar top-left position. */
+.top{display:flex;align-items:center;justify-content:space-between;gap:18px}
+.top .back{order:-1;display:inline-flex;align-items:center;gap:10px;margin-right:auto;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;color:#3d5b48;font-size:12px;font-weight:800;white-space:nowrap;transform:none}
+.top .back:before{content:'←';display:grid;place-items:center;width:35px;height:35px;border:1px solid rgba(71,105,75,.24);border-radius:50%;background:var(--palette-pale,#edf2e6);color:#3d5b48;font-size:17px;line-height:1;transition:transform .18s ease,background .18s ease}
+.top .back:hover,.top .back:focus-visible{background:transparent;transform:none;color:#af6e50}
+.top .back:hover:before,.top .back:focus-visible:before{transform:translateX(-3px);background:#fffdf4}
+.top .back:focus-visible{outline:2px solid #bd7351;outline-offset:6px;border-radius:3px}
+.top .brand{margin-left:auto}
+@media(prefers-reduced-motion:reduce){.top .back:before{transition:none}}

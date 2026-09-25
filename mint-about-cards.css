@@ -1,0 +1,13 @@
+/* Give the two about cards different visual voices. */
+#about .about .paper:first-child{position:relative;min-height:205px;padding:29px 24px 23px 88px;background:#e5efde;border:0;border-left:6px solid #78966e;border-radius:6px 28px 6px 28px;box-shadow:8px 8px #cfddc8;transform:none}
+#about .about .paper:first-child:before{content:'莓';position:absolute;left:21px;top:27px;width:49px;height:49px;display:grid;place-items:center;border:2px solid #78966e;border-radius:50%;background:#fff7e7;color:#48634b;font-size:19px;font-weight:800;box-shadow:2px 3px #c8d8bd}
+#about .about .paper:first-child:after{content:'ABOUT ME · 01';position:absolute;right:20px;top:17px;color:#738b6c;font-size:8px;font-weight:800;letter-spacing:.14em}
+#about .about .paper:first-child h3{margin:8px 0 12px;font-size:17px}
+#about .about .paper:first-child p{color:#536753}
+#about .about .paper:first-child .chips span{background:#f8fbf3;border-color:#91a788;color:#50664f}
+#about .about .paper:nth-child(2){position:relative;min-height:205px;padding:24px 24px 22px;background:#f7e8d9;border:1.5px dashed #c98c6a;border-radius:19px 5px 19px 5px;box-shadow:-6px 7px #ecd4c1;transform:rotate(1deg)}
+#about .about .paper:nth-child(2):before{content:'MY PROCESS';position:absolute;right:17px;top:-11px;padding:5px 9px;background:#fff8ee;border:1px solid #d6a181;border-radius:3px;color:#ae6f50;font-size:8px;font-weight:800;letter-spacing:.13em;transform:rotate(3deg)}
+#about .about .paper:nth-child(2) h3{display:inline-block;margin:5px 0 12px;padding:8px 12px;background:#fff7ed;border:1px solid #e2b99b;border-radius:22px;font-size:15px}
+#about .about .paper:nth-child(2) p{color:#6c5b50}
+#about .about .paper:nth-child(2) .chips span{background:#fff8ee;border-color:#d5a586;color:#8c634e}
+@media(max-width:720px){#about .about .paper:first-child{min-height:0;padding:26px 20px 21px 78px}#about .about .paper:first-child:after{right:12px;top:11px;font-size:7px}#about .about .paper:nth-child(2){min-height:0;transform:rotate(.3deg)}}

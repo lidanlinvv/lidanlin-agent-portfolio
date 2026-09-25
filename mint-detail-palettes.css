@@ -1,0 +1,41 @@
+/* Carry each card's own accent into its detail view. */
+body.detail-about,body.detail-project,body.detail-note,body.detail-hobby{background:var(--palette-page)}
+body.detail-about #content{background:var(--palette-surface);border:1px solid var(--palette-accent);box-shadow:5px 5px var(--palette-shadow);padding:26px;margin-top:26px}
+body.detail-about #emoji{background:var(--palette-pale);border-color:var(--palette-accent)}
+body.detail-about #intro{background:var(--palette-pale);border-left-color:var(--palette-accent)}
+body.detail-about .fact{border-top-color:var(--palette-accent);background:var(--palette-paper)}
+body.detail-about #result{background:var(--palette-pale);border-left:5px solid var(--palette-accent)}
+body.detail-project #content{background:var(--palette-surface);border-color:var(--palette-accent);box-shadow:7px 7px var(--palette-shadow)}
+body.detail-project #emoji{background:var(--palette-pale)}
+body.detail-project #intro{background:var(--palette-pale);border-top-color:var(--palette-accent)}
+body.detail-project .fact{background:var(--palette-paper);border-top-color:var(--palette-accent)}
+body.detail-project #result{background:var(--palette-accent)}
+body.detail-note #emoji{background:var(--palette-pale)}
+body.detail-note .crumb,body.detail-note .fact h2{color:var(--palette-accent)}
+body.detail-note .sub{border-color:var(--palette-shadow)}
+body.detail-note .intro{border-left-color:var(--palette-accent)}
+body.detail-note .fact{border-top-color:var(--palette-shadow)}
+body.detail-note .result{background:var(--palette-pale);border-left:4px solid var(--palette-accent);color:#5d584f}
+body.detail-hobby #content{background:var(--palette-surface);border-color:var(--palette-accent);box-shadow:7px 7px var(--palette-shadow)}
+body.detail-hobby .crumb{border-color:var(--palette-accent);background:var(--palette-paper);color:var(--palette-accent)}
+body.detail-hobby #emoji{background:var(--palette-pale);border-color:var(--palette-accent)}
+body.detail-hobby #intro{background:var(--palette-pale)}
+body.detail-hobby .fact{background:var(--palette-paper);border-color:var(--palette-accent);box-shadow:3px 4px var(--palette-shadow)}
+body.detail-hobby .fact:nth-child(even){background:var(--palette-pale)}
+body.detail-hobby #result{background:var(--palette-pale);border-color:var(--palette-accent);color:#5d584f}
+/* About subpages each get their own layout as well as their source card color. */
+body[data-item="about-intro"] #content{grid-template-columns:minmax(0,1.05fr) minmax(260px,.95fr);grid-template-areas:"k art" "t art" "s art" "i i" "f f" "r r";background:var(--palette-surface);border:1px solid var(--palette-accent);box-shadow:7px 7px var(--palette-shadow)}
+body[data-item="about-intro"] #emoji{min-height:280px;border:2px solid var(--palette-accent);border-radius:8px 44px 8px 8px;background:linear-gradient(145deg,#d7e7cf,#f7f4e7);box-shadow:8px 8px var(--palette-shadow);font-size:100px;transform:none}
+body[data-item="about-intro"] #emoji:after{content:'PERSONAL PROFILE';position:absolute;align-self:end;margin-bottom:15px;padding:6px 10px;background:#f8fbf3;border:1px solid var(--palette-accent);color:#536d50;font:800 9px 'DM Sans',sans-serif;letter-spacing:.16em}
+body[data-item="about-intro"] #title{font-size:clamp(40px,5vw,62px)}
+body[data-item="about-intro"] #facts{grid-template-columns:repeat(3,1fr)}
+body[data-item="about-intro"] .fact{background:var(--palette-paper);border-top:2px solid var(--palette-accent);padding:17px 14px}
+body[data-item="about-method"] #content{grid-template-columns:minmax(0,1fr) 130px;grid-template-areas:"k art" "t art" "s art" "i i" "f f" "r r";background:#fffaf3;border:1.5px dashed var(--palette-accent);box-shadow:8px 8px var(--palette-shadow);padding:34px}
+body[data-item="about-method"] #emoji{width:112px;min-height:112px;height:112px;align-self:center;border:1px solid var(--palette-accent);border-radius:18px 4px;background:var(--palette-pale);box-shadow:4px 5px #e8cfba;font-size:54px;transform:rotate(4deg)}
+body[data-item="about-method"] #title{font-size:clamp(36px,4.6vw,54px)}
+body[data-item="about-method"] #intro{background:#f7e8d9;border-left:0;border-top:4px solid var(--palette-accent);padding:23px}
+body[data-item="about-method"] #facts{display:grid;grid-template-columns:1fr;gap:9px;counter-reset:method}
+body[data-item="about-method"] .fact{display:grid;grid-template-columns:100px 1fr;align-items:center;gap:12px;background:#fff8ee;border:1px dashed #d8aa8e;border-radius:5px;box-shadow:none;padding:12px 16px}
+body[data-item="about-method"] .fact:before{counter-increment:method;content:'STEP 0' counter(method);font:800 9px 'DM Sans',sans-serif;letter-spacing:.12em;color:var(--palette-accent)}
+body[data-item="about-method"] #result{background:#f2ddca;border:0;border-left:5px solid var(--palette-accent);color:#675447}
+@media(max-width:680px){body[data-item="about-intro"] #content,body[data-item="about-method"] #content{display:block;padding:20px}body[data-item="about-intro"] #emoji{min-height:170px;height:170px;margin:15px 0;font-size:65px}body[data-item="about-intro"] #facts{grid-template-columns:1fr}body[data-item="about-method"] #emoji{width:84px;height:84px;min-height:84px;margin:15px 0;font-size:40px}body[data-item="about-method"] .fact{grid-template-columns:1fr;gap:5px}}

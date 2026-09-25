@@ -1,0 +1,56 @@
+/* Project hierarchy: one parent overview, then two implementation modules. */
+#work .project-structure{display:grid;gap:0}
+#work .project-structure .project:nth-child(n){transform:none;margin:0;min-height:0;border-radius:20px}
+#work .project-structure .project:nth-child(n):hover{transform:translateY(-3px)}
+#work .project-structure .project-overview{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:20px;align-items:center;padding:31px;border:1px solid #bfd2bd;background:linear-gradient(125deg,#f7fbf3,#ecf5e8);box-shadow:0 18px 36px rgba(52,73,57,.09)}
+#work .overview-copy{min-width:0}
+#work .module-eyebrow{display:inline-block;padding:7px 10px;border:1px solid #abc6aa;border-radius:20px;background:#fffefa;color:#52785b;font-size:10px;font-weight:800;letter-spacing:.11em}
+#work .project-overview h3{margin:17px 0 11px;font-size:clamp(22px,3vw,30px);line-height:1.3;color:#2e4635}
+#work .project-overview p{min-height:0;max-width:510px;color:#52685a;font-size:13px;line-height:1.85}
+#work .overview-meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
+#work .overview-meta span{padding:7px 9px;border-radius:7px;background:#e2efdf;color:#52745b;font-size:10px;font-weight:700}
+#work .architecture{min-width:0;padding:21px;border:1px solid #c9dec9;border-radius:16px;background:#fffefa}
+#work .architecture-label{margin-bottom:16px;color:#60846a;font-size:11px;font-weight:800;letter-spacing:.1em}
+#work .architecture-steps{display:flex;align-items:stretch;gap:5px}
+#work .architecture-steps span{display:grid;place-items:center;flex:1;min-height:70px;padding:8px;border:1px solid #bcd3bc;border-radius:10px;background:#edf5e9;color:#395842;text-align:center;font-size:11px;font-weight:800;line-height:1.5}
+#work .architecture-steps span:nth-of-type(2){background:#dcebd8;border-color:#a9c6aa}
+#work .architecture-steps b{display:grid;place-items:center;color:#729579;font-size:17px}
+#work .architecture small{display:block;margin-top:13px;color:#829187;font-size:9px;line-height:1.5}
+#work .project-overview>.card-go{grid-column:1/-1;justify-self:start;margin:0;font-size:11px}
+#work .module-branch{position:relative;display:grid;place-items:center;height:69px;color:#66836b;font-size:11px;font-weight:800}
+#work .module-branch:before{content:"";position:absolute;top:0;left:50%;height:35px;border-left:1px solid #95b497}
+#work .module-branch:after{content:"";position:absolute;left:25%;right:25%;bottom:0;border-top:1px solid #95b497}
+#work .module-branch span{position:relative;z-index:1;margin-top:10px;padding:5px 14px;border:1px solid #c9dcc9;border-radius:30px;background:#fbfdf8}
+#work .module-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+#work .project-structure .project-module{--accent:#b97958;display:flex;flex-direction:column;align-items:stretch;padding:24px;border:1px solid #ead4c1;background:#fff9f1;box-shadow:0 14px 29px rgba(87,67,53,.07)}
+#work .module-grid .project-module:nth-child(2){--accent:#7f77a7;border-color:#d8d2e8;background:#fbf8ff}
+#work .project-module .module-eyebrow{align-self:flex-start;border-color:currentColor;background:rgba(255,255,255,.7);color:var(--accent)}
+#work .module-heading{display:flex;align-items:center;gap:12px;margin-top:17px}
+#work .module-icon{display:grid;place-items:center;flex:0 0 42px;width:42px;height:42px;border-radius:11px;background:rgba(255,255,255,.8);color:var(--accent);font-size:25px}
+#work .project-module h3{margin:0;color:#36463d;font-size:20px;line-height:1.35}
+#work .project-module p{flex:1;min-height:0;margin:13px 0 18px;color:#5c685f;font-size:12px;line-height:1.85}
+#work .module-flow{display:flex;align-items:center;gap:6px;margin-top:auto;padding:10px;border:1px solid rgba(95,105,89,.12);border-radius:10px;background:rgba(255,255,255,.7)}
+#work .module-flow span{flex:1;color:#596a5e;text-align:center;font-size:10px;font-weight:700;line-height:1.4}
+#work .module-flow b{color:var(--accent);font-size:15px}
+#work .project-module .card-go{align-self:flex-start;margin-top:17px;color:var(--accent);border-color:var(--accent);font-size:11px}
+
+/* Four named implementation topics; the right-hand visuals are process labels. */
+#notes .notes-intro{max-width:850px;margin:-3px 0 23px;color:#637668;font-size:12px;line-height:1.8}
+#notes .log{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:none;gap:18px}
+#notes .log .entry:nth-child(n){grid-area:auto;display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:17px;min-height:220px;margin:0;padding:22px;border:1px solid #d5e2d0;border-radius:18px;background:#f4f8ef;box-shadow:0 13px 27px rgba(52,73,57,.07);transform:none}
+#notes .log .entry:nth-child(2){border-color:#ecd9c8;background:#fff6ed}
+#notes .log .entry:nth-child(3){border-color:#ded6e8;background:#f9f5fc}
+#notes .log .entry:nth-child(4){border-color:#d0e1dd;background:#f2f9f8}
+#notes .log .entry:nth-child(n):hover{transform:translateY(-3px)}
+#notes .log .entry:before,#notes .log .entry:after{display:none}
+#notes .log .entry-copy{display:flex;flex-direction:column;align-items:flex-start;min-width:0}
+#notes .log .entry time{padding:0;background:transparent;color:#698472;font-size:10px;line-height:1.5}
+#notes .log .entry h3,#notes .log .entry:nth-child(1) h3{margin:15px 0 10px;color:#304238;font-size:18px;line-height:1.4}
+#notes .log .entry p{max-width:none;color:#5c6f61;font-size:12px;line-height:1.8}
+#notes .log .entry a{margin-top:auto;padding-top:15px;color:#496b53;font-size:11px}
+#notes .note-flow{display:grid;align-content:center;gap:4px;min-width:0;padding:12px;border:1px solid rgba(92,128,96,.14);border-radius:13px;background:rgba(255,255,255,.7);text-align:center}
+#notes .note-flow span{display:block;padding:7px 4px;border:1px solid #d7e4d5;border-radius:7px;background:#f7fbf6;color:#4b6954;font-size:10px;font-weight:800;line-height:1.35}
+#notes .note-flow i{font-style:normal;color:#85a58b;font-size:13px;line-height:1}
+@media(max-width:900px){#work .project-structure .project-overview{grid-template-columns:1fr}#notes .log .entry:nth-child(n){grid-template-columns:minmax(0,1fr) 132px}}
+@media(max-width:760px){#work .module-grid,#notes .log{grid-template-columns:1fr}#notes .log .entry:nth-child(n){grid-template-columns:minmax(0,1fr) 145px}}
+@media(max-width:560px){#work .project-structure .project-overview{padding:21px}#work .architecture{padding:13px}#work .architecture-steps{display:grid;grid-template-columns:1fr;gap:3px}#work .architecture-steps span{min-height:42px}#work .architecture-steps b{font-size:13px;line-height:1}#work .project-structure .project-module{padding:20px}#work .module-branch:after{left:18%;right:18%}#notes .log .entry:nth-child(n){grid-template-columns:1fr;padding:20px;min-height:0}#notes .note-flow{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;margin-top:6px}#notes .note-flow span{flex:1 1 80px}#notes .note-flow i{transform:rotate(-90deg)}}

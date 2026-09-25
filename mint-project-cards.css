@@ -1,0 +1,32 @@
+/* Selected work: three portfolio covers with distinct color and shape. */
+#work .projectgrid{grid-template-columns:1.08fr .94fr 1fr;align-items:start;gap:22px;padding:4px 3px 16px}
+#work .project{--cover:#e3eddf;--wash:#f1f5ed;--accent:#71896c;--shadow:#d7e3d0;display:flex;align-self:start;flex-direction:column;padding:12px;background:var(--wash);border:0;border-radius:22px;box-shadow:0 8px 22px rgba(52,73,57,.08);overflow:hidden;transition:transform .22s,box-shadow .22s}
+#work .project:hover{transform:translateY(-7px) rotate(0);box-shadow:0 17px 32px rgba(52,73,57,.14)}
+#work .project:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+#work .project .visual{height:165px;min-height:165px;position:relative;isolation:isolate;overflow:hidden;display:grid;place-items:center;gap:10px;background:var(--cover);border-radius:17px 17px 5px 17px;font-size:38px}
+#work .project .visual:before{content:"";position:absolute;z-index:-1;width:170px;height:170px;right:-25px;top:-77px;border-radius:50%;background:rgba(255,255,255,.28)}
+#work .project .visual:after{content:"✳";position:absolute;left:17px;bottom:12px;color:var(--accent);font-size:18px;opacity:.65}
+#work .project small{display:inline-block;align-self:flex-start;margin:16px 0 7px;padding:6px 9px;border-radius:20px;background:rgba(255,255,255,.66);color:var(--accent);font-size:8px;letter-spacing:.14em}
+#work .project h3{font-size:17px;line-height:1.5;margin:0 0 8px;letter-spacing:-.025em}
+#work .project p{flex:1;min-height:104px;margin:0;padding:0 1px;color:#667168;font-size:10px;line-height:1.9}
+#work .project .outcome{display:inline-flex;align-self:flex-start;align-items:center;gap:5px;margin-top:13px;padding:8px 10px;border:0;border-radius:7px;background:rgba(255,255,255,.58);color:#687366;font-size:9px}
+#work .project .outcome b{color:var(--accent)}
+#work .project .card-go{align-self:flex-start;margin:12px 2px 2px;color:var(--accent);border-bottom-color:var(--accent)}
+#work .project:nth-child(1){transform:translateY(13px) rotate(-.6deg)}
+#work .project:nth-child(1) .visual{height:188px;min-height:188px}
+#work .project:nth-child(1) p{min-height:126px}
+#work .project:nth-child(2){--cover:#f3e3d2;--wash:#fbf2e8;--accent:#bf7952;--shadow:#ecd4c0;margin-top:18px;border-radius:5px 24px 5px 24px}
+#work .project:nth-child(2){transform:translateY(-6px) rotate(1.1deg)}
+#work .project:nth-child(2) .visual{border-radius:5px 17px 5px 17px}
+#work .project:nth-child(2) .visual{height:137px;min-height:137px}
+#work .project:nth-child(2) p{min-height:93px}
+#work .project:nth-child(2) .visual:before{width:135px;height:135px;right:-25px;top:auto;bottom:-62px;border:1px solid rgba(191,121,82,.25);background:transparent}
+#work .project:nth-child(2) .visual:after{content:"POSTCARD 02";left:auto;right:14px;bottom:13px;font-size:8px;font-weight:800;letter-spacing:.14em}
+#work .project:nth-child(3){--cover:#e8e2f1;--wash:#f3eff8;--accent:#8973a8;--shadow:#dcd3e9;border-radius:24px 5px 24px 5px;transform:translateY(28px) rotate(.5deg)}
+#work .project:nth-child(3) .visual{border-radius:17px 5px 17px 17px}
+#work .project:nth-child(3) .visual{height:174px;min-height:174px}
+#work .project:nth-child(3) p{min-height:112px}
+#work .project:nth-child(3) .visual:before{width:136px;height:136px;right:16px;top:15px;background:rgba(255,255,255,.2);border-radius:44% 56% 62% 38%}
+#work .project:nth-child(3) .visual:after{content:"FIELD EXPERIMENT";font-size:8px;font-weight:800;letter-spacing:.14em}
+@media(max-width:900px){#work .projectgrid{grid-template-columns:1fr 1fr}#work .project:nth-child(3){grid-column:2;transform:translateY(-12px) rotate(-.5deg)}}
+@media(max-width:720px){#work .projectgrid{grid-template-columns:1fr;gap:18px}#work .project:nth-child(1),#work .project:nth-child(2),#work .project:nth-child(3){grid-column:auto;margin-top:0;transform:none}#work .project .visual{height:150px;min-height:150px}#work .project p{min-height:0}}
