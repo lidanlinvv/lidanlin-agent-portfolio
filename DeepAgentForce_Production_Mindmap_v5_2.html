@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeepAgentForce｜生产级 Agent 全链路思维导图 5.2</title>
+<style>
+:root{
+  --bg:#0b1020;--panel:#111a2e;--panel2:#15213a;--line:#263653;--text:#e8eefb;
+  --muted:#9aabc7;--blue:#73a7ff;--cyan:#63d6dc;--green:#67d7a1;--amber:#ffc46b;
+  --purple:#c29aff;--red:#ff8585;--shadow:0 18px 50px rgba(0,0,0,.25)
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(1000px 600px at 12% -10%,#17294c 0%,transparent 55%),var(--bg);color:var(--text);font:14px/1.65 Inter,"PingFang SC","Microsoft YaHei",system-ui,sans-serif}
+button,input{font:inherit}
+button{cursor:pointer}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+.shell{max-width:1500px;margin:auto;padding:26px 28px 60px}
+.topline{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 14px var(--green)}
+h1{font-size:clamp(28px,4vw,44px);line-height:1.15;margin:13px 0 10px;letter-spacing:-.035em}
+.sub{max-width:1000px;color:#b4c2db;font-size:15px;margin:0 0 18px}
+.meta{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 22px}
+.pill{border:1px solid var(--line);border-radius:999px;padding:5px 10px;color:#c2cde1;background:#10192c;font-size:11px}
+.pill.blue{border-color:#355b91;color:#a9caff;background:#132746}
+.pill.green{border-color:#286b56;color:#9be6c1;background:#102b27}
+.pill.amber{border-color:#72552b;color:#ffd596;background:#302515}
+.toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;position:sticky;top:0;z-index:20;padding:12px 0;background:rgba(11,16,32,.9);backdrop-filter:blur(14px);border-bottom:1px solid rgba(73,96,132,.3)}
+.tabs{display:flex;gap:7px;flex-wrap:wrap}
+.tab,.smallbtn{border:1px solid var(--line);background:#111a2e;color:#b9c8df;border-radius:9px;padding:8px 12px;font-size:12px}
+.tab.active{background:#1a3154;border-color:#4779bd;color:#fff;box-shadow:inset 0 0 0 1px rgba(115,167,255,.12)}
+.search{min-width:230px;max-width:330px;width:28vw;border:1px solid var(--line);background:#0f1729;color:var(--text);border-radius:9px;padding:9px 12px;outline:none}
+.search:focus{border-color:#5d8dd0;box-shadow:0 0 0 3px rgba(115,167,255,.1)}
+.section{margin-top:26px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:12px}
+.section-head h2{font-size:19px;margin:0;letter-spacing:-.02em}
+.section-head p{color:var(--muted);font-size:12px;margin:0}
+.overview{border:1px solid var(--line);background:linear-gradient(145deg,rgba(20,34,59,.96),rgba(13,21,38,.96));border-radius:18px;padding:18px;box-shadow:var(--shadow);overflow:hidden}
+.flow{display:grid;grid-template-columns:repeat(11,minmax(112px,1fr));gap:8px;align-items:stretch;overflow-x:auto;padding-bottom:8px}
+.flow-node{position:relative;min-height:112px;text-align:left;border:1px solid #2c4163;border-radius:12px;padding:11px 10px;background:#111e35;color:var(--text);transition:.18s;min-width:112px}
+.flow-node:not(:last-child):after{content:"›";position:absolute;right:-9px;top:40%;z-index:2;color:#6c91c5;font-size:22px;font-weight:700}
+.flow-node:hover,.flow-node.selected{transform:translateY(-3px);border-color:var(--blue);background:#172b4a;box-shadow:0 10px 22px rgba(0,0,0,.2)}
+.flow-node .num{font-size:10px;color:var(--cyan);letter-spacing:.08em}
+.flow-node strong{display:block;font-size:13px;line-height:1.35;margin:6px 0}
+.flow-node small{display:block;color:var(--muted);font-size:10px;line-height:1.45}
+.crossline{margin-top:13px;border-top:1px dashed #344967;padding-top:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.crossline b{font-size:11px;color:#a8bad6;margin-right:4px}
+.crossline span{font-size:11px;color:#b5c6df;background:#18243b;border:1px solid #2c405f;padding:4px 8px;border-radius:6px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:11px}
+.legend i{display:inline-block;width:8px;height:8px;border-radius:3px;margin-right:5px}
+.layout{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(340px,.92fr);gap:16px;align-items:start}
+.module-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.module-card{border:1px solid var(--line);background:linear-gradient(145deg,#121d32,#10182a);border-radius:13px;padding:13px;text-align:left;color:var(--text);transition:.16s;min-height:125px}
+.module-card:hover,.module-card.active{border-color:#5d8fd2;background:#172944;transform:translateY(-2px)}
+.module-card .card-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.module-card strong{font-size:13px}
+.module-card p{margin:7px 0;color:#a9bad3;font-size:11px;line-height:1.5}
+.module-card .mini-tags{display:flex;gap:5px;flex-wrap:wrap}
+.tag{font-size:9px;border-radius:5px;padding:2px 6px;background:#1d2b43;color:#a9c3e8;border:1px solid #2b4264}
+.tag.repo{background:#103027;border-color:#28654f;color:#9de4c0}
+.tag.prod{background:#322719;border-color:#6c5029;color:#ffd28e}
+.detail{position:sticky;top:76px;border:1px solid #344967;border-radius:16px;background:linear-gradient(160deg,#14223a,#10192b);padding:18px;box-shadow:var(--shadow);max-height:calc(100vh - 100px);overflow:auto}
+.detail h3{font-size:20px;margin:7px 0 5px}
+.detail .lede{color:#b4c4dd;margin:0 0 14px;font-size:13px}
+.detail h4{font-size:12px;color:#8db7f3;letter-spacing:.04em;margin:17px 0 6px;text-transform:uppercase}
+.detail ul{padding-left:18px;margin:5px 0;color:#d3deef}
+.detail li{margin:6px 0;font-size:12px}
+.detail .quote{border-left:3px solid var(--cyan);background:#102a34;padding:10px 12px;border-radius:0 8px 8px 0;color:#c5f1ee;font-size:12px;margin-top:12px}
+.detail .codepaths{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+.detail .codepaths a{font:10px ui-monospace,SFMono-Regular,Consolas,monospace;background:#0d1524;border:1px solid #2a3a56;padding:5px 7px;border-radius:6px}
+.statusline{display:flex;gap:6px;flex-wrap:wrap}
+.status{font-size:10px;border-radius:5px;padding:3px 7px}
+.status.repo{background:#12392d;color:#9ee7c2}
+.status.extend{background:#3a2c17;color:#ffd38c}
+.subflow{display:grid;grid-template-columns:repeat(5,minmax(150px,1fr));gap:9px;overflow-x:auto;padding:4px 2px 12px}
+.substep{border:1px solid #2c4261;background:#111e34;border-radius:10px;padding:11px;min-width:150px;position:relative}
+.substep b{font-size:12px;display:block;margin-bottom:4px}
+.substep p{font-size:10px;color:var(--muted);margin:0}
+.substep em{font-style:normal;color:var(--cyan);font-size:9px;display:block;margin-bottom:4px}
+.arrowbar{text-align:center;color:#6c91c5;font-size:12px;margin:0 0 8px}
+.panel{border:1px solid var(--line);border-radius:15px;background:#111a2d;padding:16px;margin-top:12px}
+.panel h3{font-size:15px;margin:0 0 10px}
+.panel p,.panel li{color:#bac9df;font-size:12px}
+.panel ul{padding-left:18px;margin:7px 0}
+.twocol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.callout{padding:11px;border:1px solid #324966;border-radius:10px;background:#14233b}
+.callout b{font-size:12px;display:block;margin-bottom:5px}
+.callout p{margin:0;font-size:11px;color:#b5c5dd}
+.stateflow{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+.state{border:1px solid #345171;background:#142640;border-radius:8px;padding:8px 10px;font-size:11px}
+.state.warn{border-color:#77562a;background:#302719;color:#ffda9f}
+.state.good{border-color:#2a6b52;background:#112c25;color:#a6e9c8}
+.state.bad{border-color:#783c42;background:#321b25;color:#ffb1b1}
+.stateflow .arr{color:#7598c5}
+.table{width:100%;border-collapse:collapse;font-size:11px}
+.table th,.table td{border-bottom:1px solid #293b57;padding:9px 8px;text-align:left;vertical-align:top}
+.table th{color:#91b7ed;font-weight:600}
+.table td{color:#c2cee0}
+.footer{margin-top:35px;border-top:1px solid var(--line);padding-top:16px;color:#8395b1;font-size:11px}
+.hidden{display:none!important}
+.callout .green{color:var(--green)}.callout .amber{color:var(--amber)}.callout .purple{color:var(--purple)}
+@media(max-width:1000px){.layout{grid-template-columns:1fr}.detail{position:relative;top:auto;max-height:none}.flow{grid-template-columns:repeat(11,130px)}}
+@media(max-width:650px){.shell{padding:18px 14px 40px}.module-grid,.twocol{grid-template-columns:1fr}.toolbar{position:relative}.search{width:100%;max-width:none}.section-head{display:block}.section-head p{margin-top:4px}}
+@media print{body{background:#fff;color:#111}.toolbar{position:static}.detail{position:static;max-height:none}.overview,.module-card,.detail,.panel{box-shadow:none;break-inside:avoid;background:#fff;color:#111}.module-card p,.detail li,.panel p,.panel li{color:#333}}
+
+/* ===== Light technical reading theme ===== */
+:root{
+ --bg:#f3f6fb;--panel:#ffffff;--panel2:#f8faff;--line:#d9e2ef;--text:#17243a;
+ --muted:#64748b;--blue:#2563eb;--cyan:#0891b2;--green:#16845b;--amber:#b96a08;
+ --purple:#7c3aed;--red:#dc4545;--shadow:0 8px 26px rgba(26,48,82,.08)
+}
+body{background:#f3f6fb;color:#17243a}
+.topline{color:#64748b}.dot{box-shadow:0 0 10px rgba(22,132,91,.25)}
+.sub{color:#53647d}
+.pill{color:#40516b;background:#fff;border-color:#d7e1ee}
+.pill.blue{color:#1d4ed8;background:#eff6ff;border-color:#bfdbfe}
+.pill.green{color:#166534;background:#f0fdf4;border-color:#bbf7d0}
+.pill.amber{color:#92400e;background:#fffbeb;border-color:#fde68a}
+.toolbar{background:rgba(243,246,251,.94);border-bottom-color:#d9e2ef}
+.tab,.smallbtn{background:#fff;color:#475569;border-color:#d5dfec}
+.tab.active{background:#eaf2ff;border-color:#93b4ed;color:#17449a;box-shadow:inset 0 0 0 1px rgba(37,99,235,.08)}
+.search{background:#fff;color:#17243a;border-color:#cbd5e1}
+.search::placeholder{color:#94a3b8}
+.search:focus{border-color:#60a5fa;box-shadow:0 0 0 3px rgba(37,99,235,.09)}
+.overview{background:linear-gradient(145deg,#fff,#f8fbff);border-color:#d7e2f0;box-shadow:var(--shadow)}
+.flow-node{background:#fff;color:#17243a;border-color:#d3dfed;box-shadow:0 2px 7px rgba(28,52,86,.04)}
+.flow-node .num{color:#087e9c}.flow-node small{color:#64748b}
+.flow-node:hover,.flow-node.selected{background:#eff6ff;border-color:#5b91e8;box-shadow:0 8px 18px rgba(37,99,235,.1)}
+.flow-node:not(:last-child):after{color:#7296c9}
+.crossline{border-top-color:#d9e2ef}
+.crossline b{color:#475569}
+.crossline span{color:#475569;background:#f1f5f9;border-color:#dbe4ef}
+.legend{color:#64748b}
+.module-card{background:#fff;border-color:#d9e2ef;color:#17243a;box-shadow:0 2px 8px rgba(20,45,80,.035)}
+.module-card:hover,.module-card.active{background:#f0f6ff;border-color:#77a4e8;box-shadow:0 8px 20px rgba(37,99,235,.08)}
+.module-card p{color:#64748b}
+.tag{background:#eff4fb;color:#52647d;border-color:#dbe4ef}
+.tag.repo{background:#ecfdf5;border-color:#bbf7d0;color:#166534}
+.tag.prod{background:#fff7ed;border-color:#fed7aa;color:#9a4d0c}
+.detail{background:#fff;border-color:#d6e1ef;box-shadow:var(--shadow);color:#17243a}
+.detail .lede{color:#64748b}
+.detail h4{color:#245db5}
+.detail ul{color:#334155}
+.detail li{color:#334155}
+.detail .quote{background:#effaf7;border-left-color:#0d9488;color:#155e59}
+.detail .codepaths a{background:#f8fafc;border-color:#dbe4ef;color:#245db5}
+.status.repo{background:#ecfdf5;color:#166534}
+.status.extend{background:#fff7ed;color:#9a4d0c}
+.substep{background:#fff;border-color:#d6e1ef}
+.substep p{color:#64748b}
+.substep em{color:#087e9c}
+.arrowbar{color:#6685b3}
+.panel{background:#fff;border-color:#d9e2ef;box-shadow:0 3px 12px rgba(20,45,80,.035)}
+.panel p,.panel li{color:#475569}
+.table th{color:#245db5}
+.table td{color:#475569;border-bottom-color:#e5ebf3}
+.table th,.table td{border-bottom-color:#e3eaf3}
+.callout{background:#f8fbff;border-color:#d7e2f0}
+.callout p{color:#52647d}
+.state{background:#eff6ff;border-color:#bfdbfe;color:#1e40af}
+.state.warn{background:#fffbeb;border-color:#fde68a;color:#92400e}
+.state.good{background:#ecfdf5;border-color:#bbf7d0;color:#166534}
+.state.bad{background:#fef2f2;border-color:#fecaca;color:#991b1b}
+.stateflow .arr{color:#7b91b1}
+.footer{border-top-color:#dbe4ef;color:#64748b}
+.deep-block{border:1px solid #dbe5f1;background:#f8fbff;border-radius:10px;padding:11px 13px;margin:12px 0}
+.deep-block h4{margin:0 0 6px!important;color:#245db5}
+.deep-block p{margin:0;color:#42536c;font-size:12px;line-height:1.75}
+.deep-block.sequence{background:#eff6ff;border-color:#bfdbfe}
+.deep-block.metrics{background:#f0fdf4;border-color:#bbf7d0}\n.deep-block.baseline{background:#fffaf0;border-color:#f6d28a}\n.deep-block.baseline h4{color:#9a5b08}
+.qa-list{display:grid;gap:7px;margin:8px 0 14px}
+.qa{border:1px solid #dbe4ef;border-radius:9px;background:#fff;overflow:hidden}
+.qa[open]{border-color:#9bb9e8;background:#fbfdff}
+.qa summary{cursor:pointer;list-style:none;padding:10px 12px;font-size:12px;font-weight:650;color:#1e293b;display:flex;align-items:flex-start;gap:9px}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary:after{content:"＋";margin-left:auto;color:#4776bd;font-weight:700}
+.qa[open] summary:after{content:"－"}
+.qa-num{flex:0 0 auto;background:#eaf2ff;color:#245db5;border-radius:5px;padding:1px 6px;font-size:10px}
+.qa-answer{border-top:1px solid #e4ebf4;padding:11px 13px 13px 39px;color:#42536c;font-size:12px;line-height:1.8}
+.module-note{font-size:11px;color:#64748b}
+
+
+/* ===== v3: readable light theme and bilingual state labels ===== */
+body{background:#f4f7fc!important;color:#17243a!important}
+.panel,.overview,.detail,.module-card,.substep,.callout{background:#fff!important;color:#17243a!important;border-color:#dbe4f0!important}
+.state-panel{padding:18px!important}
+.state-panel h3{font-size:13px;color:#234f91;margin:0 0 12px}
+.stateflow.bilingual-flow{gap:8px;align-items:stretch;margin:8px 0 16px}
+.stateflow.bilingual-flow .state{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:92px;padding:8px 10px;background:#f3f7fd!important;border:1px solid #cbd9eb!important;color:#18345b!important;border-radius:9px;gap:1px}
+.stateflow.bilingual-flow .state b{font-size:10px;line-height:1.4;letter-spacing:.01em}
+.stateflow.bilingual-flow .state small{font-size:11px;color:#526783!important;line-height:1.5}
+.stateflow.bilingual-flow .state.good{background:#ecfdf5!important;border-color:#86d7b0!important;color:#166534!important}
+.stateflow.bilingual-flow .state.good small{color:#287a56!important}
+.stateflow.bilingual-flow .state.warn{background:#fff8e8!important;border-color:#efc66f!important;color:#8a5200!important}
+.stateflow.bilingual-flow .state.warn small{color:#986b24!important}
+.stateflow.bilingual-flow .state.bad{background:#fff1f2!important;border-color:#f0a4ad!important;color:#9f2635!important}
+.stateflow.bilingual-flow .state.bad small{color:#a34b55!important}
+.stateflow.bilingual-flow .arr{align-self:center;color:#6c85a8!important;font-size:16px}
+.state-note{margin:12px 0 0;color:#4b5f7b!important;font-size:12px;line-height:1.8}
+.compact-head{margin-top:22px}
+.compact-head h3{font-size:17px;margin:0;color:#1f3f70}
+.table-wrap{overflow-x:auto}
+.state-table{min-width:1050px}
+.state-table th{position:sticky;top:0;background:#eef4fc;color:#1d4d8d!important}
+.state-table td{color:#34465f!important;line-height:1.65}
+.state-table tr:nth-child(even){background:#f8fbff}
+.state-extra{margin-top:12px}
+.grid-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.intent-pipeline{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px;margin:8px 0 20px}
+.intent-step{background:#f7faff;border:1px solid #d7e4f4;border-radius:10px;padding:12px;min-width:0}
+.intent-step em{font-style:normal;color:#0b7f9a;font-size:10px;font-weight:700;letter-spacing:.04em}
+.intent-step b{display:block;color:#1d3e6d;font-size:13px;margin:4px 0}
+.intent-step p{font-size:11px;line-height:1.65;color:#596b83;margin:0}
+.panel h3{font-size:14px;color:#234f91;margin:18px 0 10px}
+.panel .callout{background:#f8fbff!important;border:1px solid #dce7f4!important}
+.panel .callout p{color:#4d607a!important}
+.deep-block.trigger{background:#f1f7ff!important;border-color:#b9d2f5!important}
+.deep-block.trigger h4{color:#1e58a5!important}
+.deep-block.trigger p{color:#344c6b!important}
+.deep-block.sequence{background:#eef6ff!important;border-color:#c5dcfa!important}
+.deep-block.baseline{background:#fff9ec!important;border-color:#f3d18a!important}
+.deep-block.metrics{background:#effbf4!important;border-color:#b8e8cb!important}
+.qa{background:#fff!important;border-color:#d8e2ef!important}
+.qa summary{color:#1c2d45!important}
+.qa-answer{color:#43566f!important}
+@media(max-width:850px){
+ .intent-pipeline{grid-template-columns:1fr 1fr}
+ .grid-two{grid-template-columns:1fr}
+ .stateflow.bilingual-flow .state{min-width:82px}
+}
+@media(max-width:520px){
+ .intent-pipeline{grid-template-columns:1fr}
+ .stateflow.bilingual-flow .state{min-width:calc(50% - 8px)}
+}
+
+
+/* ===== 4.0 narrative-first technical explanations ===== */
+.deep-block.mechanism{background:#eef6ff!important;border-color:#b8d2f4!important}
+.deep-block.mechanism h4{color:#174f9b!important}
+.deep-block.implementation{background:#f4f8ff!important;border-color:#d0def1!important}
+.deep-block.implementation h4{color:#285b91!important}
+.deep-block.failure{background:#fff7f3!important;border-color:#f1c7b8!important}
+.deep-block.failure h4{color:#a44725!important}
+.deep-block p{white-space:pre-line;line-height:1.95!important;font-size:12.5px!important;color:#354a65!important}
+.deep-block.mechanism p,.deep-block.implementation p,.deep-block.failure p{font-size:13px!important;line-height:2.0!important}
+.reference-list{margin:12px 0 16px;border:1px dashed #cbd8e8;border-radius:10px;padding:10px 13px;background:#fbfdff}
+.reference-list summary{cursor:pointer;color:#4b6383;font-size:12px;font-weight:650}
+.reference-list h4{margin:12px 0 6px;color:#536b8d;font-size:12px}
+.reference-list ul{margin-top:5px}
+.reference-list li{font-size:11.5px;line-height:1.7;color:#64748b}
+.detail .lede{line-height:1.8}
+
+
+/* ===== 5.0 Plain-language technical glossary ===== */
+.glossary-section{margin-top:16px}
+.term-panel{border:1px solid #b9cce5;border-radius:15px;background:linear-gradient(135deg,#f7fbff,#eef5ff);box-shadow:0 8px 24px rgba(40,80,130,.07);overflow:hidden}
+.term-panel>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 19px;color:#193b67}
+.term-panel>summary::-webkit-details-marker,.term-group>summary::-webkit-details-marker{display:none}
+.term-panel>summary strong{display:block;font-size:15px}
+.term-panel>summary small{display:block;color:#617792;font-size:12px;margin-top:3px;font-weight:400}
+.term-count{white-space:nowrap;border:1px solid #c7d8ed;border-radius:999px;padding:4px 9px;color:#46698f;font-size:11px;background:#fff}
+.term-content{padding:0 17px 16px}
+.term-intro{font-size:12px;color:#536a86;line-height:1.8;margin:0 0 12px}
+.term-group{border-top:1px solid #d9e5f2;padding:9px 0}
+.term-group>summary{cursor:pointer;color:#244c7c;font-size:13px;font-weight:700;list-style:none;display:flex;justify-content:space-between;padding:6px 2px}
+.term-group>summary span{font-weight:500;color:#7890aa;font-size:11px}
+.term-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:8px}
+.term-card{background:#fff;border:1px solid #dbe6f2;border-radius:10px;padding:10px 11px;min-width:0}
+.term-name{font-size:12px;font-weight:750;color:#174f91;overflow-wrap:anywhere}
+.term-zh{font-size:11px;font-weight:700;color:#2f6a57;margin-top:2px}
+.term-card p{font-size:11px;line-height:1.7;color:#586b81;margin:6px 0 0}
+@media(max-width:900px){.term-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.term-panel>summary{align-items:flex-start}.term-count{font-size:10px}.term-grid{grid-template-columns:1fr}}
+
+
+/* ===== 5.1 Explicit routing rules ===== */
+.route-rules{margin:18px 0 14px;padding:18px;border:1px solid #b8cbe2;border-radius:14px;background:#f8fbff;color:#263b56}
+.route-rules h3{font-size:17px;color:#1e477b;margin:4px 0 9px}
+.route-rules h4{font-size:14px;color:#28558b;margin:18px 0 8px}
+.route-lead{margin:0 0 12px;padding:11px 13px;background:#eaf2fc;border-left:4px solid #5688c6;border-radius:7px;color:#405875;line-height:1.8}
+.route-dimensions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.route-dimensions>div,.responsibility-grid>div{padding:11px 12px;background:#fff;border:1px solid #d8e4f1;border-radius:9px}
+.route-dimensions b,.responsibility-grid b{display:block;color:#28558b;font-size:12px}
+.route-dimensions span{display:block;color:#566b84;font-size:11px;line-height:1.7;margin-top:4px}
+.route-steps{padding-left:22px;margin:8px 0;color:#4b6079;font-size:12px;line-height:1.85}
+.route-steps li{padding:3px 0 3px 3px}
+.route-steps b{color:#2b4f78}
+.route-rule-table{min-width:900px;background:#fff}
+.route-rule-table th{background:#e9f1fb;color:#294e7b;position:sticky;top:0}
+.route-rule-table td{vertical-align:top;line-height:1.75;color:#52667f}
+.route-rule-table td:first-child{min-width:125px;color:#244e7e}
+.route-rule-table td:nth-child(2){min-width:245px}
+.route-rule-table td:nth-child(3){min-width:210px}
+.route-rule-table td:nth-child(4){min-width:235px}
+.responsibility-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
+.responsibility-grid p{font-size:11px;line-height:1.75;color:#596e85;margin:5px 0 0}
+.priority-line{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:7px;padding:12px;background:#edf4fc;border-radius:9px;color:#28558b;font-size:11px;font-weight:700}
+.priority-line span{padding:6px 8px;background:#fff;border:1px solid #d3e0ee;border-radius:7px}
+.priority-line i{font-style:normal;color:#7d96b4}
+.route-note{font-size:11px;line-height:1.8;color:#5c7088;margin:9px 0}
+.route-example{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.route-example>div{padding:10px;background:#fff;border:1px solid #d8e4f1;border-radius:9px}
+.route-example b{font-size:11px;color:#28558b}
+.route-example p{font-size:11px;line-height:1.75;color:#5a6d84;margin:5px 0 0}
+@media(max-width:950px){.responsibility-grid,.route-example{grid-template-columns:repeat(2,minmax(0,1fr))}.route-dimensions{grid-template-columns:1fr}}
+@media(max-width:560px){.responsibility-grid,.route-example{grid-template-columns:1fr}.route-rules{padding:12px}.priority-line{justify-content:flex-start}}
+
+
+/* 5.2 precision audit styles */
+.audit-summary{margin:14px 0 20px;padding:17px;border:1px solid #b9cde5;border-radius:14px;background:linear-gradient(135deg,#f8fbff,#f0f6fd)}
+.audit-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
+.audit-grid>div{background:#fff;border:1px solid #dce7f2;border-radius:9px;padding:11px}
+.audit-grid b{font-size:12px;color:#245486}
+.audit-grid p{font-size:11px;line-height:1.75;color:#5a6e85;margin:5px 0 0}
+.cross-tag{border:1px solid #c5d7eb;background:#fff;color:#315b88;border-radius:999px;padding:5px 10px;font-size:11px;cursor:pointer}
+.cross-tag:hover{background:#eaf3ff}
+.flow-footnote{margin:10px 0 0;padding:10px 12px;border-radius:8px;background:#f2f6fb;color:#5b6e85;font-size:11px;line-height:1.75}
+.state-domain-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:12px 0}
+.state-domain-grid>div{background:#f7faff;border:1px solid #d9e5f2;border-radius:9px;padding:10px}
+.state-domain-grid b{font-size:11px;color:#28588d}
+.state-domain-grid p{font-size:10.5px;line-height:1.7;color:#5a6d84;margin:5px 0 0}
+.state-table td{vertical-align:top;line-height:1.65}
+.state-table td:first-child{min-width:160px;font-weight:650;color:#28558b}
+.state-table td:nth-child(2){min-width:230px}
+.state-table td:nth-child(3){min-width:105px}
+.state-table td:nth-child(4){min-width:245px}
+.state-table td:nth-child(5){min-width:225px}
+@media(max-width:1000px){.audit-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.state-domain-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.audit-grid,.state-domain-grid{grid-template-columns:1fr}.cross-tag{white-space:normal}}
+
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="topline"><span class="dot"></span> SYSTEM ARCHITECTURE / INTERVIEW EDITION</div>
+  <h1>DeepAgentForce：生产级 Agent 全链路思维导图 5.2</h1>
+  <p class="sub">从一次用户请求出发，串起任务理解、上下文构建、Agent 编排、工具执行、RAG、Memory、数据一致性、故障恢复、结果交付与评测反馈。每个模块以问题、触发、决策机制、技术链路、数据模型、故障收敛和连续追问串成完整解释，不再把技术条件只写成名词清单，按高级工程师系统设计面试的深度组织。</p>
+  <div class="meta">
+    <span class="pill blue">主线：请求 → 决策 → 执行 → 交付 → 学习</span>
+    <span class="pill green">核心实现</span>
+    <span class="pill amber">橙色：关键机制与设计取舍</span>
+    <span class="pill">架构顺序校正 · 四层状态边界 · 路由决策闭环 · 数据库事务落地</span>
+  </div>
+
+  <div class="toolbar">
+    <div class="tabs">
+      <button class="tab active" data-view="overview">全链路总览</button>
+      <button class="tab" data-view="modules">模块深拆</button>
+      <button class="tab" data-view="rag">RAG 专项</button>
+      <button class="tab" data-view="reliability">可靠性与一致性</button>
+      <button class="tab" data-view="memory">记忆闭环</button>
+      <button class="tab" data-view="interview">面试表达</button>
+    </div>
+    <input id="search" class="search" placeholder="搜索模块 / 技术机制 / 故障场景…">
+  </div>
+
+  
+<div class="section glossary-section">
+  <details class="term-panel">
+    <summary>
+      <span><strong>术语解释：英文名词不默认你已经懂</strong><small>每个术语都给出中文含义、它在系统里负责什么，以及一个具体例子</small></span>
+      <span class="term-count">术语手册 · 可展开</span>
+    </summary>
+    <div class="term-content">
+      <p class="term-intro">阅读模块时遇到英文名词，可以回到这里查。注意：术语只是标签，真正重要的是它在什么时机被谁读取、改变了什么状态，以及失败后怎么处理。</p>
+
+<details class="term-group"><summary>身份、权限与工具选择 <span>9 个术语</span></summary><div class="term-grid">
+<article class="term-card"><div class="term-name">required_scopes</div><div class="term-zh">必需权限范围</div><p>工具声明的调用门槛。比如查询订单要求 orders:read，取消订单要求 orders:cancel；用户没有对应权限，工具即使语义最匹配也不能进入可执行候选。</p></article>
+<article class="term-card"><div class="term-name">Principal</div><div class="term-zh">已认证身份主体</div><p>服务端从已验证登录凭证中解析出的用户身份及其租户、角色等信息。不能直接相信请求体里用户自己填写的 user_id 或 tenant_id。</p></article>
+<article class="term-card"><div class="term-name">Scope</div><div class="term-zh">权限范围</div><p>一项具体操作权限，例如 files:read、orders:cancel。它比“管理员 / 普通用户”这种角色更细，适合控制工具能做什么。</p></article>
+<article class="term-card"><div class="term-name">RBAC</div><div class="term-zh">基于角色的访问控制</div><p>先给用户分配角色，再由角色获得权限。例如财务角色能查账单，客服角色能查订单；执行具体工具时仍需检查资源归属。</p></article>
+<article class="term-card"><div class="term-name">Tenant</div><div class="term-zh">租户</div><p>SaaS 系统里相互隔离的客户组织。A 公司用户的文档、会话和记忆不能被 B 公司检索到。</p></article>
+<article class="term-card"><div class="term-name">Capability Contract</div><div class="term-zh">能力契约</div><p>把某一步任务说清楚：要做什么动作、作用于什么对象、需要什么前置条件、返回什么结果、会不会产生副作用。例如“查询订单状态”与“取消订单”是两份不同契约。</p></article>
+<article class="term-card"><div class="term-name">Tool Registry</div><div class="term-zh">工具注册目录</div><p>系统登记所有可用工具的目录，保存工具用途、参数格式、权限要求、版本、超时和健康状态；不是把所有工具代码直接塞进模型提示词。</p></article>
+<article class="term-card"><div class="term-name">JSON Schema</div><div class="term-zh">JSON 参数结构规范</div><p>规定参数字段、类型、必填项、枚举和范围。例如 order_id 必须是字符串、reason 必须在允许枚举内；服务端用它拒绝模型生成的非法参数。</p></article>
+<article class="term-card"><div class="term-name">MCP</div><div class="term-zh">模型上下文协议</div><p>一种让 Agent 以统一协议发现和调用外部工具 / 资源的接入方式；它解决连接规范问题，不自动替代身份授权、参数校验和调用审计。</p></article>
+</div></details>
+<details class="term-group"><summary>上下文、意图与 Agent 执行 <span>12 个术语</span></summary><div class="term-grid">
+<article class="term-card"><div class="term-name">Context Manifest</div><div class="term-zh">上下文清单</div><p>记录某一次模型调用实际装入了哪些历史消息、检索片段、记忆、工具说明及其版本和 Token 用量。排查错误答案时，可以还原模型当时看到了什么。</p></article>
+<article class="term-card"><div class="term-name">Context Window</div><div class="term-zh">上下文窗口</div><p>模型单次请求最多能接收的 Token 容量。系统提示、历史、RAG 证据、工具定义和预留输出都占用它。</p></article>
+<article class="term-card"><div class="term-name">Token Budget</div><div class="term-zh">Token 预算</div><p>给本次请求各类内容分配的 Token 上限。例如先预留系统规则和 2,000 个输出 Token，再把剩余空间分给历史、检索证据和记忆。</p></article>
+<article class="term-card"><div class="term-name">Prompt Injection</div><div class="term-zh">提示词注入</div><p>把恶意指令藏在网页、文档或工具返回内容里，诱导模型忽略系统规则。外部内容必须当作数据而非可信指令，并由服务端执行权限检查。</p></article>
+<article class="term-card"><div class="term-name">意图识别</div><div class="term-zh">判断用户要完成的任务类型</div><p>例如区分“解释订单状态”（查询 / 解释）和“取消订单”（写操作）。意图识别只给出任务判断，不代表已经获得执行权限。</p></article>
+<article class="term-card"><div class="term-name">DAG</div><div class="term-zh">有向无环任务图</div><p>把多步任务表示为带依赖关系的步骤图。比如先查订单，再判断是否可取消，最后取消；后一步必须等前一步完成。无环是为了避免计划互相等待。</p></article>
+<article class="term-card"><div class="term-name">Step Ledger</div><div class="term-zh">步骤账本</div><p>逐步记录每个任务步骤的唯一 ID、输入摘要、执行状态、尝试次数和结果引用。Worker 重启后先查账本，避免重复执行已经成功的步骤。</p></article>
+<article class="term-card"><div class="term-name">Observation</div><div class="term-zh">工具执行观测结果</div><p>工具调用后返回的结构化结果，包括成功 / 失败状态、业务数据、错误码和外部单号；Controller 根据它判断下一步，而不是只读模型说“完成了”。</p></article>
+<article class="term-card"><div class="term-name">Checkpoint</div><div class="term-zh">恢复检查点</div><p>某个安全时刻保存的任务状态快照。进程崩溃后从最近一次已提交检查点恢复，不必从任务开头重跑。</p></article>
+<article class="term-card"><div class="term-name">Lease</div><div class="term-zh">执行租约</div><p>Worker 临时持有某个任务的执行权，并带有到期时间。Worker 崩溃后租约过期，其他 Worker 才能接管，避免两个 Worker 同时执行同一步。</p></article>
+<article class="term-card"><div class="term-name">CAS</div><div class="term-zh">比较并交换式条件更新</div><p>数据库只有在记录版本仍等于读取时的版本，才允许更新。若另一个 Worker 已经更新，旧 Worker 的写入会失败，避免旧状态覆盖新状态。</p></article>
+<article class="term-card"><div class="term-name">Trace</div><div class="term-zh">链路追踪记录</div><p>用同一个 trace_id 串起一次请求经过的 API、模型、检索、工具和数据库操作，定位延迟和失败发生在哪一段。</p></article>
+</div></details>
+<details class="term-group"><summary>RAG 检索与知识处理 <span>10 个术语</span></summary><div class="term-grid">
+<article class="term-card"><div class="term-name">RAG</div><div class="term-zh">检索增强生成</div><p>先从企业文档或知识库找证据，再把证据交给模型生成答案。它不是模型训练，也不是只做向量搜索。</p></article>
+<article class="term-card"><div class="term-name">ACL</div><div class="term-zh">访问控制列表</div><p>记录某份文档允许哪些用户、角色或租户访问。检索时必须先按 ACL 过滤，不能先召回再把无权文档交给模型。</p></article>
+<article class="term-card"><div class="term-name">Chunk</div><div class="term-zh">文档切片</div><p>把长文档按标题、段落、表格或代码结构拆成可检索的小块，并保留页码和文档版本，方便命中后回到原文。</p></article>
+<article class="term-card"><div class="term-name">Embedding</div><div class="term-zh">文本向量表示</div><p>把文本转换成一串数字，使语义相近的文本在向量空间里更接近。它擅长找同义表达，但对订单号、错误码等精确字符串不一定可靠。</p></article>
+<article class="term-card"><div class="term-name">BM25</div><div class="term-zh">关键词相关性排序算法</div><p>根据查询词在文档中的出现频率和稀有程度排序，适合精确查型号、编号、错误码和专有名词。</p></article>
+<article class="term-card"><div class="term-name">RRF</div><div class="term-zh">倒数排名融合</div><p>把向量检索和关键词检索各自的名次融合，不直接相加两种量纲不同的原始分数。某个片段在两路都排得靠前，融合后通常更靠前。</p></article>
+<article class="term-card"><div class="term-name">Cross-Encoder</div><div class="term-zh">查询与文档联合精排模型</div><p>把问题和每个候选片段一起输入模型，判断二者是否真正相关。它比向量召回更细，但计算更贵，所以只重排前几十个候选。</p></article>
+<article class="term-card"><div class="term-name">Query Rewrite</div><div class="term-zh">查询改写</div><p>把“那它为什么失败”改写成带上前文实体的完整检索问题；只在指代不清或首轮召回不足时触发，避免无必要改写造成语义偏移。</p></article>
+<article class="term-card"><div class="term-name">OCR</div><div class="term-zh">图片文字识别</div><p>把扫描 PDF 或图片里的文字识别出来。识别结果仍需校验页码、表格结构和置信度，不能默认完全准确。</p></article>
+<article class="term-card"><div class="term-name">Rerank</div><div class="term-zh">检索结果重排</div><p>对初步召回的候选片段再次打分并排序，目的是提高最终送入模型的证据准确度。</p></article>
+</div></details>
+<details class="term-group"><summary>可靠性、数据库一致性与并发 <span>16 个术语</span></summary><div class="term-grid">
+<article class="term-card"><div class="term-name">Idempotency-Key</div><div class="term-zh">幂等键</div><p>客户端为一次逻辑操作生成的唯一标识。相同用户用同一个键重试时，服务端返回原任务 / 原结果，而不是再创建一笔业务操作。</p></article>
+<article class="term-card"><div class="term-name">payload_hash</div><div class="term-zh">请求内容摘要</div><p>对规范化请求内容计算的哈希值，用来判断同一个幂等键是否被错误地拿去提交了不同内容。</p></article>
+<article class="term-card"><div class="term-name">Deadline</div><div class="term-zh">整条任务的截止时间</div><p>不是每个子调用都重新获得完整超时，而是所有模型、检索和工具调用共享同一个结束时刻，并为最终落库和收尾预留时间。</p></article>
+<article class="term-card"><div class="term-name">P95 / P99</div><div class="term-zh">95 / 99 分位耗时</div><p>P95 表示 100 次请求中约 95 次不超过这个耗时；P99 看更慢的尾部请求。比平均值更能暴露少数特别慢的调用。</p></article>
+<article class="term-card"><div class="term-name">RPM / TPM</div><div class="term-zh">每分钟请求数 / Token 数</div><p>模型供应商常见配额。RPM 限制请求频率，TPM 限制每分钟输入与输出 Token 总量；并发要同时受这两项约束。</p></article>
+<article class="term-card"><div class="term-name">Outbox</div><div class="term-zh">事务发件箱表</div><p>业务主表更新时，在同一个数据库事务里写一条待发布事件。这样业务提交成功后，即使进程崩溃，事件也不会丢。</p></article>
+<article class="term-card"><div class="term-name">Inbox</div><div class="term-zh">消费去重表</div><p>消费者记录已经处理过的 event_id，并设置唯一约束。消息队列重复投递时，消费者识别重复事件，不重复产生业务效果。</p></article>
+<article class="term-card"><div class="term-name">At-Least-Once</div><div class="term-zh">至少投递一次</div><p>消息系统保证尽力重投直到确认，因此消息可能重复。消费者必须幂等，不能假设每条消息只到达一次。</p></article>
+<article class="term-card"><div class="term-name">Exactly Once</div><div class="term-zh">恰好一次效果</div><p>跨数据库、消息队列和外部 API 通常很难保证端到端只传一次；工程上更常用至少一次投递，加唯一事件 ID、幂等写入和对账实现业务效果不重复。</p></article>
+<article class="term-card"><div class="term-name">DLQ</div><div class="term-zh">死信队列</div><p>多次处理仍失败的消息被转移到隔离队列，保留原始内容和错误，供排查、修复后重放，避免阻塞正常消息。</p></article>
+<article class="term-card"><div class="term-name">Saga</div><div class="term-zh">跨服务补偿事务</div><p>多个系统不能放进同一个数据库事务时，把流程拆成多个本地事务，并为已成功的步骤定义补偿动作。例如订票成功但付款失败，就触发退订。</p></article>
+<article class="term-card"><div class="term-name">Backpressure</div><div class="term-zh">背压 / 过载反馈</div><p>队列或下游容量快满时，系统减慢生产、排队或拒绝新请求，而不是无限堆积任务把延迟和内存拖垮。</p></article>
+<article class="term-card"><div class="term-name">Circuit Breaker</div><div class="term-zh">熔断器</div><p>某个依赖持续失败时暂时停止向它发送普通请求；恢复后只放少量探测请求，避免故障服务被重试流量继续压垮。</p></article>
+<article class="term-card"><div class="term-name">UNKNOWN_COMMIT</div><div class="term-zh">提交结果未知</div><p>调用方超时，但第三方可能已经完成写操作。此时先查外部单号或幂等键对账，不能直接重试，否则可能重复创建或扣款。</p></article>
+<article class="term-card"><div class="term-name">Retry-After</div><div class="term-zh">建议重试等待时间</div><p>下游返回限流响应时给出的等待秒数或时间点；客户端按它延迟重试，而不是马上继续冲击服务。</p></article>
+<article class="term-card"><div class="term-name">Saga Compensation</div><div class="term-zh">补偿动作</div><p>对已经完成的业务步骤执行反向或修正操作；它不是数据库回滚，可能失败，也必须单独记录和重试。</p></article>
+</div></details>
+<details class="term-group"><summary>评测、发布与运维 <span>10 个术语</span></summary><div class="term-grid">
+<article class="term-card"><div class="term-name">LLM Judge</div><div class="term-zh">大模型评审器</div><p>用另一个模型按评分标准评价答案质量；它可能有偏差，所以不能替代确定性业务校验和人工抽样。</p></article>
+<article class="term-card"><div class="term-name">Gold Chunk</div><div class="term-zh">标准证据片段</div><p>评测集里人工确认的正确文档片段，用来检查检索是否把真正相关的资料召回。</p></article>
+<article class="term-card"><div class="term-name">Recall@K</div><div class="term-zh">前 K 个结果召回率</div><p>正确证据是否出现在检索前 K 个候选中；主要衡量召回阶段有没有把答案依据找出来。</p></article>
+<article class="term-card"><div class="term-name">MRR</div><div class="term-zh">平均倒数排名</div><p>正确证据排得越靠前，分数越高；适合衡量第一个正确结果出现得有多早。</p></article>
+<article class="term-card"><div class="term-name">NDCG</div><div class="term-zh">归一化折损累计增益</div><p>同时考虑多个结果的相关等级和排序位置，越相关的结果排得越前，分数越高。</p></article>
+<article class="term-card"><div class="term-name">Canary</div><div class="term-zh">金丝雀发布</div><p>先让少量真实流量使用新版本，观察错误率、延迟和业务成功率；指标稳定后再逐步扩大流量。</p></article>
+<article class="term-card"><div class="term-name">Liveness</div><div class="term-zh">存活探针</div><p>判断进程是否还活着、是否卡死；失败通常触发重启。</p></article>
+<article class="term-card"><div class="term-name">Readiness</div><div class="term-zh">就绪探针</div><p>判断实例是否已经准备好接收流量；数据库迁移未完成时可以暂时不就绪，但不一定要重启进程。</p></article>
+<article class="term-card"><div class="term-name">PITR</div><div class="term-zh">时间点恢复</div><p>利用数据库备份和日志，把数据库恢复到某个历史时间点，用于误删或数据损坏后的恢复。</p></article>
+<article class="term-card"><div class="term-name">RPO / RTO</div><div class="term-zh">可接受数据丢失量 / 恢复时间目标</div><p>RPO 回答最多能丢多少时间的数据，RTO 回答故障后最多多久恢复服务；需要通过真实恢复演练验证。</p></article>
+</div></details>
+
+    </div>
+  </details>
+</div>
+
+<div class="section audit-summary">
+  <div class="section-head"><h2>仍需项目方明确的配置决策</h2><p>这些不是架构逻辑缺失，而是必须由业务 SLA、安全规范和部署规模确定的参数；不能在通用架构图里伪造统一答案。</p></div>
+  <div class="audit-grid">
+    <div><b>01 · 多租户隔离模型</b><p>明确采用共享库 tenant_id 行级隔离、Schema-per-tenant，还是 Database-per-tenant；同时定义跨租户管理角色和数据导出边界。</p></div>
+    <div><b>02 · 身份与权限模型</b><p>选定 OIDC / IdP、角色与 Scope 映射、资源 ACL 数据源、权限撤销生效 SLA，以及审批人授权和职责分离规则。</p></div>
+    <div><b>03 · 中间件选型</b><p>明确关系库、队列 / 事件总线、Redis、对象存储、向量库、BM25 引擎和部署平台；并定义各组件不可用时的降级能力。</p></div>
+    <div><b>04 · 操作风险矩阵</b><p>逐个业务动作定义副作用等级、是否需发起人确认、是否需独立审批、审批角色、payload 绑定字段和审批 TTL。</p></div>
+    <div><b>05 · SLA 与预算</b><p>按任务类型定义端到端 Deadline、排队预算、Token / 工具预算、并发配额、重试上限、队列硬阈值和 429 / 503 策略。</p></div>
+    <div><b>06 · 外部幂等能力</b><p>逐个写工具确认第三方幂等键语义、业务单号查询能力和对账 API；缺少这些能力的工具不得承诺 exactly-once。</p></div>
+    <div><b>07 · RAG 与 Memory 参数</b><p>按文档类型校准 Chunk / Top-K / Rerank 门槛；按记忆类型确定 TTL、用户查看 / 更正 / 删除流程和派生索引清理 SLA。</p></div>
+    <div><b>08 · 运营目标</b><p>定义各风险等级 SLO、P95 / P99、错误预算、Canary 回滚门槛、RPO / RTO、审计保留期和灾备演练频率。</p></div>
+  </div>
+</div>
+<div class="section audit-summary">
+  <div class="section-head"><h2>本版设计审查：已修正的高风险模糊点</h2><p>不是单纯增加术语，而是修正顺序、状态边界、决策责任和失败收敛条件。</p></div>
+  <div class="audit-grid">
+    <div><b>01 · 上下文顺序</b><p>先构建路由前最小上下文；策略确定数据源后，再检索 RAG / Tool；最后组装完整模型上下文，避免“先要 RAG 才能判断是否要 RAG”的循环。</p></div>
+    <div><b>02 · 路由维度</b><p>数据来源、执行组织方式、风险门禁分开判断；RAG + Tool + Agent 可以组合，不再把它们做成互斥单选。</p></div>
+    <div><b>03 · 决策责任</b><p>LLM 只提取意图候选和槽位；权限来自身份 / ACL 服务，风险来自动作元数据，复杂度来自任务依赖图，策略引擎产出 RoutePlan。</p></div>
+    <div><b>04 · 工作流边界</b><p>固定步骤和固定分支用 Workflow / DAG；只有后续动作要根据 Observation 动态改变时，才启动 Agent Planner。</p></div>
+    <div><b>05 · 状态边界</b><p>Task、Step、Operation、Delivery 四套状态分开；补齐澄清、用户确认、独立审批、重规划、恢复、取消和未知提交的返回路径。</p></div>
+    <div><b>06 · RAG 证据门槛</b><p>不把线上“Recall@K”当成可直接观测值；用召回候选、精排分数校准、子问题覆盖、来源和时效判断证据是否足够。</p></div>
+    <div><b>07 · 数据库事务</b><p>补充唯一约束、CAS、原子 claim、TaskEvent / Outbox / Inbox 的区别、索引版本和连接池容量治理。</p></div>
+    <div><b>08 · 超时与取消</b><p>Deadline 从受理时刻开始计入排队时间；有未知写提交时先对账，不能直接结束为 TIMED_OUT 或 CANCELLED。</p></div>
+  </div>
+</div>
+
+<section id="view-overview" class="view">
+    <div class="section">
+      <div class="section-head"><h2>01 / 端到端主链路</h2><p>点击任一节点，右侧查看它在整条链路中的职责和生产问题</p></div>
+      <div class="overview">
+        <div class="flow" id="mainFlow">
+          <button class="flow-node selected" data-id="ingress"><span class="num">01 · INGRESS</span><strong>请求接入</strong><small>认证、租户、幂等、配额</small></button>
+          <button class="flow-node" data-id="planner"><span class="num">02 · UNDERSTAND</span><strong>预路由理解</strong><small>最小历史、实体、槽位、意图候选</small></button>
+          <button class="flow-node" data-id="capability"><span class="num">03 · POLICY</span><strong>策略与能力门禁</strong><small>权限、数据来源、风险、执行模式</small></button>
+          <button class="flow-node" data-id="rag"><span class="num">04 · EVIDENCE</span><strong>按需获取证据</strong><small>RAG 检索 / 实时工具查询，可并行</small></button>
+          <button class="flow-node" data-id="context"><span class="num">05 · CONTEXT</span><strong>完整上下文组装</strong><small>最新 State、证据、工具结果、Memory</small></button>
+          <button class="flow-node" data-id="execution"><span class="num">06 · EXECUTION</span><strong>执行控制循环</strong><small>Plan → Action → Observation → State</small></button>
+          <button class="flow-node" data-id="delivery"><span class="num">07 · DELIVERY</span><strong>结果持久化与交付</strong><small>先提交终态，再发送 done</small></button>
+          <button class="flow-node" data-id="memory"><span class="num">08 · MEMORY</span><strong>异步经验沉淀</strong><small>质量门控、去重、落库、索引</small></button>
+          <button class="flow-node" data-id="evaluation"><span class="num">09 · FEEDBACK</span><strong>评测与迭代</strong><small>离线回归、线上观测、灰度回滚</small></button>
+        </div>
+        <div class="crossline"><b>不是串行步骤，而是横向控制面：</b>
+          <button class="cross-tag" data-id="reliability">可靠性：Deadline / Retry / 幂等 / 并发 / 熔断</button>
+          <button class="cross-tag" data-id="consistency">一致性：事务 / Outbox / Inbox / 对账</button>
+          <button class="cross-tag" data-id="ops">运维：安全 / 配置 / 部署 / 灾备</button>
+          <span>租户隔离与权限复核</span><span>Trace / Metrics / Logs</span><span>资源配额与背压</span><span>审计与数据脱敏</span>
+        </div>
+        <p class="flow-footnote">注意：RAG 和工具查询不是每个请求必经的固定步骤；由策略路由按需触发。Agent 每轮得到新 Observation 后，可能再次回到能力选择、检索和上下文组装。流式增量可以边执行边推送，但最终 done 必须在结果与终态提交后发送。</p>
+        <div class="legend"><span><i style="background:#67d7a1"></i>项目实现模块</span><span><i style="background:#ffc46b"></i>生产级工程机制</span><span><i style="background:#73a7ff"></i>主流程节点</span></div>
+      </div>
+    </div>
+    <div class="section layout">
+      <div>
+        <div class="section-head"><h2>02 / 主链路模块树</h2><p>不是文件目录，而是业务职责与技术机制</p></div>
+        <div id="moduleGrid" class="module-grid"></div>
+      </div>
+      <aside id="detail" class="detail"></aside>
+    </div>
+    
+<div class="section">
+  <div class="section-head"><h2>03 / 任务状态机：不只看箭头，要看迁移条件</h2><p>每个状态都给出中文含义；QUEUED、CLAIMED、EXECUTING 明确拆开，避免把排队、领任务和真正执行混成一个状态。</p></div>
+  <div class="panel state-panel">
+    <h3>主链路 / Main Path</h3>
+    <div class="stateflow bilingual-flow">
+      <span class="state"><b>RECEIVED</b><small>已接收</small></span><span class="arr">→</span>
+      <span class="state"><b>VALIDATING</b><small>校验中</small></span><span class="arr">→</span>
+      <span class="state"><b>QUEUED</b><small>排队中</small></span><span class="arr">→</span>
+      <span class="state"><b>CLAIMED</b><small>已领取</small></span><span class="arr">→</span>
+      <span class="state"><b>PLANNING</b><small>规划中</small></span><span class="arr">→</span>
+      <span class="state"><b>EXECUTING</b><small>执行中</small></span><span class="arr">→</span>
+      <span class="state good"><b>SUCCEEDED</b><small>成功</small></span>
+    </div>
+    <h3>分支 / Recovery / Exception Paths</h3>
+    <div class="stateflow bilingual-flow">
+      <span class="state warn"><b>WAITING_APPROVAL</b><small>等待审批</small></span>
+      <span class="state warn"><b>NEEDS_CLARIFICATION</b><small>等待澄清</small></span>
+      <span class="state warn"><b>REPLANNING</b><small>重新规划</small></span>
+      <span class="state warn"><b>RETRY_WAIT</b><small>等待重试</small></span>
+      <span class="state warn"><b>RECONCILING</b><small>对账中</small></span>
+      <span class="state"><b>RECOVERING</b><small>恢复中</small></span>
+    </div>
+    <div class="stateflow bilingual-flow" style="margin-top:10px">
+      <span class="state good"><b>PARTIAL</b><small>部分完成</small></span>
+      <span class="state bad"><b>FAILED</b><small>失败</small></span>
+      <span class="state bad"><b>TIMED_OUT</b><small>超时</small></span>
+      <span class="state bad"><b>CANCEL_REQUESTED</b><small>取消请求中</small></span>
+      <span class="state bad"><b>CANCELLED</b><small>已取消</small></span>
+      <span class="state bad"><b>ABORTED</b><small>主动终止</small></span>
+      <span class="state bad"><b>REJECTED</b><small>已拒绝</small></span>
+    </div>
+    <p class="state-note">Task 状态只描述整项任务；Step 状态描述单个步骤；Operation 状态描述外部副作用是否提交；Delivery 状态描述单个订阅者的事件交付。GATHERING_EVIDENCE 是可选任务阶段；Full Context 在每次模型调用前按最新版本组装，不单独形成 Task 状态。QUEUED 是等待 Worker，CLAIMED 是 Worker 获得租约，EXECUTING 是至少一个 Step 正在运行。WebSocket 断开只影响订阅，不取消 Task。</p>
+    <div class="state-domain-grid">
+      <div><b>Task State（任务状态）</b><p>RECEIVED、VALIDATING、QUEUED、CLAIMED、PLANNING、GATHERING_EVIDENCE、EXECUTING、WAITING_CONFIRMATION、WAITING_APPROVAL、NEEDS_CLARIFICATION、REPLANNING、RECONCILING、RECOVERING、CANCEL_REQUESTED、PARTIAL、SUCCEEDED、FAILED、TIMED_OUT、CANCELLED、ABORTED、REJECTED 等。</p></div>
+      <div><b>Step State（步骤状态）</b><p>BLOCKED → READY → RUNNING → SUCCEEDED / FAILED / SKIPPED / CANCELLED；瞬时失败可进入 RETRY_WAIT。多个 Step 可同时处于不同状态。</p></div>
+      <div><b>Operation State（外部操作状态）</b><p>NOT_STARTED → IN_PROGRESS → SUCCEEDED / FAILED / UNKNOWN_COMMIT；需要补偿时进入 COMPENSATING → COMPENSATED。它决定写操作能否安全重放。</p></div>
+      <div><b>Delivery State（交付状态）</b><p>按订阅者维护 PENDING → SENT → ACKED；客户端 ACK / last_event_seq 只表示收到事件。Outbox 的 PENDING / PUBLISHED 是独立发布状态；交付失败不回滚已提交的 Task 结果。</p></div>
+    </div>
+  </div>
+  <div class="section-head compact-head"><h3>状态迁移判定表</h3><p>面试时按“事件 → Guard 条件 → 执行主体 → 持久化动作 → 失败去向”解释每条边。</p></div>
+  <div class="panel table-wrap"><table class="table state-table"><thead><tr><th>状态迁移</th><th>触发时机 / Guard 条件</th><th>谁触发</th><th>数据库 / 执行动作</th><th>异常去向</th></tr></thead><tbody><tr><td>请求到达 → RequestAudit</td><td>任何 HTTP 请求到达即生成 request_id；先做协议、大小和认证检查</td><td>API Gateway</td><td>写请求审计记录；JWT 无效时不创建 Task，只记录拒绝事件并返回 401</td><td>认证失败停留在请求层，不创建 Task；已认证但业务授权失败才进入 REJECTED</td></tr>
+<tr><td>认证通过 → RECEIVED</td><td>JWT / OIDC 有效；基础 Schema、大小与同步限流通过</td><td>API + DB</td><td>同一事务写 Task、用户消息、幂等记录、初始 TaskEvent 和 task.validation_requested Outbox</td><td>提交后返回 202 + task_id；202 只代表接收请求，不代表业务 ACL / Scope 已通过</td></tr>
+<tr><td>RECEIVED → VALIDATING</td><td>Validation Worker 收到 task.validation_requested 并原子 claim</td><td>Validation Worker</td><td>记录 validator lease、Principal / ACL 快照版本和 policy_version</td><td>Worker 崩溃由租约接管；重复事件通过 Inbox / Task 状态幂等处理</td></tr>
+<tr><td>VALIDATING → QUEUED</td><td>资源 ACL、必需 Scope、业务前置条件、配额、预算和 Deadline 均通过</td><td>Validation Worker + DB</td><td>同一事务 CAS 更新 Task、写 TaskEvent 和 task.execute_requested Outbox</td><td>事务回滚则保持 VALIDATING 并由 Outbox 重投；未提交前不允许执行 Worker 消费</td></tr>
+<tr><td>VALIDATING → REJECTED</td><td>资源归属、Scope、ACL 或业务硬门禁失败</td><td>Validation Worker + Policy</td><td>记录 deny_reason、policy_version 和 TaskEvent；不创建 execution Outbox</td><td>向客户端只披露允许的信息；拒绝不能通过澄清或审批绕过</td></tr>
+<tr><td>QUEUED → CLAIMED</td><td>Worker 从队列领取任务，数据库原子 claim 条件更新成功</td><td>Worker</td><td>写 lease_owner、lease_until、fencing_token；递增 state_version</td><td>未抢到任务的 Worker 放弃；租约失效后必须重新 claim</td></tr>
+<tr><td>CLAIMED → PLANNING</td><td>租约有效；加载任务快照和路由前最小上下文成功</td><td>Controller</td><td>记录 context_version、policy_version、deadline_at 和预算快照</td><td>加载失败按依赖类型重试；此阶段不提前拉取全库 RAG</td></tr>
+<tr><td>PLANNING → GATHERING_EVIDENCE</td><td>RoutePlan 合法，且 data_sources 声明需要预执行 RAG 或只读 Tool 证据</td><td>Evidence Coordinator</td><td>按 ACL 获取所需 Chunk / 只读查询结果；记录 source_version 和 evidence_ref</td><td>证据不足可一次扩展检索后澄清 / 拒答；不允许用未授权来源补齐</td></tr>
+<tr><td>PLANNING → EXECUTING</td><td>RoutePlan 合法，且无需预执行证据获取；必填槽位、任务图、权限、预算和 Deadline 均通过</td><td>Policy Engine + Controller</td><td>保存 route_plan_version、step_id、依赖边和验收条件</td><td>固定流程走 Workflow；只有动态决策需求才启动 Agent Planner</td></tr>
+<tr><td>GATHERING_EVIDENCE → EXECUTING</td><td>必需的预执行证据已获取并通过 ACL / 版本 / 来源校验</td><td>Evidence Coordinator + Controller</td><td>保存 evidence_manifest_id；每次模型调用前再组装 Full Context</td><td>Context 组装是调用前过程，不是独立 Task 状态；执行中新增检索仍由 Step 调度</td></tr>
+<tr><td>PLANNING / EXECUTING → NEEDS_CLARIFICATION</td><td>required slot 缺失；实体 0 个或多个候选无法消歧；歧义会改变目标或副作用</td><td>Controller</td><td>保存 missing_slots、候选实体和上下文游标；释放 Worker 租约</td><td>用户回复必须关联原 task_id，并重新做身份、权限和槽位校验；TTL 到期转 ABORTED</td></tr>
+<tr><td>NEEDS_CLARIFICATION → QUEUED</td><td>用户补充信息到达，能唯一补齐缺失槽位，且原任务未过期 / 未取消</td><td>API + Controller</td><td>追加用户消息、更新输入版本，重新写 Outbox 事件</td><td>仍有歧义则继续澄清；任务已过期则要求新建任务</td></tr>
+<tr><td>PLANNING / EXECUTING → WAITING_CONFIRMATION</td><td>发起人有权限且参数完整，但策略要求发起人确认最终对象、payload_hash 和影响范围</td><td>Controller + Confirmation Service</td><td>创建 ActionConfirmation，绑定 initiator_id、payload_hash、resource_version、expires_at；暂停对应 Step</td><td>确认不增加权限；参数或资源版本变化、确认过期时必须重新确认</td></tr>
+<tr><td>WAITING_CONFIRMATION → QUEUED</td><td>原发起人确认同一 payload_hash；确认未过期；权限、资源归属和 resource_version 复核通过</td><td>Confirmation Service</td><td>记录确认人、时间和确认内容 Hash；写恢复 Outbox 事件</td><td>确认人不匹配、内容变化或资源变化则拒绝 / 重新确认</td></tr>
+<tr><td>WAITING_CONFIRMATION → ABORTED</td><td>发起人拒绝确认或确认 TTL 到期</td><td>Confirmation Service</td><td>记录 confirmation_decision 和终止原因</td><td>不执行对应副作用；已完成的前置只读结果可保留</td></tr>
+<tr><td>PLANNING / EXECUTING → WAITING_APPROVAL</td><td>动作参数完整、发起人有权限，但动作元数据命中人工审批策略</td><td>Policy Engine</td><td>创建 Approval 记录，绑定 payload_hash、approver_scope 和过期时间；暂停该 Step</td><td>审批不是授权替代；权限变更或参数 Hash 变化时原审批失效</td></tr>
+<tr><td>WAITING_APPROVAL → QUEUED</td><td>独立审批人批准；审批未过期；发起人权限、资源归属和参数 Hash 复核仍通过</td><td>Approval Service</td><td>记录审批人、时间和决策；写恢复事件，重新排队</td><td>审批人无权、审批过期或资源状态变化则拒绝或重新审批</td></tr>
+<tr><td>WAITING_APPROVAL → ABORTED / REJECTED</td><td>审批人拒绝 / 审批 TTL 到期 / 风险策略撤销</td><td>Approval Service</td><td>记录 approval_decision 和终止原因</td><td>不执行对应副作用；已完成的前置只读步骤可保留审计结果</td></tr>
+<tr><td>EXECUTING → REPLANNING → PLANNING</td><td>Observation 改变关键假设；原工具不可用；验收失败；出现分支或连续无进展</td><td>Controller</td><td>保留已完成 Step；创建新 plan_version；只重建未完成子图</td><td>受 max_replans 和 Deadline 限制；超过上限转 ABORTED / PARTIAL</td></tr>
+<tr><td>Step（步骤级）：RUNNING → RETRY_WAIT → READY</td><td>错误分类为瞬时故障；只读可重试，或写操作已确认未提交 / 使用同一幂等键可安全重放</td><td>Retry Scheduler</td><td>Step 记录 attempt、error_class、next_retry_at；任务仍可有其他 Step 并行执行</td><td>达到次数 / Deadline 后 Step FAILED；Task 按依赖与部分交付策略收敛</td></tr>
+<tr><td>EXECUTING → RECONCILING</td><td>写操作超时、连接中断或响应丢失，第三方可能已经提交</td><td>Operation Manager</td><td>Operation 标记 UNKNOWN_COMMIT；保存 operation_id、幂等键和外部查询线索</td><td>禁止盲目重试；查外部状态或进入人工对账</td></tr>
+<tr><td>RECONCILING → EXECUTING</td><td>外部系统确认未提交，或确认已提交但任务还有后续步骤</td><td>Reconciler</td><td>未提交才允许安全重试；已提交则补记回执并完成当前 Step</td><td>仍无法确认就保持 RECONCILING；不能提前标记 TIMED_OUT / CANCELLED</td></tr>
+<tr><td>任意运行态 → RECOVERING</td><td>Worker 心跳超时、租约过期或部署重启发现悬挂任务</td><td>Recovery Worker</td><td>读取最新 Checkpoint、TaskEvent、Step Ledger 和 Operation Ledger；验证 fencing_token</td><td>旧 Worker 的过期写入被拒绝；发现未知外部副作用则转 RECONCILING</td></tr>
+<tr><td>RECOVERING → QUEUED / RECONCILING / FAILED</td><td>恢复检查完成</td><td>Recovery Worker</td><td>无未知副作用且 Checkpoint 完整则重新排队；存在未知写提交则对账</td><td>状态损坏且不可恢复时 FAILED，并保留现场证据</td></tr>
+<tr><td>EXECUTING → SUCCEEDED</td><td>所有 required Step 达到验收条件；必需外部回执已确认；无 UNKNOWN_COMMIT</td><td>Controller</td><td>一个 DB 事务提交最终 Answer、Task 终态、TaskEvent 和 Outbox；提交后才推送 done</td><td>事务失败不发 done；由恢复流程重试提交</td></tr>
+<tr><td>EXECUTING → PARTIAL</td><td>任务策略允许部分交付；必需核心结果成功，非关键步骤失败；无未解决未知提交</td><td>Controller</td><td>记录成功项、失败项、缺失证据和补救建议</td><td>对用户明确标记部分完成；不得伪装 SUCCEEDED</td></tr>
+<tr><td>运行态 → TIMED_OUT</td><td>deadline_at 到期；停止新 Step；所有在途写操作已确认提交状态</td><td>Deadline Manager</td><td>记录 deadline_exceeded；保存已完成结果和超时阶段</td><td>只要存在 UNKNOWN_COMMIT，就先留在 RECONCILING；对账后再决定 TIMED_OUT / PARTIAL</td></tr>
+<tr><td>任意非终态 → CANCEL_REQUESTED → CANCELLED</td><td>用户显式取消；停止新调度；在途读调用取消或到安全点</td><td>API + Controller</td><td>记录 cancel_requested_at；写操作按 operation_id 对账；必要时执行已定义补偿</td><td>存在未知提交先 RECONCILING；不可逆副作用已发生则按业务规则 PARTIAL，而非假称 CANCELLED</td></tr>
+<tr><td>运行态 → FAILED / ABORTED / REJECTED</td><td>FAILED：不可恢复执行错误；ABORTED：预算 / 最大步数 / 策略主动终止；REJECTED：执行前权限或安全硬拒绝</td><td>Controller / Policy</td><td>分别记录 error_code、abort_reason 或 deny_reason</td><td>三种终态不可混用；保留已完成步骤和审计记录</td></tr></tbody></table></div>
+  <div class="grid-two state-extra">
+    <div class="callout"><b>状态机需要落库什么？</b><p>task_id、tenant_id、status、state_version、plan_version、current_step、deadline_at、lease_owner、lease_until、cancel_requested_at、last_event_seq、terminal_reason、updated_at。状态快照负责快速恢复，事件日志负责审计与重放。</p></div>
+    <div class="callout"><b>状态机最重要的四条不变量</b><p>① 终态不可被普通事件重新打开；② 状态迁移必须校验合法边与 version；③ 未知外部提交不能直接重试；④ 任务成功必须先持久化最终结果，再发送 done 事件。</p></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-head"><h2>04 / 意图识别与路由：系统到底根据什么做决定？</h2><p>不是让 LLM 四选一：规则层处理确定条件，分类器 / LLM 只输出结构化候选，策略引擎按固定规则做最终路由，服务端权限与风险门禁优先级最高。</p></div>
+  <div class="panel">
+    <div class="intent-pipeline">
+      <div class="intent-step"><em>01 · INPUT</em><b>路由前最小上下文</b><p>当前消息、最近有效轮次、未完成目标、已解析实体；此时不预先塞入整库 RAG 和长期 Memory。</p></div>
+      <div class="intent-step"><em>02 · RULES</em><b>确定性规则</b><p>解析固定命令和明确字段；认证、租户、权限硬门禁由服务端执行，不交给 LLM 判断。</p></div>
+      <div class="intent-step"><em>03 · CLASSIFY</em><b>语义解析</b><p>必要时由分类器 / 结构化 LLM 提取意图候选、实体、槽位、来源需求、动作候选和歧义标记；不授予权限。</p></div>
+      <div class="intent-step"><em>04 · POLICY</em><b>服务端策略决策</b><p>重查 Principal / ACL；计算风险和任务复杂度；检查槽位、能力、预算、截止时间，再生成 RoutePlan。</p></div>
+      <div class="intent-step"><em>05 · ROUTE</em><b>组合式路由</b><p>数据来源 × 执行方式 × 风险门禁；例如 Agent + RAG + Tool，而不是互斥单选。</p></div>
+    </div>
+    <h3>意图识别输入特征：不是只看关键词</h3>
+    <div class="grid-two">
+      <div class="callout"><b>语义与上下文</b><p>当前消息语义、最近有效对话、代词指代、未完成目标、用户纠正、实体关系、时间与范围约束。</p></div>
+      <div class="callout"><b>任务结构</b><p>目标数量、必填槽位、步骤依赖、是否需要循环观察、是否跨系统、是否存在分支和失败补偿。</p></div>
+      <div class="callout"><b>服务端能力与授权信息</b><p>策略引擎查询工具目录、租户启用范围、Principal 的有效 Scope、资源 ACL 和工具健康状态。权限与健康不是 LLM 的分类输出。</p></div>
+      <div class="callout"><b>服务端风险与预算</b><p>风险按工具副作用等级、资源敏感度和可逆性计算；复杂度按步骤依赖 / 分支 / 循环计算；再检查 Token、工具调用、Deadline 和供应商配额。</p></div>
+    </div>
+    <h3>路由决策矩阵：三个维度分别判定，不能把它们做成四选一</h3>
+    <div class="table-wrap"><table class="table">
+      <thead><tr><th>判定维度</th><th>可选结果</th><th>由谁依据什么决定</th></tr></thead>
+      <tbody>
+        <tr><td><b>数据来源</b></td><td>当前对话 / 通用知识；内部资料 RAG；外部实时系统 / Tool</td><td>策略引擎根据用户明确要求、问题涉及的数据域、来源目录和时效要求决定。LLM 只能提出“可能需要什么来源”的候选。</td></tr>
+        <tr><td><b>执行组织方式</b></td><td>直接回答；单个原子能力调用；固定工作流；动态 Agent</td><td>根据业务步骤、依赖边、分支、循环和中间结果是否改变后续计划决定；不是按句子长度或工具数量决定。</td></tr>
+        <tr><td><b>风险门禁</b></td><td>允许；补充参数；用户确认；人工审批；拒绝</td><td>服务端根据 Principal、资源归属、工具副作用等级、资源敏感度和审批策略决定。模型不能授予权限，也不能批准自己提出的操作。</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="route-rules">
+      <h3>真正可执行的路由规则：先判断“需要什么”，再决定“怎么执行”</h3>
+      <p class="route-lead"><b>先定义边界：</b>RAG / Tool 描述“去哪里取数据或执行能力”；Direct / 单工具 / 固定工作流 / 动态 Agent 描述“怎么完成任务”；澄清 / 审批 / 拒绝是执行门禁。它们不是同一层级。例如一次任务可以是“动态 Agent 编排 + RAG 检索 + Tool 查询 + 写操作审批”。</p>
+      <div class="route-dimensions">
+        <div><b>回答依据 / 数据来源</b><span>当前对话与通用知识 · 内部文档 RAG · 外部实时数据 / 系统工具</span></div>
+        <div><b>执行组织方式</b><span>直接回答 · 单原子能力 · 固定工作流 · 动态 Agent</span></div>
+        <div><b>风险门禁</b><span>允许执行 · 补充信息 · 等待审批 · 拒绝执行</span></div>
+      </div>
+      <h4>一、路由前的固定处理顺序</h4>
+      <ol class="route-steps">
+        <li><b>先做确定性校验：</b>认证、租户归属、请求格式、速率限制和安全策略。身份无效、租户越权或明确禁止的请求，直接拒绝；不让 LLM 决定是否放行。</li>
+        <li><b>再理解任务：</b>格式固定、字段明确的命令由规则解析；自然语言歧义、多轮指代或多目标请求才调用分类器 / LLM。模型只提取候选意图和槽位，解析阶段不执行工具。</li>
+        <li><b>校验解析结果：</b>服务端验证输出 Schema、字段类型和必填槽位；“上次那个实验”必须解析到唯一 experiment_id。模型结构不合法时允许一次受约束的格式修复；仍失败就返回解析错误，不得猜测资源 ID。</li>
+        <li><b>最后由策略引擎路由：</b>权限从身份 / 授权服务读取；风险从工具目录的副作用等级、资源敏感度和可逆性计算；复杂度从任务图的依赖、分支和循环计算。模型不提供最终权限、风险等级或执行模式。</li>
+      </ol>
+      <h4>二、各类行为的硬触发条件（以下分类不是互斥路由选项）</h4>
+      <div class="table-wrap"><table class="table route-rule-table">
+        <thead><tr><th>路径 / 决策</th><th>满足什么条件才触发</th><th>明确不属于这条路径的情况</th><th>例子与系统动作</th></tr></thead>
+        <tbody>
+          <tr><td><b>Direct Answer<br>直接回答</b></td><td>答案的全部依据已在当前消息 / 已授权的会话上下文中，或属于稳定通用知识；不依赖租户私有文档、不依赖“现在”的外部状态、不产生外部副作用；所需实体和范围均明确。短附件若已被安全提取并完整放入当前上下文，也可直接总结。</td><td>只要答案需要查内部文件、未加载的长附件、数据库当前值、外部 API，或需要改变外部状态，就不能走纯 Direct；必须增加相应数据源或执行步骤。</td><td>“解释什么是过拟合” → 直接回答；“总结我刚贴出的这段文字” → 基于当前输入总结。</td></tr>
+          <tr><td><b>RAG<br>知识检索</b></td><td>用户明确指定 SOP / 内部规范 / 私有资料，或问题涉及企业知识域且答案必须以这些文档为依据时触发。检索前按 tenant_id、user_id、document_id 和当前 ACL 过滤；向量检索与 BM25 必须使用同一权限范围。</td><td>“分析”“解释”“总结”这些动词本身不是触发条件。若用户提供的短文本已在上下文中，直接基于该文本回答；若需要从长文档集合中定位证据，才走 RAG。</td><td>“按公司的实验 SOP 解释这次操作是否合规” → 检索 SOP；没有权限或没有证据时明确说明，不能拿其他租户文档补齐。</td></tr>
+          <tr><td><b>Atomic Capability<br>单原子能力调用</b></td><td>需要查询会话外的实时业务状态，或执行一个有明确输入、单一业务结果和独立验收条件的原子能力；目标对象、必填参数和授权均已确认，不需要根据中间结果动态决定下一步。一次 API 调用不等于一个原子业务操作，需按实际副作用判断。</td><td>如果一个业务动作内部包含多个副作用、需要按中间结果改变后续步骤，或需要跨系统补偿，就不能仅因它包装成一个 Tool 而视为简单单工具任务。固定、可预定义的步骤可走固定工作流；动态决策才升级为 Agent。</td><td>“查询实验 E-102 当前状态” → 调用一次只读查询工具；“创建一条实验记录” → 校验权限、参数和幂等键后执行，写操作按风险规则确认。</td></tr>
+          <tr><td><b>Agent Workflow<br>多步骤工作流</b></td><td>出现动态规划需求时才进入 Agent：工具 / 检索结果会改变后续计划；需要按观察结果选择分支；需要循环检查直到满足业务条件；任务中途可能重规划。若步骤固定、分支固定、验收规则固定，即使跨多个系统，也优先用确定性 Workflow / DAG 编排，不必调用 LLM 做动态规划。</td><td>长文本、长答案、多个并列但互不依赖的只读查询，都不自动意味着需要 Agent。工具数量也不是唯一标准；核心判断是是否需要基于中间观察动态改变后续行动。</td><td>“读取 E-102 实验数据 → 查 SOP → 对比历史记录 → 生成固定格式报告”，若步骤和分支预先确定则用 Workflow；若某项证据会决定下一步追加查询、循环验证或改写计划，才升级为动态 Agent。</td></tr>
+          <tr><td><b>Clarification<br>澄清补充</b></td><td>工具 Schema 标记为 required 的字段缺失；实体解析返回 0 个或多个候选且无法按确定规则消歧；时间 / 范围冲突；或分类结果处于该意图经验证集校准的拒判区间。只有会影响目标对象、数据范围或副作用的歧义才打断执行。</td><td>权限不足不是澄清问题；系统不能通过追问让用户“补出”本来没有的授权。</td><td>“把它删掉”但上下文有多个文件 → 询问具体文件；“查上次实验”但存在多个实验 → 询问实验编号或日期。</td></tr>
+          <tr><td><b>Confirmation<br>用户二次确认</b></td><td>操作由当前用户发起且该用户有权限；动作策略要求在不可逆 / 高影响副作用前，再由发起人确认最终对象、参数和影响范围。</td><td>确认只证明发起人确认了这次具体操作，不增加权限，也不替代独立审批。确认必须绑定 payload_hash、资源版本和有效期；参数变化后重新确认。</td><td>“删除项目 P-17” → 展示项目名、影响范围和不可恢复提示；用户确认后再执行。</td></tr>
+<tr><td><b>Approval<br>人工审批</b></td><td>动作策略要求独立审批人复核；发起人本身仍须有执行权限，目标和参数完整。审批人必须具备 approver Scope，且不能由发起人自批。</td><td>审批只解除风险门禁，不授予发起人权限；执行前重查发起人权限、审批人权限、资源归属、payload_hash、资源版本和审批有效期。</td><td>“把分析报告发给客户” → 固化收件人和内容 Hash，创建审批单；独立审批人批准后再次校验并发送。</td></tr>
+          <tr><td><b>Refusal<br>拒绝执行</b></td><td>已认证请求若租户隔离失败、缺少必需 Scope、资源 ACL 不允许、命中禁止策略或没有获准的能力实现，则拒绝执行；拒绝结果不得通过澄清或审批绕过。入口认证失败属于 HTTP 401，不进入这条 Task 路由。</td><td>不能因为 LLM 置信度高、工具语义匹配或用户催促，就跳过拒绝条件。</td><td>用户只有 orders:read，却请求取消订单 → 服务端拒绝写操作；可以提示其申请相应权限。</td></tr>
+        </tbody>
+      </table></div>
+      <h4>三、意图到底由谁判断？职责边界如下</h4>
+      <div class="responsibility-grid">
+        <div><b>规则层</b><p>识别固定命令、明确操作、必填字段和硬性安全边界；确定性强、结果可复现。</p></div>
+        <div><b>分类器 / LLM</b><p>只输出 intent_candidate、entities、slots、knowledge_source_candidate、live_data_need、action_candidate、subgoals、ambiguity_flags。模型自报 confidence 只作弱信号；不输出最终权限、风险等级或审批结论。</p></div>
+        <div><b>策略引擎</b><p>服务端读取 Principal / ACL / Tool Registry；按动作元数据计算风险、按任务图计算复杂度，再产出 RoutePlan：data_sources、execution_mode、required_capabilities、approval_policy、deadline 和预算。</p></div>
+        <div><b>Controller</b><p>执行 RoutePlan 并维护 Task / Step 状态。固定步骤固定分支用 Workflow；只有后续动作需由新 Observation 动态决定时，才让 Agent Planner 重规划。</p></div>
+      </div>
+      <div class="route-note"><b>固定 Workflow 与动态 Agent 的边界：</b>如果业务步骤和分支在设计时已知，例如“先查订单、再查物流、最后生成固定格式摘要”，用普通 Workflow / DAG 执行即可；如果必须根据工具返回或新证据决定下一步查什么、是否循环、是否改计划，才需要 Agent Planner。多工具并行本身不等于 Agent。</div><h4>四、冲突时按什么优先级处理？</h4>
+      <div class="priority-line"><span>1. 身份 / 租户校验</span><i>→</i><span>2. 权限 / 安全硬拒绝</span><i>→</i><span>3. 必填槽位与歧义</span><i>→</i><span>4. 数据来源与执行模式</span><i>→</i><span>5. 副作用前确认 / 审批</span><i>→</i><span>6. 执行与验收</span></div>
+      <p class="route-note"><b>置信度如何使用：</b>LLM 自报的 0.9 不是“90% 正确”的统计概率。只有经过标注验证集校准的分类器分数，才可按意图类别和误判成本设拒判阈值；LLM 结构化解析则主要看必填槽位、实体候选数、歧义标记和二次判别结果。没有经过校准就不设置通用数字阈值。无论置信度多高，权限和高风险审批都必须由服务端独立执行。</p>
+      <h4>五、拿一个真实请求走完整条判断链</h4>
+      <div class="route-example">
+        <div><b>用户请求</b><p>“帮我分析实验 E-102 为什么失败，结合公司 SOP 和过去类似实验，最后生成一份报告。”</p></div>
+        <div><b>结构化理解</b><p>目标：失败原因分析 + 报告；对象：E-102；需要实时实验结果；需要内部 SOP 和历史案例；多个数据源；存在分析依赖，但不要求修改外部业务数据。</p></div>
+        <div><b>策略引擎决定</b><p>先用固定 Workflow 读取实验数据并检索 SOP / 历史案例；如果观察结果触发未预设的追查分支，再由 Agent Planner 动态重规划。数据来源是 RAG + 只读 Tool，执行模式由实际是否需要动态决策决定。</p></div>
+        <div><b>执行中如何变化</b><p>若实验 ID 不存在 → 停止并澄清；若 SOP 无权限 → 不检索该文档并报告缺失；若实验系统超时 → 按只读调用策略有限重试；若证据不足 → 标记结论不确定，不编造根因。</p></div>
+      </div>
+    </div>
+
+    <div class="grid-two">
+      <div class="callout"><b>置信度怎么用？</b><p>不使用通用固定阈值。若使用监督分类器，按意图类别在独立验证集上校准分数，并根据误判代价设拒判区间；若使用 LLM 解析，则以 required_slots、实体候选数、ambiguity_flags 和二次判别结果决定是否澄清。模型自报分数不作为授权或审批依据。</p></div>
+      <div class="callout"><b>复杂度如何判断？</b><p>不按字数或工具数量计分。先形成候选步骤图，再统计依赖边、条件分支、循环观察、外部系统边界和副作用；固定图走 Workflow，必须根据 Observation 改图才走动态 Agent。风险单独由动作元数据和资源敏感度计算。</p></div>
+    </div>
+    <p class="state-note">面试表达：我不会让 LLM 直接决定执行路径。模型只负责输出结构化候选意图与槽位，服务端策略引擎结合权限、风险、工具能力和预算做最终路由。对不确定且执行代价高的请求，优先澄清而不是猜测执行。</p>
+  </div>
+</div>
+  </section>
+
+  <section id="view-modules" class="view hidden">
+    <div class="section-head"><h2>模块深拆</h2><p>点击卡片切换详情；项目已实现的核心能力，项目中的生产级工程机制</p></div>
+    <div class="layout"><div id="moduleGrid2" class="module-grid"></div><aside id="detail2" class="detail"></aside></div>
+  </section>
+
+  <section id="view-rag" class="view hidden">
+    <div class="section">
+      <div class="section-head"><h2>RAG / 文档入库链路</h2><p>目标：把非结构化知识变成可检索、可追溯、可更新、可隔离的知识资产</p></div>
+      <div class="overview">
+        <div class="subflow">
+          <div class="substep"><em>01 · SOURCE</em><b>文件接入与校验</b><p>格式白名单、大小限制、恶意文件扫描、租户 ACL、内容 Hash 去重</p></div>
+          <div class="substep"><em>02 · PARSE</em><b>解析与标准化</b><p>PDF / DOCX / TXT / CSV / Markdown；扫描件 OCR；清理页眉页脚和噪声</p></div>
+          <div class="substep"><em>03 · CHUNK</em><b>结构化切块</b><p>按标题、段落、表格语义切分；控制 chunk size 与 overlap；保留页码和来源</p></div>
+          <div class="substep"><em>04 · EMBED</em><b>向量化</b><p>批量 Embedding、维度校验、限流、超时、重试、模型版本记录</p></div>
+          <div class="substep"><em>05 · INDEX</em><b>双索引构建</b><p>向量索引 + BM25 倒排索引；稳定 chunk ID；元数据与索引版本绑定</p></div>
+        </div>
+        <div class="arrowbar">只有解析、Chunk、向量索引、BM25 索引和 ACL 清单校验全部通过，才切换 active_version；新版本未就绪时继续服务旧版本</div>
+        <div class="stateflow"><span class="state">UPLOADED</span><span class="arr">→</span><span class="state">PARSING</span><span class="arr">→</span><span class="state">CHUNKING</span><span class="arr">→</span><span class="state">INDEXING</span><span class="arr">→</span><span class="state good">READY</span><span class="arr">↘</span><span class="state bad">FAILED / RETRYABLE</span></div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-head"><h2>RAG / 在线检索链路</h2><p>召回负责“不要漏”，重排负责“不要把不相关的排前面”</p></div>
+      <div class="overview">
+        <div class="subflow">
+          <div class="substep"><em>01 · QUERY</em><b>Query 预处理</b><p>规范化、实体补全、过滤条件、租户与文档 ACL</p></div>
+          <div class="substep"><em>02 · REWRITE</em><b>查询改写 / 拆解</b><p>把模糊问题转成多个可检索子问题；可选，不应每次都增加 LLM 延迟</p></div>
+          <div class="substep"><em>03 · RECALL</em><b>双路并行召回</b><p>向量召回找语义相近；BM25 找关键词、编号、专有名词和精确术语</p></div>
+          <div class="substep"><em>04 · FUSION</em><b>RRF 融合</b><p>按排名融合而不是直接相加原始分数，避免不同检索器分数尺度不一致</p></div>
+          <div class="substep"><em>05 · RERANK</em><b>精排与去重</b><p>Cross-Encoder 判断 Query-Chunk 相关性；去重、MMR 多样性、过滤低分块</p></div>
+        </div>
+        <div class="subflow" style="grid-template-columns:repeat(4,minmax(150px,1fr))">
+          <div class="substep"><em>06 · PACK</em><b>上下文组装</b><p>按 token 预算选片段，保留来源、页码、文档版本和引用 ID</p></div>
+          <div class="substep"><em>07 · GENERATE</em><b>受证据约束生成</b><p>要求回答区分证据与推断；证据不足时明确说明，不编造引用</p></div>
+          <div class="substep"><em>08 · VALIDATE</em><b>引用与答案校验</b><p>检查引用是否存在、是否支持结论；必要时降低置信度或追问</p></div>
+          <div class="substep"><em>09 · FALLBACK</em><b>证据不足与降级</b><p>用校准后的精排分数、子问题覆盖、来源有效性判断；一次扩展 / 改写仍不足则澄清或拒答</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="section twocol">
+      <div class="panel">
+        <h3>为什么每一阶段都存在</h3>
+        <ul>
+          <li><b>解析：</b>原始文件格式不统一，必须先变成可处理文本；表格、扫描 PDF、页眉页脚需要专门处理，否则噪声会进入索引。</li>
+          <li><b>切块：</b>整篇文档超出上下文窗口且检索粒度太粗；块太大带来噪声，块太小会丢失指代和上下文。Overlap 用来缓解边界截断。</li>
+          <li><b>Embedding：</b>把语义映射到向量空间，解决“意思相近但字面不同”的检索问题；但它不擅长精确编号、代码符号和罕见词。</li>
+          <li><b>BM25：</b>利用词频与逆文档频率做词项匹配，补足精确术语；对同义改写能力弱。</li>
+          <li><b>RRF：</b>不同检索器分数不在同一量纲，直接加权容易偏向某一路；RRF 依据排名融合，工程上更稳健。</li>
+          <li><b>Rerank：</b>初召回追求覆盖，允许多取候选；Cross-Encoder 对 Query 与候选文本联合编码，精度更高但计算更贵，因此只对候选集精排。线上没有 Gold Chunk，不能直接计算 Recall@K；应使用经过版本校准的精排分数、Top1/Top2 分差、子问题证据覆盖和来源有效性判断证据充分性。</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>关键参数与生产权衡</h3>
+        <table class="table">
+          <tr><th>参数 / 策略</th><th>太小 / 太弱</th><th>太大 / 太强</th></tr>
+          <tr><td>Chunk Size</td><td>上下文断裂、召回片段缺信息</td><td>噪声增多、精度下降、Token 成本上升</td></tr>
+          <tr><td>Overlap</td><td>跨块语义容易丢失</td><td>重复内容增加、索引成本变高</td></tr>
+          <tr><td>Recall Top-K</td><td>证据遗漏、召回率低</td><td>候选噪声大、Rerank 成本高</td></tr>
+          <tr><td>Rerank Top-N</td><td>高价值候选可能被提前截断</td><td>延迟和 GPU / CPU 成本增加</td></tr>
+          <tr><td>Context Token Budget</td><td>证据不足</td><td>挤占对话与输出预算，增加幻觉干扰</td></tr>
+        </table>
+        <p><b>项目实现落点：</b>文件安全校验、解析 / OCR、结构清洗、结构感知切块、Embedding 批处理、Chroma 向量索引、BM25、RRF、Rerank、ACL 过滤、版本化发布、引用校验与索引一致性治理。切块长度和 Overlap 通过检索评测集调优，不把单一参数当成所有文档的固定答案。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-reliability" class="view hidden">
+    <div class="section">
+      <div class="section-head"><h2>可靠性：工具调用不是“调用成功 / 失败”二元问题</h2><p>必须区分执行状态、提交状态、重试安全性与业务副作用</p></div>
+      <div class="panel">
+        <div class="stateflow">
+          <span class="state good">SUCCESS</span><span class="state"><b>PARTIAL</b><small>部分完成</small></span><span class="state">EMPTY</span><span class="state warn">RETRYABLE_ERROR</span><span class="state bad">PERMANENT_ERROR</span><span class="state bad">DENIED</span><span class="state warn">APPROVAL_REQUIRED</span><span class="state bad">UNKNOWN_COMMIT</span>
+        </div>
+        <p>例如：调用“创建订单”时客户端超时，不代表订单没创建。外部系统可能已提交，只是响应丢失。此时如果直接重试，可能创建两笔订单。必须把“调用超时”和“业务提交结果未知”分开建模。</p>
+      </div>
+    </div>
+    <div class="section twocol">
+      <div class="panel">
+        <h3>重试策略：先判断可重试，再执行退避</h3>
+        <ul>
+          <li><b>瞬时故障：</b>连接重置、429、部分 5xx、读超时，可按策略重试；优先尊重 Retry-After。</li>
+          <li><b>永久故障：</b>参数校验失败、权限拒绝、资源不存在，不重试，直接返回可解释错误。</li>
+          <li><b>退避：</b>指数退避 + 随机抖动，例如 0.5s、1s、2s，并设置最大次数和总耗时上限，避免雪崩。</li>
+          <li><b>幂等：</b>写操作生成稳定 idempotency_key；服务端以唯一键记录操作结果，同一 key 重放返回原结果。</li>
+          <li><b>未知提交：</b>进入 UNKNOWN_COMMIT / RECONCILIATION，先查外部系统或操作台账，不能盲目重放。</li>
+          <li><b>补偿：</b>跨多个系统的写操作采用 Saga 思路，定义反向补偿动作；补偿也要幂等且可审计。</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>超时：使用 Deadline，而不是每个请求各自随意等待</h3>
+        <ul>
+          <li>入口创建全局 deadline，例如整轮任务最多 90 秒；所有下游调用继承剩余预算。</li>
+          <li>为 LLM、Embedding、向量库、数据库、MCP / HTTP 工具分别设 connect / read / total timeout。</li>
+          <li>预留收尾时间：执行预算到点前停止新工具调用，留时间整理结果、写入最终状态和发送 done。</li>
+          <li>超时触发取消时，向下游传播 cancellation；但取消请求不等于外部副作用已回滚。</li>
+          <li>区分排队时间、连接时间、服务端处理时间和总耗时，才能定位瓶颈。</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>并发：能并行不代表可以无限并行</h3>
+        <ul>
+          <li>先把计划表达成依赖 DAG：无依赖的只读查询可并行，有前后依赖的步骤必须串行。</li>
+          <li>用全局、租户级、模型供应商级、单工具级 Semaphore 限制并发；避免一个租户耗尽全部连接和模型额度。</li>
+          <li>有界队列 + 背压：队列满时拒绝、降级或排队，不能无限堆积协程和内存。</li>
+          <li>CPU 密集解析 / OCR 放线程池或独立 Worker；网络 IO 用异步，避免阻塞事件循环。</li>
+          <li>批量 Embedding、连接池复用、缓存只读元数据；限制单请求最大并行工具数。</li>
+          <li>部分失败时保留成功结果，按依赖关系决定是否继续；不要简单地让一个工具失败拖垮整组任务。</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>隔离与熔断</h3>
+        <ul>
+          <li><b>Bulkhead：</b>LLM、RAG、MCP、数据库使用独立资源池或并发配额，某个依赖故障不拖垮全站。</li>
+          <li><b>Circuit Breaker：</b>连续失败后打开熔断，短暂拒绝请求；半开状态探测恢复，避免持续冲击故障服务。</li>
+          <li><b>Rate Limit：</b>按用户、租户、API Key、工具和模型供应商限速；同时控制 Token / 日预算。</li>
+          <li><b>Sandbox：</b>自定义代码在隔离进程 / 容器运行，限制 CPU、内存、执行时间、文件系统和网络出口。</li>
+        </ul>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-head"><h2>一致性：多个存储系统之间不要靠“连续写两次”保证</h2><p>关系库是事实源，向量索引、缓存和事件流是可重建的派生数据</p></div>
+      <div class="overview">
+        <div class="twocol">
+          <div class="callout"><b>① 请求接收事务</b><p>同一个 DB transaction 写入用户消息、任务记录和 Outbox 事件；提交成功才确认任务已受理。</p></div>
+          <div class="callout"><b>② 异步消费者</b><p>Worker 拉取 Outbox，按 event_id 幂等消费；更新任务状态时用版本号 / CAS 防止并发覆盖。</p></div>
+          <div class="callout"><b>③ 多存储索引</b><p>文档元数据在关系库；原文件在对象存储；向量索引与 BM25 是派生索引。失败可重放事件重建。</p></div>
+          <div class="callout"><b>④ 记忆写入</b><p>回答交付不等待所有记忆索引完成；先可靠记录待处理事件，再异步摘要、去重、Embedding 和落库。</p></div>
+        </div>
+        <p style="margin-top:12px"><b>核心原则：</b>不要宣称分布式系统天然“Exactly Once”。更可信的面试表达是：采用 At-least-once 投递 + 幂等消费 + 去重键 + 状态机 + 对账任务，达到业务效果上的一次性。</p>
+      </div>
+    </div>
+  <div class="section">
+      <div class="section-head"><h2>数据库落地：表、约束、事务边界和并发控制</h2><p>把“一致性”落实到具体写入顺序；外部网络调用永远不放进数据库事务。</p></div>
+      <div class="panel">
+        <h3>核心表与唯一约束</h3>
+        <div class="table-wrap"><table class="table">
+          <thead><tr><th>表</th><th>主键 / 唯一约束</th><th>解决什么问题</th></tr></thead>
+          <tbody>
+            <tr><td>tasks</td><td>task_id；state_version</td><td>任务当前快照；CAS 防止旧 Worker 覆盖新状态。</td></tr>
+            <tr><td>idempotency_records</td><td>(tenant_id, user_id, idempotency_key) UNIQUE</td><td>同一逻辑提交只创建一次；同时比对 payload_hash，防止同 Key 不同请求。</td></tr>
+            <tr><td>task_steps</td><td>(task_id, step_id, step_version) UNIQUE</td><td>每个步骤独立记录输入 Hash、尝试次数、状态和结果引用。</td></tr>
+            <tr><td>operations</td><td>operation_id UNIQUE；(provider_account, idempotency_key) UNIQUE（供应商支持时）</td><td>记录外部副作用是否已提交，处理 UNKNOWN_COMMIT；本地唯一键不等于第三方幂等。</td></tr>
+<tr><td>action_confirmations</td><td>confirmation_id UNIQUE；task_id；initiator_id；payload_hash；resource_version；expires_at</td><td>绑定发起人对具体副作用的二次确认，与独立人工审批分开记录。</td></tr>
+<tr><td>approvals</td><td>approval_id UNIQUE；task_id；approver_id；payload_hash；decision；expires_at</td><td>记录独立审批人的决定；发起人不能自批，审批不能授予发起人原本没有的权限。</td></tr>
+<tr><td>task_messages</td><td>(task_id, message_id) UNIQUE</td><td>保存用户消息与最终回答引用；同一幂等请求不重复写入用户消息。</td></tr>
+            <tr><td>task_events</td><td>(task_id, event_seq) UNIQUE</td><td>不可变事件历史，支持审计和 WebSocket 断线补发。</td></tr>
+            <tr><td>outbox_events</td><td>event_id UNIQUE；aggregate_id + aggregate_version</td><td>可靠发布 validation_requested、execute_requested 和状态事件；发布重试可能重复。</td></tr>
+            <tr><td>inbox_events</td><td>(consumer_name, event_id) UNIQUE</td><td>消费者去重；只在业务处理成功的本地事务里提交 Inbox 记录。</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="twocol">
+        <div class="panel">
+          <h3>三个本地事务边界</h3>
+          <ol>
+            <li><b>受理事务 A：</b>认证、基础 Schema 和同步限流通过后，写 Task(RECEIVED)、用户消息、幂等记录、初始 TaskEvent 和 task.validation_requested Outbox；提交后返回 202 + task_id。202 只代表异步受理，不代表业务授权已通过。</li>
+            <li><b>校验 / 状态事务 B：</b>Validation Worker 完成 ACL、Scope、配额和业务前置校验后，用 state_version CAS 写 QUEUED + TaskEvent + task.execute_requested Outbox；失败则写 REJECTED + TaskEvent，不创建执行 Outbox。任一事务内写入失败都整体回滚。</li>
+            <li><b>步骤事务：</b>外部调用返回后，写 Step Result、Operation 回执、Task State 和事件；调用外部 API 本身发生在事务之外。</li>
+          </ol>
+        </div>
+        <div class="panel">
+          <h3>并发写入与查询策略</h3>
+          <ul>
+            <li>Task 状态：UPDATE ... WHERE task_id=? AND state_version=?；影响行数为 0 表示版本冲突，必须重读。</li>
+            <li>Worker claim：原子条件更新或 SELECT ... FOR UPDATE SKIP LOCKED；同时递增 fencing_token。</li>
+            <li>幂等：唯一索引处理并发插入竞争；同 Key 同 Hash 返回原结果，同 Key 不同 Hash 返回 409。</li>
+            <li>鉴权、幂等和任务状态使用主库读，避免副本延迟造成错误放行或旧状态展示；报表可读副本。</li>
+            <li>长文本和工具输出放对象存储；数据库保留引用、Hash、版本和必要摘要。</li>
+            <li>连接池按所有 API / Worker 实例总量计算，预留迁移、监控和故障处理连接。</li>
+          </ul>
+        </div>
+      </div>
+      <p class="state-note"><b>不要混淆：</b>TaskEvent 是“发生过什么”的事实日志；Outbox 是“还需要发出去什么”的待投递记录；Inbox 是“这个消费者处理过什么”的去重记录。三者有不同生命周期。</p>
+    </div>
+</section>
+
+  <section id="view-memory" class="view hidden">
+    <div class="section">
+      <div class="section-head"><h2>Memory：把一次执行变成下一次任务可复用的经验</h2><p>RAG 是外部知识检索；Memory 是系统从交互和执行中积累的个体 / 任务经验</p></div>
+      <div class="overview">
+        <div class="subflow" style="grid-template-columns:repeat(5,minmax(150px,1fr))">
+          <div class="substep"><em>01 · CAPTURE</em><b>执行数据采集</b><p>任务输入、路由、工具调用、工具结果、Token、延迟、重规划、最终结果</p></div>
+          <div class="substep"><em>02 · DISTILL</em><b>经验提炼</b><p>摘要、错误分类、成功质量评分、提取有效策略；避免把原始长 Trace 全部塞入 Prompt</p></div>
+          <div class="substep"><em>03 · DEDUPE</em><b>去重与更新</b><p>意图签名 / 相似度查重；命中则更新复用次数、成功率和最近使用时间</p></div>
+          <div class="substep"><em>04 · PERSIST</em><b>持久化</b><p>按租户隔离写入任务记忆、工具画像、用户偏好、失败模式和可调参数</p></div>
+          <div class="substep"><em>05 · RETRIEVE</em><b>检索与注入</b><p>BM25 + 向量 + RRF；按质量、结果、时效、复用次数加权，Top-K 注入上下文</p></div>
+        </div>
+        <div class="arrowbar">新任务执行 → 产生新 Trace → 更新经验 → 下一次检索更准确（持续循环）</div>
+      </div>
+    </div>
+    <div class="section twocol">
+      <div class="panel">
+        <h3>记忆分层：不同信息使用不同生命周期</h3>
+        <ul>
+          <li><b>会话 / 短期状态：</b>当前对话窗口、当前任务计划、工具结果；跟随 Session / Checkpoint，适合快速读取和恢复。</li>
+          <li><b>Task Memory：</b>类似任务如何完成、使用了哪些工具、是否成功、耗时与失败原因；支持相似任务复用。</li>
+          <li><b>Tool Memory：</b>工具成功率、常见错误、参数偏好、适用场景；帮助模型选择更合适的工具。</li>
+          <li><b>User Profile：</b>用户稳定偏好、语言、输出习惯、常用技术栈；要有用户可见、可编辑和删除机制。</li>
+          <li><b>Failure Pattern：</b>错误签名、命中次数、修复策略、策略成功率；命中已知失败时可跳过昂贵反思。</li>
+          <li><b>Learning Parameters：</b>阈值或权重调整；必须有边界、版本、变更来源和回滚能力，不能让模型任意改线上参数。</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>记忆检索为什么不能只做向量 Top-K</h3>
+        <ul>
+          <li>BM25 对精确工具名、错误码、API 名称更敏感；向量检索对语义相似任务更敏感。</li>
+          <li>RRF 先融合不同检索器的排名，再做业务加权，避免分数尺度差异导致偏置。</li>
+          <li>成功经验权重高于失败经验，但失败经验仍有价值；注入时明确标记“历史失败教训”，防止模型把失败方案当成功模板。</li>
+          <li>质量、时间衰减、复用次数、用户偏好共同决定排序；过期经验需要 TTL / 淘汰策略。</li>
+          <li>Top-K 必须受 Token Budget 限制；记忆是上下文提示，不是事实数据库，关键事实仍要查源系统。</li>
+        </ul>
+      </div>
+    </div>
+    <div class="section">
+      <div class="panel">
+        <h3>回答成功与记忆写入失败，应该如何处理？</h3>
+        <div class="stateflow"><span class="state good">用户答案已交付</span><span class="arr">→</span><span class="state">写入 Memory Outbox</span><span class="arr">→</span><span class="state">异步提炼 / Embedding</span><span class="arr">→</span><span class="state good">Memory READY</span></div>
+        <p>系统将“用户请求成功”和“经验沉淀成功”拆成两个状态域。记忆是增强能力，不应因为 Embedding 服务短暂不可用就让已完成的用户任务变成失败。失败事件进入重试队列；超过重试窗口进入 DLQ，并支持人工重放。关键审计日志则不能随意丢弃。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-interview" class="view hidden">
+    <div class="section">
+      <div class="section-head"><h2>面试表达：从“我用了什么组件”升级到“我解决了什么系统问题”</h2><p>用于项目介绍、架构追问和生产级系统设计的表达框架</p></div>
+      <div class="panel">
+        <h3>90 秒项目介绍模板</h3>
+        <p>我把这个项目理解为一个面向多租户的 Agent 执行平台，而不只是一个接了大模型的聊天应用。系统从请求入口开始，先完成身份、租户和会话校验，再把对话历史、知识检索结果和历史执行经验组装成有预算的上下文。随后由控制层判断任务复杂度，选择执行路线和可用能力。执行阶段采用受预算约束的循环：模型提出动作，工具执行后把结果规范化，再由监控层判断继续、重规划还是终止。对外部写操作，还需要审批、幂等键和操作台账，避免超时后的重复提交。任务完成后，系统交付流式结果，同时异步沉淀 Trace 和 Memory；离线评测再用成功率、工具选择、恢复率、延迟和成本验证改动是否真的提升质量。系统把一致性、并发、故障恢复、租户隔离和可观测性贯穿到每一层。</p>
+      </div>
+    </div>
+    <div class="section twocol">
+      <div class="panel">
+        <h3>高频追问：为什么不用单一向量检索？</h3>
+        <p>向量检索解决语义相似，不保证精确术语召回；BM25 擅长关键词和标识符。两路并行召回后用 RRF 融合，避免原始分数不可比，再用 Cross-Encoder 对候选精排。这样把高召回和高精度拆成两个阶段，并把昂贵模型限制在小候选集上。</p>
+      </div>
+      <div class="panel">
+        <h3>高频追问：工具超时后能不能重试？</h3>
+        <p>先看工具副作用和提交状态。只读操作通常可以有限重试；写操作必须有幂等键。若请求超时但提交结果未知，先按 operation_id 对账，不直接重放。否则会把网络层的不确定性变成业务重复执行。</p>
+      </div>
+      <div class="panel">
+        <h3>高频追问：如何保证数据库与向量库一致？</h3>
+        <p>不做跨存储伪事务。关系库保存文档元数据和索引任务状态，事务内写 Outbox；消费者异步构建向量与 BM25 索引，按文档版本和稳定 chunk ID 幂等写入。只有索引达到可用条件才发布版本；失败可重试、重建和对账。删除使用 tombstone，确保所有派生索引最终清理。</p>
+      </div>
+      <div class="panel">
+        <h3>高频追问：并发工具怎么调度？</h3>
+        <p>先根据计划依赖关系构造 DAG，只并行执行互相独立的步骤。全局、租户、供应商和单工具维度都设置并发上限；队列有界并提供背压。每个子任务继承全局 deadline，部分失败按依赖关系决定是否继续，写操作不因并行而绕过幂等和审批。</p>
+      </div>
+      <div class="panel">
+        <h3>高频追问：Memory 与 RAG 有什么区别？</h3>
+        <p>RAG 面向外部知识资产，强调文档解析、版本、权限、引用和知识更新；Memory 面向系统执行经验与用户偏好，强调任务结果、工具表现、失败策略、复用和时效。二者可以共享检索技术，但数据模型、写入触发、权限和生命周期不同。</p>
+      </div>
+      <div class="panel">
+        <h3>高频追问：如何证明 Agent 变好了？</h3>
+        <p>不能只看主观回答。建立固定任务集，分别度量任务成功率、路由准确率、工具选择准确率、重规划恢复率、记忆命中率、延迟分位数、Token 成本和安全拒绝率。版本对比使用配对任务和置信区间 / 显著性检验；通过质量门禁后灰度发布，并保留回滚路径。</p>
+      </div>
+    </div>
+    <div class="section">
+      <div class="panel">
+        <h3>面试时必须讲清楚的工程边界</h3>
+        <ul>
+          <li><b>项目实现：</b>围绕多租户请求路径、Agent 控制与反思、工具渐进式披露、混合 RAG、经验记忆、可靠性治理、数据一致性、Trace 和评测门禁形成完整闭环。</li>
+          <li><b>系统工程机制：</b>讲清楚 Outbox、任务队列、DLQ、分布式限流、熔断、灰度、版本化索引和可恢复执行的设计取舍、状态流转和故障边界。</li>
+          <li><b>量化承诺：</b>不要在没有压测和线上数据时声称具体 QPS、P99、召回率或成本下降比例。可以说清楚指标如何定义、如何压测、如何验收。</li>
+          <li><b>系统边界：</b>Agent 的“推理过程”不等于可信执行；模型给出的参数必须校验，工具权限必须由服务端执行，文档内容和工具输出必须视为不可信输入。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">
+    <b>仓库：</b><a href="https://github.com/lidanlinvv/Experiment_Agent" target="_blank" rel="noreferrer">lidanlinvv/Experiment_Agent</a> · 项目说明按 DeepAgentForce 的 Agent 工作台来组织。<br>
+    <b>阅读方式：</b>先沿顶部 11 个节点走一遍主链路，再逐模块深拆；RAG、可靠性、一致性、Memory 是重点专题。本图按完整项目能力组织，覆盖业务主链路与生产级工程机制。面试时重点解释关键机制的设计动机、状态流转、异常边界和验证方法。
+  </div>
+</div>
+
+<script>
+const modules = [
+{id:"ingress",n:"01",title:"请求接入、身份与会话",group:"入口层",repo:["src/api/routes.py","src/api/websocket.py","src/services/auth_service.py","src/services/rbac.py"],repoText:"项目实现：通过 FastAPI HTTP / WebSocket 统一接入请求，完成 JWT 身份解析、租户识别、RBAC 授权和会话归属校验。",prod:["API Gateway 先完成 JWT / OIDC、基础 Schema、大小限制和同步入口限流；未认证请求不创建 Task。","入口幂等键绑定 tenant_id + user_id + canonical_payload_hash；同 Key 同 Hash 返回原 task_id，不同 Hash 返回 409。","受理事务写 Task(RECEIVED)、用户消息、幂等记录、TaskEvent 和 task.validation_requested Outbox；提交后返回 202。","202 只表示请求已被系统接收；Validation Worker 还要检查资源 ACL、Scope、租户配额、预算和业务前置条件。","只有 Validation Worker 校验通过并原子提交 QUEUED + task.execute_requested Outbox 后，执行 Worker 才能领取任务。","业务校验失败转 REJECTED，不创建执行事件；验证 Worker 崩溃通过租约和 Outbox 恢复，不重复创建 Task。"],problem:["解决匿名滥用、跨租户越权、重复提交、超大输入拖垮模型、同一会话被其他用户读取等问题。","HTTP 负责提交和查询；WebSocket 负责流式事件，不应让 WebSocket 连接本身成为任务状态的唯一载体。"],prodExtra:["工程实现：API Gateway、WAF、Redis 分布式限流、请求幂等表、设备 / API Key 管理、审计日志。"],pitch:"入口层最重要的不是接收字符串，而是把一次自然语言请求变成有身份、有租户、有配额、有唯一标识、可追踪的业务任务。",why:"如果入口没有可信身份和唯一任务 ID，后面的 Memory、RAG、Trace 即使做得再好，也可能发生越权读取、重复执行和无法追责。"},
+{id:"context",n:"02",title:"上下文工程与 Prompt 组装",group:"理解层",repo:["src/services/conversational_agent.py","src/services/memory/experience.py","src/services/rag.py"],repoText:"项目实现：将对话历史、任务经验、用户画像和知识检索结果统一纳入上下文构建。",prod:["路由前只装配当前消息、最近有效历史、未完成目标和实体槽位；策略确定数据源后再取 RAG / Tool 证据。","每次模型调用前根据最新 Task / Plan / ACL / Tool Schema 版本组装 Full Context，并生成 Context Manifest。","预算按模型窗口扣除输出预留、系统策略、必需 Schema 和安全余量后计算；当前目标、明确约束和已验证证据优先。","RAG Chunk 必须通过当前 ACL 和文档版本复核；历史 ACL 记录只用于审计，不作为授权缓存。","历史摘要、Memory 和检索证据分别记录来源、版本、Token 数与裁剪原因；来源冲突不能被摘要抹平。","缓存键包含消息、Task State、Plan、检索、Memory、Tool Schema 和 ACL Policy 版本，相关版本变化即失效。"],problem:["解决上下文窗口有限、历史噪声、无关记忆干扰、RAG 证据缺少来源、提示注入等问题。"],prodExtra:["工程实现：Context Budget Manager、历史摘要版本、Prompt 模板版本化、注入内容分区、敏感信息脱敏。"],pitch:"上下文工程的目标不是尽可能多地塞信息，而是在有限 Token 预算内，把对当前任务最有用、权限正确、来源可追溯的信息交给模型。",why:"模型输出质量高度依赖上下文质量。错误上下文、过期记忆和越权文档会直接变成错误决策。"},
+{id:"planner",n:"03",title:"意图识别、任务路由与 Meta Controller",group:"控制层",repo:["src/controller/","src/services/conversational_agent.py"],repoText:"项目实现：通过意图分析、简单 / 复杂任务路由、动态升级、执行快照、预算监控、反思和重规划构建控制平面。",prod:["先构建路由前最小上下文，再做规则解析 / 语义候选提取；LLM 不做权限授予、风险定级或审批。","服务端策略引擎将数据来源、执行组织方式和风险门禁分开决策；RAG、Tool、Workflow、Agent 可以组合。","固定步骤 / 固定分支使用 Workflow / DAG；只有后续行动要根据 Observation 动态改变时才使用 Agent Planner。","将 Task、Step、Operation、Delivery 状态分开持久化；计划保存版本、依赖边、验收条件和输入来源。","为任务分配绝对 Deadline、Token / 工具 / 成本预算、最大重规划次数；所有下游调用继承剩余预算。","执行中只有关键 Observation 改变计划假设时才重规划；普通瞬时故障走 Retry Policy，避免反思调用放大成本。","澄清解决缺失槽位和目标歧义；人工审批由独立审批人完成；权限不足直接拒绝，不能靠澄清或审批绕过。"],problem:["解决模型无限循环、任务过度规划、复杂任务被当成简单问答、低质量结果仍被判成功、Token 和调用成本不可控等问题。"],prodExtra:["工程实现：持久化执行状态、可恢复 Checkpoint、策略版本、按风险等级设置不同审批和预算。"],pitch:"Meta Controller 相当于 Agent 的运行时控制平面。LLM 负责提出下一步动作，Controller 负责判断动作是否合理、是否还有预算、是否需要重规划，以及什么时候必须停止。",why:"没有控制平面，Agent 只是一个可能无限调用工具的循环；有了状态、预算和终止条件，才具备可运营性。"},
+{id:"capability",n:"04",title:"Tools、Skills、MCP 与权限边界",group:"能力层",repo:["src/services/tool_disclosure.py","src/services/skill_disclosure.py","src/services/mcp_integration.py","src/services/custom_tool_manager.py"],repoText:"项目实现：工具与技能渐进式披露、能力检索、参数 Schema 校验、调用桥接，以及 MCP 和自定义工具接入。",prod:["先构建 Capability Contract，再按租户启用范围、Principal Scope、资源 ACL 和 Schema 兼容性做硬过滤；未通过者不得参与排序。","通过硬过滤后再按动作 / 对象匹配、前置条件、Schema 兼容、相近场景成功表现、P95 延迟和成本排序。","工具健康状态是独立门禁：OPEN 不接普通流量，HALF_OPEN 仅探测，CLOSED 才进入正常候选。","只在选中能力后向模型披露完整 Schema；模型生成参数，服务端再次校验类型、范围、枚举、资源归属和业务前置条件。","写操作绑定稳定 operation_id / idempotency_key；内部幂等记录不等于第三方幂等；必须确认供应商确实按同一键去重，或有可查询的唯一业务单号。两者都没有时，未知提交不能自动重试，只能保持对账并升级人工处理。","用户确认与人工审批分开：确认由发起人确认具体 payload；审批由有独立 approver Scope 的人员批准，二者都不授予原本没有的执行权限。"],problem:["解决工具数量膨胀导致 Prompt 过长、模型选错工具、参数不合法、工具越权、外部服务不稳定和写操作不可追责等问题。"],prodExtra:["工程实现：工具注册中心、Schema 版本兼容、密钥托管、服务级熔断、权限策略引擎、审批工作流。"],pitch:"工具层不是简单把 Python 函数暴露给模型，而是一个受权限控制的能力目录。模型只能发现和提出调用，真正的参数校验、权限判定、审批和副作用控制由服务端完成。",why:"模型是非确定性的，不能把模型的“我有权限”当成真实权限。"},
+{id:"execution",n:"05",title:"Agent 执行循环与状态推进",group:"执行层",repo:["src/controller/meta_controller.py","src/controller/state.py","src/controller/trace.py","src/workflow/"],repoText:"项目实现：多轮执行控制、状态快照、Trace 事件、步骤记录、Checkpoint 和执行回调。",prod:["执行器读取持久化 DAG / Workflow，只领取依赖已满足的 READY Step；固定流程由 Workflow Runner 执行，动态决策才交给 Agent Planner。","Worker 原子 claim 后取得 lease_owner、lease_until 和 fencing_token；旧租约 Worker 的迟到写入必须被拒绝。","每个 Step 保存稳定 step_id、step_version、input_hash、依赖、验收条件、attempt、结果引用和错误分类。","外部写操作单独建立 Operation Ledger；调用前检查幂等键，调用后按业务验收条件确认，不以 HTTP 200 或自然语言 success 作为完成依据。","外部网络调用在 DB 事务外；本地短事务提交 Step Result、Operation 回执、Task State、TaskEvent 和 Outbox。","发生未知提交时进入 RECONCILING；先查外部状态，不能盲目重放。Worker 接管时先读取 Step / Operation Ledger，再决定恢复或对账。"],problem:["解决执行过程不可恢复、工具调用与状态脱节、模型重复执行已完成步骤、并发步骤顺序错误和任务无法终止等问题。"],prodExtra:["工程实现：持久化状态机、事件日志、Checkpoint、Worker 队列、租约锁和任务接管机制。"],pitch:"我会把 Agent 执行视为一个有状态工作流，而不是单次 LLM 请求。每个动作都有输入、输出、状态变更和 Trace，因此可以审计、恢复、评测和重放。",why:"只保存最终答案无法解释为什么成功或失败，也无法从中间步骤恢复。"},
+{id:"reliability",n:"06",title:"工具可靠性、超时、重试与并发",group:"可靠性层",repo:["src/services/tool_result.py","src/services/tool_disclosure.py","src/services/external_operations.py","src/controller/execution_monitor.py"],repoText:"项目实现：结构化工具状态、写操作审批、操作台账、未知提交状态识别、安全重试判断和执行阈值监控。",prod:["统一工具结果协议：success / partial / empty / retryable_error / permanent_error / denied / approval_required / unknown_commit；按结构化状态处理，不从自然语言猜成功。","任务受理时写入绝对 Deadline，排队时间计入；LLM、Embedding、DB、向量库和外部工具调用都继承剩余时间。","永久 4xx、权限和参数错误不重试；429 尊重 Retry-After；瞬时网络错误和只读超时按错误矩阵有限重试。","写操作绑定稳定 operation_id；应用内幂等只防止本系统重复受理。外部重放必须依赖供应商真实幂等键或可查询业务单号，否则 UNKNOWN_COMMIT 只能对账 / 人工处理。","按全局、租户、供应商、工具和 DB 连接池分层限并发；队列设软 / 硬容量，硬阈值触发背压或拒绝。","对独立 Step 用 DAG 并行；同一资源写入串行。部分失败按依赖图和 required_steps 决定是否继续。","熔断、隔舱、速率限制、DLQ、人工重放、未知提交对账和故障演练共同构成韧性机制。"],problem:["解决超时重复扣款 / 重复创建、工具故障引发级联雪崩、单租户资源耗尽、并发竞争、任务无限等待和部分成功无法处理等问题。"],prodExtra:["工程实现：分布式限流、消息队列、DLQ、熔断器、租约、对账任务、Saga 补偿和故障注入。"],pitch:"最重要的边界是：网络调用失败不等于业务操作失败。只读调用可以有限重试，写操作必须幂等；提交状态未知时先对账。",why:"生产环境最危险的不是明显失败，而是调用方不知道下游到底有没有成功。"},
+{id:"rag",n:"07",title:"RAG 知识库：从文档到可信证据",group:"知识层",repo:["src/services/rag.py","src/api/"],repoText:"项目实现：多格式文档解析、结构化切块、Embedding、持久化向量索引、BM25、RRF、查询改写、Rerank 和检索降级。",prod:["离线入库先校验文件与 ACL，再按段落 / 表格 / 代码结构解析切块；每个 Chunk 保留文档版本、页码和标题路径。","Vector 与 BM25 使用同一租户 / 用户 ACL 和 active_version 过滤；两路召回经 RRF 融合后再去重、邻块扩展和精排。","线上没有 Gold Chunk，不能直接计算 Recall@K；用候选是否为空、校准后的 rerank 分数、子问题覆盖、来源有效性和引用支持性做代理指标。","Query Rewrite 只在指代未补全、多子问题、首轮无候选或证据质量代理未过门槛时触发；原 Query 与改写 Query 并行召回。","新版本在独立版本空间构建，Vector 与 BM25 清单均 READY 后，通过权威元数据中的 active_version 指针切换；未完成版本不对查询可见。","ACL 撤销先立即阻断读取并使缓存失效，再异步清理索引；若无法证明检索过滤有效，则拒绝检索而不是全库搜索。"],problem:["解决非结构化文档无法检索、语义与关键词召回互补、检索噪声、文档更新不同步、引用不可追溯和跨租户知识泄漏等问题。"],prodExtra:["工程实现：OCR / Layout Parser、语义切块、文档版本、ACL 过滤、对象存储、Outbox 索引任务、索引重建和引用校验。"],pitch:"RAG 不是“把文档向量化就结束”。入库要可重复、可更新、可删除；在线检索要兼顾召回和精度；生成时要保留来源并对证据不足做降级。",why:"RAG 的质量由解析、切块、召回、重排、上下文组装共同决定，任何一环失真都会传导到最终答案。"},
+{id:"delivery",n:"08",title:"流式输出、会话持久化与取消",group:"交付层",repo:["src/api/websocket.py","src/services/execution_logger.py","src/services/conversation_storage.py"],repoText:"项目实现：WebSocket 流式事件、Token 缓冲刷新、取消传播、事件序号、最终消息持久化和断线恢复。",prod:["TaskEvent 在数据库中持久化并分配 task_id 范围内单调 event_seq；Outbox 是独立待发布记录，WebSocket / SSE 只是传输通道。","Token delta 可合并发送；状态迁移、审批、工具结果、错误、取消和终态必须持久化。","客户端保存 last_event_seq，重连按 event_seq 补发并去重；游标过期时返回 Task Snapshot 和新 cursor。","最终 Answer、Task terminal state、TaskEvent 和 Outbox 在同一事务提交；提交后才发送 done。","断线只影响订阅，不取消 Task；显式 Cancel API 才请求取消，且在途写操作仍需对账。"],problem:["解决流式体验差、断线后丢消息、重复展示、取消不彻底、任务成功但会话记录缺失等问题。"],prodExtra:["工程实现：事件总线 / Redis Stream、事件游标、重连补偿、慢消费者背压、任务与连接解耦。"],pitch:"流式输出只是传输层体验。真正的任务状态要落在服务端，事件可重放，连接可以断开和恢复；最终结果先持久化，再通知客户端任务完成。",why:"如果 WebSocket 断开就丢失任务状态，系统就无法支撑移动网络、浏览器刷新和长时间任务。"},
+{id:"consistency",n:"09",title:"数据库、事务与跨存储一致性",group:"数据层",repo:["src/database/connection.py","src/services/memory/store.py","src/services/conversation_storage.py","src/services/checkpoint_store.py"],repoText:"项目实现：关系型数据访问、PostgreSQL 持久化、租户隔离、事务边界、会话 / 记忆 / Checkpoint 存储，以及跨存储异步一致性机制。",prod:["关系数据库作为业务事实源：用户、租户、会话、消息、任务、审批、操作台账、文档元数据和评测记录。","事务只包住必要的数据库变更；不在 DB transaction 内等待 LLM、Embedding 或外部 HTTP，避免长事务占连接和锁。","同一业务操作的主表变更 + Outbox 事件在一个事务提交；异步 Worker 幂等消费，避免 DB 与消息 / 向量库双写不一致。","状态更新带 version / updated_at 做乐观锁或 CAS；关键唯一约束包括 request_id、idempotency_key、tenant_id + resource_id。","向量库、缓存和搜索索引作为派生数据，允许短暂最终一致；用事件重放、全量重建、对账任务修复漂移。","数据库连接池设置 pool_size、max_overflow、pool_timeout、回收策略；读写分离需明确读己之写语义。","生产 PostgreSQL 配合迁移、备份、PITR、慢查询监控和恢复演练；SQLite 更适合本地 / 单机轻量部署。"],problem:["解决多存储双写、状态覆盖、重复消费、长事务、连接耗尽、索引漂移、备份不可恢复和跨租户数据泄漏等问题。"],prodExtra:["工程实现：PostgreSQL 主库、Outbox / CDC、Redis、对象存储、向量索引版本化、备份恢复演练。"],pitch:"一致性设计不追求所有存储强一致，而是明确事实源和一致性边界：核心业务状态在关系库事务内保证，派生索引异步最终一致，并通过幂等事件、版本和对账恢复。",why:"Agent 是多步骤、跨服务系统，天然存在部分成功；必须设计状态机和补偿，而不是假设所有步骤都能放进一个事务。"},
+{id:"memory",n:"10",title:"Memory：经验提炼、检索与长期学习",group:"学习层",repo:["src/services/memory/","src/services/memory/retrieval.py","src/services/memory/experience.py","src/services/memory/learning.py","src/services/person_like_service.py"],repoText:"项目实现：任务记忆、工具画像、用户偏好、混合检索、经验提炼与沉淀、失败模式库和受控参数更新。",prod:["采集执行 Trace、工具调用、成功 / 失败、耗时和 Token；先做脱敏和隐私过滤，再进入经验提炼。","把原始轨迹压缩为任务摘要、工具序列、结果质量、失败原因和修复策略；避免把完整 Trace 直接注入模型。","按租户隔离保存 Task Memory、Tool Memory、User Profile、Failure Pattern；区分会话短期状态与跨任务长期经验。","检索用 BM25 + Vector + RRF，再叠加 outcome、quality、recency、reuse_count 和用户偏好权重。","注入上下文时限制 Top-K 和 Token 数；失败经验显式标记为反例；关键事实回源，不把记忆当权威数据库。","新经验先去重再 upsert；通过反馈更新策略成功率；设置 TTL、质量阈值、容量上限和用户删除 / 导出能力。","回答交付与记忆索引解耦：Outbox 保证待处理事件可靠，异步 Worker 完成摘要和向量化，失败进入重试 / DLQ。"],problem:["解决每次任务从零开始、工具经验无法复用、同类错误反复发生、用户偏好丢失和记忆无限增长污染上下文等问题。"],prodExtra:["工程实现：PostgreSQL + pgvector / 独立向量库、异步记忆流水线、隐私治理、TTL / 淘汰、人工纠错。"],pitch:"Memory 的价值不是保存聊天记录，而是把执行结果提炼成下一次可检索、可验证、可更新的经验。它和 RAG 共用检索技术，但语义对象、更新触发和可信边界不同。",why:"没有沉淀，Agent 每次都重新探索；没有质量和时效治理，记忆又会变成新的噪声源。"},
+{id:"evaluation",n:"11",title:"Trace、评测、质量门禁与持续迭代",group:"反馈层",repo:["src/services/execution_logger.py","src/controller/trace.py","evaluation/","scripts/run_evaluation.py","src/api/evaluation_routes.py"],repoText:"项目实现：全链路 Trace、Benchmark、Mock / 故障注入 / 真实 Agent 评测、Agentic 指标、统计比较、评测报告和质量门禁。",prod:["每个任务用 trace_id 串联入口、LLM、RAG、工具、DB、Memory 和交付；Span 记录耗时、重试、状态和错误分类。","日志结构化并脱敏；Metrics 记录请求量、成功率、P50 / P95 / P99、Token、成本、工具失败率和队列积压。","离线 Benchmark 覆盖简单问答、固定 Workflow、动态 Agent、失败恢复、Memory 命中和权限拒绝。","Task Success 必须基于预先定义的 acceptance_assertions；工具任务检查真实业务状态和副作用次数，PARTIAL 单独报告。","RAG Recall@K / MRR / NDCG 只在带 Gold Chunk 的离线集计算；线上使用 evidence coverage、citation validity、source freshness 等代理指标。","版本比较采用固定数据集和配对实验，报告置信区间及任务类型 / 风险等级子集，不只看总体平均分。","质量门禁同时检查任务成功、安全违规、重复副作用、延迟、成本和队列等待；越权 / 重复写入为硬门禁，Canary 失败则暂停或回滚。"],problem:["解决 Agent 无法量化评估、版本迭代靠主观感觉、故障不可定位、质量退化未发现和线上学习被噪声污染等问题。"],prodExtra:["工程实现：OpenTelemetry、Prometheus / Grafana、告警、Canary、自动回滚、数据集版本管理和反馈审核。"],pitch:"Agent 不能只用语言模型离线分数衡量。我要从任务成功、路由、工具、恢复、RAG、记忆、延迟和成本多个维度评估，并用门禁把评测结果接入发布流程。",why:"没有评测闭环，系统只能不断增加功能，无法证明功能是否让任务完成得更好。"},
+{id:"ops",n:"12",title:"部署、安全、可观测性与运维",group:"横切层",repo:["main.py","Dockerfile","docker-compose.yml","config/settings.py"],repoText:"项目实现：配置驱动的服务启动、容器化部署、API / Worker 分离、健康检查、资源隔离和可观测性。",prod:["启动阶段做配置校验、依赖连通性检查和数据库迁移；区分 liveness 与 readiness，依赖不可用时不接收新任务。","密钥从 Secret Manager / 环境注入，不写入镜像和日志；工具凭据按租户 / 服务最小权限授权。","多租户数据访问统一强制 tenant_id 过滤；RAG 检索额外执行文档 ACL，防止“搜到了但无权看”。","结构化日志 + Trace + Metrics 三件套；记录 task_id、tenant_id、tool_name、model、latency、status，不记录明文密钥和敏感 Prompt。","部署采用 API / Worker 分离、水平扩缩容、优雅关闭；停止接收新任务，等待在途任务到安全检查点。","备份策略覆盖关系库、对象存储、配置和索引重建材料；定期演练恢复，而不只是确认备份文件存在。","容量规划覆盖 DB 连接、模型 QPS / TPM、Embedding 吞吐、向量检索延迟、队列积压和单租户资源配额。"],problem:["解决服务启动不可靠、密钥泄露、故障不可观测、扩容无效、优雅停机丢任务和灾难恢复无保障等问题。"],prodExtra:["工程实现：Kubernetes / 容器编排、Secret Manager、OTel、监控告警、自动扩缩容、备份与 DR 演练。"],pitch:"生产化不只是 Docker 能启动，而是有健康检查、资源隔离、优雅关闭、可观测性、备份恢复和发布回滚能力。",why:"Agent 依赖多个外部模型和工具，任何单个依赖都可能成为瓶颈；必须让故障可见、可隔离、可恢复。"}
+];
+
+const deepDive = {"ingress":{"sequence":"客户端请求 → API Gateway 生成 request_id / trace_id → JWT / OIDC 认证 → Principal / Tenant Context → 请求体大小、Content-Type、Schema 与同步限流检查 → 幂等键查重 → 创建 RECEIVED Task + 用户消息 + TaskEvent + validation Outbox → 返回 202 + task_id（表示已接收并进入异步校验，不代表业务授权已通过）→ Validation Worker 校验资源 ACL / Scope / 配额 / 预算 / 业务前置条件 → 通过则 QUEUED 并写 execution Outbox；失败则 REJECTED 并记录拒绝原因。","model":"RequestAudit：request_id、trace_id、received_at、principal_id（认证后）、tenant_id、payload_hash、idempotency_key、http_status、deny_reason。Task：task_id、tenant_id、owner_id、session_id、state、state_version、event_seq、deadline_at、cancel_requested_at、validation_lease_owner、validation_lease_until、validation_attempt、created_at。IdempotencyRecord 唯一键为 (tenant_id,user_id,idempotency_key)，同时保存 canonical_payload_hash、task_id、expires_at；幂等记录保留期必须覆盖最大客户端重试窗口和任务生命周期。","tradeoff":"入口尽量快速完成身份、参数、权限和受理记录，不在 HTTP 请求线程中同步执行长任务。任务状态与 WebSocket 连接解耦，避免浏览器断线影响任务本身。","metrics":"认证失败率、越权拦截数、重复请求命中率、429 比例、排队时长、租户并发占用、请求受理到 Worker 开始的等待时间。","baseline":"入口参数不使用拍脑袋固定值：先按供应商 RPM（每分钟请求数配额） / TPM（每分钟 Token 数配额） 上限和租户套餐定义配额。压测初始阶段至少区分每用户请求速率、每租户并发、全局模型并发三层；Redis 限流窗口与 DB 幂等记录 TTL 分开设置。限流阈值以 P95（95 分位耗时：100 次请求中约 95 次在这个时间内完成） / P99（99 分位耗时：用于观察最慢的尾部请求）、供应商 429 和队列等待 SLO 反推。","qas":[["为什么任务要先落库再投递队列？","如果先发消息再写任务表，Worker 可能先消费却查不到任务；如果先写任务再直接发消息，进程可能在两者之间崩溃。Task 与 Outbox 同事务提交，Relay 再异步发布，避免“任务存在但永远没有执行事件”的丢失窗口。"],["401、403、404、409、429 分别怎么处理？","401 表示身份无效；403 表示身份有效但无权执行；404 用于资源不存在或按安全策略隐藏资源存在性；409 用于幂等键冲突或状态版本冲突；429 表示配额或速率限制。错误码要稳定、可观测，并携带可重试性语义，不能让客户端对所有 4xx 盲目重试。"]],"trigger":"请求通过 JWT / OIDC、基础请求 Schema、大小限制和同步入口限流后，才创建 RECEIVED Task。Task 创建事务提交后由 Validation Worker 异步执行资源归属、Scope、业务 ACL、租户配额和前置条件校验；全部通过才进入 QUEUED 并允许执行 Worker 消费。认证失败或入口格式错误不创建 Task。","decision":["API Gateway 先生成 request_id / trace_id 并写最小 RequestAudit；JWT / OIDC 校验签名、issuer、audience、exp / nbf 和用户状态。认证失败返回 401，不创建 Task。","tenant_id 从已验证身份上下文解析；客户端传入的 tenant_id 只能与身份上下文比对，不能作为授权依据。租户身份不匹配按安全策略返回 403 或统一资源不可见响应。","入口同步检查 Content-Type、请求体大小、基础 Schema、字段范围和速率限制；过大返回 413，格式错误返回 400 / 422，入口限流返回 429。","幂等键按 (tenant_id,user_id,idempotency_key) 唯一；同 Key + 同 canonical_payload_hash 返回原 task_id / 当前状态；同 Key + 不同 Hash 返回 409。","入口受理事务写 Task(RECEIVED)、用户消息、IdempotencyRecord、初始 TaskEvent 和 task.validation_requested Outbox；事务提交后返回 202 + task_id。202 只代表系统接收请求，不代表资源权限或业务校验通过。","Validation Worker 领取任务后检查 tenant_id、owner / resource ACL、有效 Scope、业务前置条件、套餐配额、剩余预算和 Deadline；验证通过才在同一事务写 QUEUED、TaskEvent 和 task.execute_requested Outbox。","校验失败时将 Task 写为 REJECTED 并记录 deny_reason / policy_version；响应或任务详情只返回允许披露的拒绝信息，不泄露资源存在性。验证 Worker 失败可由租约接管恢复，不重复创建 Task。","已认证但无权访问是业务拒绝（403 / 统一 404），不是入口认证失败（401）；无权结果不能通过澄清或人工审批绕过。"],"failure":["JWT 过期、签名错误或用户禁用：返回 401，记录 RequestAudit，不创建 Task。","身份有效但缺少 Scope / 资源 ACL 不通过：返回 403 或统一 404，不创建 Task，不通过澄清或审批绕过。","数据库受理事务失败：不返回 202；客户端使用原幂等键重试，避免重复 Task。","Redis 限流服务不可用：按请求风险和成本采用 fail-closed 或本地保守限额；高成本写任务不得无限放行。","同一幂等键并发到达：依赖数据库唯一约束仲裁；失败方读取已提交记录并返回原 task_id，不创建第二条任务。","WebSocket / SSE 建连失败：不影响 Task 受理；客户端通过 task_id 查询状态并按 event_seq 补拉。"],"problemText":"入口真正要解决的不是“接收一段文本”，而是把不可信的外部请求变成一个可以被系统承担责任的任务。没有可信身份，后续检索可能跨租户泄露数据；没有幂等标识，浏览器超时重发就可能创建两份任务；没有受理记录，消息队列、Worker 和前端就无法围绕同一个任务对齐状态。因此入口必须先建立身份、资源边界和任务身份，再谈执行。","mechanismText":"入口先处理不需要访问业务资源的同步门禁：生成 request_id / trace_id，验证 JWT / OIDC，从服务端凭证解析 Principal 和 tenant_id，检查 Content-Type、请求体大小、基础 Schema 和同步速率限制。客户端传入的 tenant_id 只能与 Principal 的租户身份比对；不匹配时在创建 Task 前返回 403 / 统一 404。认证失败返回 401；请求格式错误返回 400 / 422；超大请求返回 413；同步限流返回 429。\n\n随后处理幂等：以 (tenant_id,user_id,idempotency_key) 建唯一约束，并保存规范化请求的 canonical_payload_hash。同 Key + 同 Hash 返回已有 task_id 和当前状态；同 Key + 不同 Hash 返回 409。第一次提交时，事务 A 写 Task(RECEIVED)、用户消息、IdempotencyRecord、初始 TaskEvent 和 task.validation_requested Outbox。事务提交后返回 202 + task_id。202 的含义只是系统已经可靠接收请求并开始异步校验，不表示资源 ACL、Scope 或业务前置条件已经通过。\n\nValidation Worker 从队列领取校验事件，原子 claim Task 并记录 validator lease；随后检查目标资源 owner / ACL、当前 Principal 的有效 Scope、租户套餐配额、预算、业务状态和 Deadline。授权检查在校验时执行，不能只依赖请求到达时的旧快照。全部通过后，事务 B 使用 state_version CAS 将 Task 更新为 QUEUED，同时写 TaskEvent 和 task.execute_requested Outbox；执行 Worker 只能消费该 execution 事件。若业务校验失败，则在事务 B 写 REJECTED 和 deny_reason，不创建 execution Outbox。\n\n因此，认证、入口限流和基础 Schema 是同步门禁；资源授权、业务配额和前置条件是异步校验。把两者分开可以让入口快速返回，同时保留可审计的 REJECTED 任务，也避免未授权任务进入执行队列。","implementationText":"受理分成两个短事务和一个异步校验阶段。事务 A：插入 Task(RECEIVED)、用户消息、IdempotencyRecord、初始 TaskEvent 和 task.validation_requested Outbox；提交后返回 202 + task_id。Outbox Relay 可靠发布校验事件，Validation Worker 原子 claim 并检查资源 ACL、Scope、配额、预算和业务前置条件。事务 B：若通过，CAS 更新 Task 为 QUEUED，同时写 TaskEvent 和 task.execute_requested Outbox；若拒绝，更新为 REJECTED 并写 TaskEvent，不创建执行 Outbox。因此，202 是异步受理回执，不是业务授权成功回执。客户端通过 task_id 查询 VALIDATING / QUEUED / REJECTED。同步入口限流用于保护 API；异步租户配额和业务授权由 Validation Worker 再校验。幂等记录与 Task 在事务 A 同时创建，保证客户端重试返回同一个 task_id。","failureText":"JWT / OIDC 失败：请求层返回 401，不创建 Task。入口 Schema、大小或同步限流失败：返回 400 / 413 / 429，并记录 RequestAudit。事务 A 失败：不返回 202，客户端用原幂等键重试。Validation Worker 在 claim 前崩溃：队列消息重新投递。Worker claim 后崩溃：租约到期后由 Recovery Worker 接管；重复消息根据 Task 状态和 Inbox 唯一键幂等处理。事务 B 失败：若消息尚未 ACK，由 Broker redelivery；若已 ACK，则 Lease Recovery 扫描过期 VALIDATING 任务并重新入队。不得把尚未入队的任务报告为 QUEUED。业务 ACL / Scope 不通过：Task 转 REJECTED，不创建 execution Outbox；向客户端只返回最小必要拒绝信息。若身份 / ACL 服务不可用，不按“无权限”误判为 REJECTED；任务保持 VALIDATING，在 Deadline 内有限重试，过期则转 TIMED_OUT / FAILED，且绝不创建 execution Outbox。Redis / 限流依赖不可用：同步入口按风险 fail-closed 或使用有上限的本地保守限额；不能无限放行高成本请求。"},"context":{"sequence":"先构建路由前最小上下文：当前消息 + 最近有效对话 + 未完成目标 + 已知实体 / 槽位；不在此时预先检索整个知识库。策略引擎确定数据来源后，再按需执行 RAG / Tool 查询。每次模型调用前，基于最新 Task State 组装完整上下文：系统规则 + 当前目标 + 必要历史 + ACL 通过的 RAG Chunk + 已验证 Tool Observation + 相关 Memory + 当前可用 Tool Schema。","model":"PreRouteContext：当前消息、最近有效轮次、未完成目标、实体 / 槽位候选、显式约束；不包含预先全库检索。FullContext：system policy、当前目标、必要历史、ACL 实时复核通过的 RAG Chunk、已验证 Tool Observation、相关 Memory 和本轮所需 Tool Schema。ContextManifest 记录 manifest_id、task_id、model_id、tokenizer_version、prompt_version / hash、context_hash、message / summary / chunk / memory / tool_schema 引用及版本、acl_decision_id、policy_version、分项 Token 数和裁剪原因。","tradeoff":"不追求把所有历史和所有检索结果塞满上下文。系统提示、当前任务约束和工具 Schema（数据结构规范：定义字段、类型、必填项和允许值） 优先；历史与 RAG / Memory 按相关性、可信度和 Token 成本竞争预算。","metrics":"Prompt Token 数、上下文裁剪比例、历史摘要命中率、RAG 证据采用率、Memory 命中后任务成功率、注入攻击拦截率。","qas":[["为什么不能一开始就把 RAG 和 Memory 全部装进上下文？","因为在意图和数据来源判定前，系统还不知道哪些资料与当前请求有关，也不应把不必要的私有资料交给模型。先用最小上下文理解任务，路由后再按 ACL 和相关性取证，最后组装完整上下文。"],["Context Manifest 是不是保存完整 Prompt？","不是。它首先是一次模型调用的元数据清单，记录模型版本、Prompt Hash、消息 / Chunk / Memory 引用、Schema 版本、Token 用量和裁剪原因。是否保存加密 Prompt 快照由合规策略决定。"],["Manifest 里记录了 ACL，是否可以不再检查权限？","不可以。Manifest 只证明当时使用了哪个授权决策和策略版本；每次检索、读取文件和调用工具仍需服务端实时授权，避免权限撤销后继续复用旧上下文。"]],"trigger":"有两个明确触发点。①新请求进入意图识别前：只构建小型 Pre-route Context，用于理解“它 / 上次那个实验”等指代。②每次真正调用模型之前：读取最新 state_version、plan_version 和已完成 Step，重新组装 Full Context。工具结果、用户补充、重规划、文档版本变化、Memory 更新或权限策略变化都会使相关缓存失效；不能复用旧快照。","decision":["PreRouteContext 只用于理解请求和消解多轮指代；路由后才按 RoutePlan 取 RAG / Tool 证据。","每次模型调用前读取最新 task_state_version、plan_version、step results 和权限版本，再组装 FullContext。","可用 Token = model_context_limit - reserved_output_tokens - system_policy_tokens - required_tool_schema_tokens - safety_margin；剩余预算再分配给当前目标、证据、历史和 Memory。","不可裁剪项：系统策略、当前用户明确约束、目标实体、必需工具 Schema 字段和影响副作用的关键 Observation；其他内容按相关性、可信度、时效和 Token 成本排序。","RAG Chunk 每次读取时复核当前 tenant / user / resource ACL；ContextManifest 的历史 ACL 记录只用于审计，不作为授权缓存。","来源冲突时保留 source_id、时间和版本，并在答案中标记冲突；摘要只能作为导航线索，不能替代原始证据。","缓存键必须包含消息版本、Task State、Plan、检索版本、Memory、Tool Schema 和 ACL Policy 版本；任一相关版本变化即失效。"],"failure":["Token 估算与供应商实际 Token 不一致：保留安全余量，遇到上下文超限时按优先级裁剪并记录裁剪原因。","历史摘要生成失败：回退到最近的结构化消息窗口，不阻塞主任务。","检索结果无权限或版本已失效：丢弃该证据并重新检索，不能为了凑上下文绕过 ACL。","Prompt Injection（提示词注入：外部文档或网页藏入恶意指令，试图改变模型行为） 命中：将检索内容视为不可信数据，工具权限仍由服务端策略层判断。"],"problemText":"模型窗口有限，而任务事实分散在消息、数据库、知识库、工具和记忆中。路由前若塞入全部资料，会浪费 Token 且在策略决策前暴露不必要内容；若只用最近几轮，又可能丢掉关键约束。必须先用最小上下文识别任务，再按路由结果取证，最后构建本轮模型真正需要的上下文。","mechanismText":"第一阶段是 Pre-route Context，只包含当前消息、最近几轮与当前目标直接相关的对话、尚未解决的实体指代和用户明确约束。它的用途是识别“用户在说什么”，不负责提供完整业务证据。策略引擎完成路由后，系统才知道要查哪些内部文档、哪些外部系统，以及当前用户是否能读取这些资源。\n\n第二阶段是 Full Context。先计算可用 Token：模型窗口上限减去系统规则、工具 Schema、最大输出预留和安全余量。剩余预算按硬约束优先分配：当前目标与用户明确限制不能裁；随后放入本轮必须使用的 RAG 证据和已验证工具结果；再放入相关历史摘要和 Memory。超预算时按可解释优先级裁剪低相关内容，并记录被裁剪的消息 / Chunk / Memory ID。\n\n每个外部来源进入上下文前都要检查租户、用户和资源 ACL；权限在检索后发生变化时，不能因为旧 Context Manifest 里曾经允许就继续使用。文档内容和工具返回属于不可信数据，只能作为证据，不能覆盖系统规则。","implementationText":"Pre-route Context 和 Full Context 使用不同缓存键。前者可按 session_id + latest_message_id + conversation_version 缓存；后者还必须包含 task_state_version、plan_version、retrieval_version、memory_version、tool_schema_version 和 acl_policy_version。每次模型请求生成独立 Context Manifest，保存引用 ID、版本、Token 统计、Prompt Hash 和裁剪日志。为合规与成本考虑，Manifest 默认保存引用和 Hash；只有在数据保留策略允许时才保存加密后的 Prompt 快照。","failureText":"如果路由前上下文缺失，先回退到当前消息并要求补充必要信息，不提前启动全库检索。如果 RAG ACL 复核失败，丢弃对应 Chunk 并重新检索；如果摘要服务失败，使用有限原始消息窗口；如果 Token 超限，按固定优先级裁剪低价值内容后最多重试一次。若权限版本变化，旧 Full Context 立即失效，重新授权和组装。"},"planner":{"sequence":"请求级认证与资源校验 → 构建路由前最小上下文 → 规则解析 / 结构化意图候选 → 服务端策略计算 → 生成 RoutePlan → 若为固定流程交给 Workflow；若需动态决策才交给 Agent Planner → 执行后读取 Observation 决定 CONTINUE / REPLAN / ASK / ABORT。","model":"RoutePlan：route_id、task_id、intent_candidate、resolved_entities、slot_values、data_sources[]、execution_mode（DIRECT / ATOMIC_CAPABILITY / WORKFLOW / DYNAMIC_AGENT）、required_capabilities[]、risk_policy_id、confirmation_required、approval_required、acceptance_criteria、deadline_at、token_budget、tool_budget、policy_version、rationale_codes[]。AgentState 另存 plan_id、plan_version、current_step、observations[]、failure_streak、replan_count、state_version。LLM 候选字段与服务端最终决策字段分开保存。","tradeoff":"让 LLM 提出计划和动作，但由 Controller 负责预算、权限、状态迁移和终止。反思不是每一步都调用，而是在异常、停滞、低置信或关键决策点触发，控制额外延迟和成本。","metrics":"任务成功率、平均规划轮数、重规划触发率、无效工具调用率、预算耗尽率、停滞检测率、每任务模型调用成本。","qas":[["意图识别是让 LLM 自己判断吗？","不是。规则层先处理固定格式和确定性字段；需要语义理解时，LLM 只输出候选意图、实体、槽位和歧义。服务端再查 Principal、ACL、工具元数据和预算，策略引擎生成最终 RoutePlan。"],["风险等级和复杂度是 LLM 输出的吗？","LLM 可以提出风险提示，但最终风险由服务端根据动作副作用、资源敏感度、可逆性和影响范围计算；复杂度根据步骤依赖、分支、循环和跨系统调用计算。不能让模型给自己批准高风险动作。"],["什么时候用 Workflow，什么时候用 Agent？","步骤和分支在设计时已确定的流程用 Workflow / DAG；后续要根据工具结果或新证据动态选择动作、循环观察或修改计划时才用 Agent。跨系统或多工具本身不必然意味着动态 Agent。"],["置信度阈值怎么定？","不设通用常数。只有监督分类器分数经过独立标注验证集校准后，才按意图类别和误判代价确定阈值；LLM 自报 confidence 不视为概率。缺槽位、实体不唯一和副作用歧义直接按规则澄清。"],["意图判断成了写操作怎么办？","分类输出不会直接执行。工具调用前服务端重新校验用户 Scope、资源归属、动作副作用、幂等键和审批要求；无权限直接拒绝，高风险动作进入独立审批。"]],"trigger":"任务通过入口认证和基础校验后触发一次初始路由。只有自然语言存在多轮指代、多目标或语义歧义时才调用 LLM 解析；格式固定的命令走规则。每次 Observation 改变关键前提、出现新分支、原能力不可用或验收失败时，才重新规划。普通瞬时网络错误走 Retry Policy，不应直接触发 LLM 重规划。","decision":["先构建 Pre-route Context：当前消息、最近有效轮次、未完成目标和已解析实体；不在路由前预取全库 RAG / Memory。","确定性规则先解析固定命令、明确 ID、日期格式和枚举；认证、租户、Scope、资源 ACL、配额由服务端查询，不交给 LLM。","只有自然语言指代、多目标或语义歧义需要分类器 / 结构化 LLM；模型输出 intent_candidate、entities、slots、missing_slots、source_candidates、action_candidates、subgoals、ambiguity_flags，不输出最终权限、风险等级或审批结论。","服务端策略引擎重新读取 Principal / ACL、Tool Registry、资源状态和租户配额；风险按副作用等级、资源敏感度、可逆性和影响范围计算，复杂度按任务图的依赖边、分支、循环和动态决策需求计算。","RoutePlan 分三轴决策：data_sources（当前上下文 / RAG / 实时 Tool，可组合）；execution_mode（DIRECT / 单原子能力 / 固定 Workflow / 动态 Agent）；risk_gate（允许 / 补槽 / 用户确认 / 人工审批 / 拒绝）。三轴不是互斥单选。","固定步骤与固定分支走 Workflow / DAG；只有后续动作必须根据新 Observation 动态改变时才走 DYNAMIC_AGENT。多工具并行、跨系统但步骤固定，不足以单独触发 Agent。","澄清条件：required slot 缺失；实体候选为 0 或多个且无法确定性消歧；时间 / 范围冲突；或歧义会改变资源对象、数据范围或副作用。无权限是拒绝，不是澄清。","审批条件：发起人本身有权限且参数完整，但动作元数据命中独立审批策略。审批人必须具备 approver Scope，且不得由发起人自批；审批只解除风险门禁，不授予发起人权限。","置信度只用于语义拒判辅助。监督分类器分数须按意图类别在独立验证集校准；LLM 自报 confidence 不作为统计概率。没有校准证据时不设置通用数值阈值。","执行中只有 Observation 改变关键假设、出现未预见分支或原验收条件失败才触发 REPLAN；瞬时网络错误按 Retry Policy 处理，不把每次错误都升级成 LLM 重规划。"],"failure":["分类器 / LLM 超时：固定命令仍可走规则路径；无法可靠解析的请求进入澄清或受控解析错误，不自动变成写操作。","结构化输出不符合 Schema：允许一次受约束格式修复；仍失败则不执行工具，并返回可定位的解析错误。","模型候选意图与服务端权限冲突：服务端 ACL / Scope 优先；缺权限直接拒绝，不允许模型改写意图绕过。","执行中发现原计划不完整：先读取 Step Ledger 和 Operation Ledger；固定剩余步骤仍走 Workflow，只有需要根据 Observation 动态选动作时才升级 DYNAMIC_AGENT。","反思 / 重规划调用超时：使用现有 State、验收条件和规则型恢复策略；重规划受 max_replans 与绝对 Deadline 限制。","用户二次确认拒绝或过期：不执行副作用，Task 转 ABORTED；确认内容 Hash 或资源版本变化时要求重新确认。"],"route_matrix":[["数据来源","当前消息 / 已授权会话上下文；内部 RAG；实时 Tool；可多选组合","由策略引擎依据用户明确要求、问题数据域、来源目录、时效和 ACL 决定"],["执行组织方式","DIRECT；单原子能力；固定 Workflow / DAG；动态 Agent","固定步骤 / 固定分支走 Workflow；只有 Observation 会改变后续行动时才用动态 Agent"],["风险门禁","允许；补充参数；发起人二次确认；独立人工审批；拒绝","权限和资源 ACL 是硬门槛；确认 / 审批只解除对应风险门禁，不授予原本不存在的权限"]],"problemText":"把意图、复杂度、风险都交给 LLM 一个标签，会把理解、授权和执行混在一起。意图是用户目标；复杂度是需要多少控制逻辑；风险是做错的损失。三者必须由不同信息源判断，否则模型一次分类错误就可能直接触发高风险动作。","mechanismText":"第一步是确定性解析：识别明确命令、固定参数格式和业务枚举。若请求是“查询实验 E-102”，可直接抽取动作和 ID，不必调用 LLM。第二步才是语义解析：对“帮我看看上次那个实验为什么没跑起来”这类指代和自然语言，使用分类器或结构化 LLM 输出 intent_candidate、entities、slots、missing_slots、knowledge_source_candidate、live_data_need、action_candidate、subgoals 和 ambiguity_flags。模型不输出最终授权结论。\n\n第三步由服务端策略引擎补齐可信信息：从 Principal / 授权服务读取用户有效 Scope；从资源服务检查目标对象归属；从 Tool Registry 读取动作副作用等级、幂等能力和审批要求；从任务图计算依赖边、条件分支、循环和跨系统边界。风险不是模型猜的，而是按动作等级、资源敏感度、可逆性和影响范围计算；复杂度不是按文本长度计算，而是按执行图结构计算。\n\n第四步生成组合式 RoutePlan。数据来源可以是当前上下文、RAG、实时 Tool，也可以多种并用；执行模式可以是 Direct、单原子能力、固定 Workflow 或动态 Agent；风险门禁则是允许、澄清、用户确认、人工审批或拒绝。固定步骤和固定分支优先用普通 Workflow / DAG；只有后续行动必须根据 Observation 动态改变时，才使用 Agent Planner。多工具并行本身不等于 Agent。\n\n置信度处理也要分清来源。监督分类器的分数可以在独立标注集上按意图类别校准，再依据误判成本设拒判区间；LLM 自报的 0.9 不代表 90% 正确，只能作为弱信号。缺少 required slot、实体候选不唯一或歧义影响副作用时直接澄清；权限不足则拒绝，不能通过追问补权限。","implementationText":"RoutePlan 至少保存 route_id、intent_candidate、resolved_entities、slot_values、data_sources[]、execution_mode、required_capabilities[]、risk_policy_id、approval_required、acceptance_criteria、deadline_at、token_budget、tool_budget、policy_version 和 rationale_codes[]。策略引擎对每个字段记录来源：用户显式输入、规则抽取、分类器候选或服务端授权查询。执行前 Controller 再次验证权限和预算，避免计划生成后权限或资源状态变化。","failureText":"结构化输出不符合 Schema 时只允许一次受约束格式修复；仍失败则返回解析错误或澄清，不把非法结果猜成写操作。实体解析为多个候选时，只有在无副作用且业务规则允许时才按确定性规则消歧；否则询问用户。策略服务不可用时，对写操作 fail closed；低风险只读请求可按预定义安全降级路径处理。重规划只修改未完成子图，已完成副作用先从 Operation Ledger 读取，不重复执行。"},"capability":{"sequence":"Planner 给出子任务 → 生成 Capability Contract（动作、对象、前置条件、输出和副作用）→ 按租户 / Scope / 资源 ACL / Schema 版本做硬过滤 → 检索剩余能力 → 按任务适配度和运行数据排序 → 加载被选工具 Schema → 模型生成参数 → 服务端二次授权和校验 → 审批 / 执行。","model":"Tool Registry：tool_id、version、provider、tenant_allowlist、action、object_type、preconditions、input_schema_version、output_schema_version、required_scopes、side_effect_level（NONE / REVERSIBLE / IRREVERSIBLE）、idempotency_support、timeout_policy、retry_policy、confirmation_policy_id、approval_policy_id、health_state（CLOSED / OPEN / HALF_OPEN）。Tool Call 记录 tool_call_id、task_id、step_id、tool_id、schema_version、input_hash、operation_id（仅有外部副作用时必填）、started_at、finished_at、result_ref、error_class。","tradeoff":"工具描述需要足够让模型选对，但不能把全部工具定义塞进每轮 Prompt。采用渐进式披露降低 Token 消耗；安全边界必须在服务端执行，不能由 Prompt 代替。","metrics":"工具发现命中率、工具选择准确率、Schema 校验失败率、权限拒绝率、MCP（模型上下文协议：统一连接 Agent 与外部工具 / 资源的协议） 健康率、工具 P95 延迟、审批等待时间。","qas":[["required_scopes 是什么？","它是工具声明的必需权限范围。例如查询订单要求 orders:read，取消订单要求 orders:cancel。服务端把当前用户有效 Scope 与工具要求做包含关系检查；Scope 通过后仍需检查具体订单是否属于该用户或租户。"],["为什么先过滤再排序？","租户启用、Scope、资源 ACL 和 Schema 兼容是硬约束。一个越权工具不能因为语义相似度高或历史成功率高而入选；排序只比较已经合法可用的候选。"],["工具健康状态可以作为排序分数吗？","OPEN 熔断应直接排除，HALF_OPEN 只用于受控探测，CLOSED 才进入正常候选。健康状态是运行门禁，不是授权，也不应被高匹配分数覆盖。"],["历史成功率样本很少怎么办？","不能用 1/1 等于 100% 直接排序。按同类操作分桶，用 Beta 先验平滑并同时检查样本量；样本不足时降低置信、使用稳定默认能力或人工策略，不让偶然成功主导路由。"]],"trigger":"只有 RoutePlan 中声明需要外部实时数据或外部动作时，才发现工具能力。固定内置工具可走确定性映射；扩展工具数量较多或描述不统一时才需要关键词 / 向量能力检索。工具注册、版本、租户启停、Scope 或资源 ACL 变化时刷新对应缓存；每次真正调用前都实时复核权限。","decision":["先形成 Capability Contract：action、object_type、目标资源、required inputs、preconditions、期望输出 Schema、side effects 和 acceptance criteria。","第一轮做硬过滤：租户是否启用；Principal Scope 是否包含 required_scopes；目标资源是否通过当前 ACL / owner 校验；Schema 版本是否兼容；动作是否被策略允许。任何一项失败即剔除，不参与语义排序。","运行健康是独立门禁：OPEN 不接普通流量；HALF_OPEN 只允许受控探测；CLOSED 才进入正常候选。健康状态不能替代权限检查。","硬过滤后先按能力域、动作和对象类型做关键词 / 结构化检索，再用语义匹配补足同义表达；排序考虑输入输出 Schema 兼容、前置条件满足度、相近场景成功表现、P95 延迟和成本。","历史表现按 tool_id + operation_type + 场景分桶；样本少时用先验平滑并展示样本量，不能用 1/1 的表面成功率直接排名。熔断状态不混入成功率分数。","选中能力后才向模型披露完整 Schema；模型只生成参数。服务端再次验证字段、范围、枚举、URL / 文件路径白名单、资源归属和业务前置条件。","写操作创建稳定 operation_id / idempotency_key；实际执行前再次读取 Principal、资源 ACL、资源版本和审批状态。任何关键版本变化都要重新校验。"],"failure":["没有候选通过硬过滤：返回能力缺失或权限不足的受控结果，不允许模型编造工具名称。","参数缺失：仅对真正影响目标或副作用的 required input 追问；非必填字段使用明确 Schema 默认值，不自行猜资源 ID。","Schema 不兼容或参数校验失败：返回字段级错误；只允许有限修正，超过上限终止当前 Step。","工具 OPEN 熔断：不再向该实例发送普通请求；仅使用经过同等权限和业务语义验证的替代能力，否则报告暂不可用。","审批后权限、资源版本或 payload_hash 变化：原审批失效；重新校验并按策略重新审批或拒绝。"],"problemText":"工具选择不能只看名称相似度。系统必须找出当前用户在当前租户、当前资源范围内真正能执行、参数可构造、前置条件满足且运行状态可接受的能力。权限、资源归属和 Schema 兼容性是硬门槛，不允许被高语义分数抵消。","mechanismText":"先区分三个容易混淆的对象：Tool 是带输入 / 输出 Schema 的可调用能力，通常完成一个原子业务动作；Skill 是可复用的任务操作规程、提示模板或流程封装，可以编排一个或多个 Tool，但 Skill 本身不授予权限；MCP 是连接 Agent 与外部服务的协议，可暴露 Tools / Resources / Prompts，协议接通不等于用户获得业务授权。\n\n再把 Planner 的子任务转成 Capability Contract：动作是什么（查询 / 创建 / 更新 / 删除 / 发送）、操作对象是什么（实验 / 文件 / 订单）、前置条件是什么、期望返回什么结构、是否产生外部副作用。然后做硬过滤：①租户是否启用该工具；②当前 Principal 的有效 Scope 是否包含工具声明的 required_scopes；③目标资源是否通过 owner / ACL 检查；④工具 Schema 版本是否兼容；⑤动作是否被当前策略允许。任何一项失败都直接剔除，不能放进排序分数里“折价”。\n\n健康状态单独处理：Circuit Breaker 为 OPEN 的实例不接普通流量；HALF_OPEN 只放探测请求；CLOSED 才进入正常候选。健康状态不是权限，也不能用短 TTL 缓存替代执行前授权。通过硬门槛后，先用能力域、动作标签和对象类型做关键词 / 结构化检索，再用语义检索补足自然语言表达差异。排序比较动作与对象匹配、前置条件满足度、输入输出 Schema 兼容度、同类操作成功表现、P95 延迟和成本。\n\n历史成功表现不能直接用全局成功次数相除。按 tool_id + operation_type + 相近场景分桶，样本少时使用先验平滑，例如 Beta-Binomial 后验均值 (successes + α) / (trials + α + β)，并同时看样本量；延迟使用同类操作 P95 / P99，而不是全局平均。健康熔断是硬门禁，不应与成功率混成一个分数。\n\n选中工具后才向模型披露完整 Schema。模型只生成参数；服务端验证类型、必填项、枚举、范围、URL 白名单、资源归属和业务前置条件。对于写操作，再绑定稳定 operation_id / idempotency_key，并在实际执行前重新授权。","implementationText":"Tool Registry 保存 tool_id、provider、tenant_allowlist、action、object_type、preconditions、input_schema_version、output_schema_version、required_scopes、side_effect_level、idempotency_support、timeout_policy、retry_policy 和 health endpoint。运行指标单独按工具 + 操作类型记录样本数、成功数、错误分类、P95 / P99、成本和熔断状态。候选查询输出被过滤原因和排序特征，便于解释为什么选择某工具。完整 Schema 按需加载，调用前由服务端二次校验。","failureText":"没有候选通过硬过滤时，明确返回“当前租户 / 用户没有可用能力”，不允许模型编造工具。候选存在但缺参数时澄清；目标资源无权访问时拒绝。工具 OPEN 熔断时可选经过验证的替代工具，或说明暂不可用；不能为了可用性绕过 Scope。Schema 不兼容时停止调用并回退兼容版本。审批后执行前重新检查权限、资源版本和 payload_hash，任一变化都使审批失效。"},"execution":{"sequence":"Controller 读取 Task State → 找到依赖已满足的 READY Step → 原子 claim 并获得租约 / fencing token → 检查 Step Ledger 和 Operation Ledger → 生成 Action → Schema / 权限复核 → 调用工具 → 规范化 Observation → 业务验收 → 一个本地事务提交 Step Result + State Version + TaskEvent / Outbox → 调度后继 Step 或终止。","model":"Task Step：task_id、step_id、step_version、parent_step_id、dependency_step_ids[]、status、input_hash、acceptance_criteria、attempt_count、lease_owner、lease_until、fencing_token、tool_call_id、operation_id、result_ref、error_class、started_at、finished_at、state_version。Step 大对象放对象存储，数据库保存引用、Hash 和摘要。","tradeoff":"执行状态与事件日志分离：状态表保存当前快照，事件表保存发生过什么。快照用于快速恢复，事件用于审计、重放和排障。对外部副作用以 operation_id 做幂等保护。","metrics":"每步耗时、每任务步骤数、Checkpoint 成功率、重复 Step 拦截数、Worker 接管次数、任务恢复成功率。","qas":[["Lease 过期后旧 Worker 还在运行怎么办？","仅有 Lease 不够。每次 claim 都递增 fencing_token，数据库写入必须携带当前 token；旧 Worker 的 token 过期后不能覆盖新状态。外部写操作还要使用稳定 operation_id / 幂等键，避免旧 Worker 在网络调用层重复产生副作用。"],["Task 和 Step 为什么分开建状态？","一个 Task 可以同时有多个 Step：一个已成功、一个运行中、一个等待重试。Task 状态表达整体生命周期，Step 状态表达单步进度，Operation 状态表达第三方是否提交，不能混用一个 status 字段。"],["为什么事务里不能直接调用工具？","外部 HTTP / LLM 调用可能耗时、超时或回调；把它放在 DB 事务里会长期占锁和连接，且无法把第三方纳入本地 ACID。应先持久化操作意图，事务外调用，再用第二个本地事务记录结果。"]],"trigger":"Plan / Workflow 已持久化且某个 Step 的全部前置依赖 SUCCEEDED 时，该 Step 才从 BLOCKED 变为 READY。Worker 原子 claim 成功后才执行。Step 成功、失败、取消、Checkpoint 边界和租约异常都会触发状态提交或恢复检查。","decision":["Step 从 BLOCKED 变 READY 的条件：所有依赖 Step 均达到所需成功状态，且资源版本 / 前置条件仍满足。","Worker 必须原子 claim 成功并取得 lease_owner、lease_until、递增 fencing_token 后才能执行；租约过期的旧 Worker 不得提交状态。","执行前检查 Task 未取消、绝对 Deadline 尚有足够剩余时间、预算足够、Principal / ACL 仍有效、工具非 OPEN 熔断，并读取 Step Ledger / Operation Ledger。","并行只允许用于无数据依赖且无写冲突的 Step；同一 resource_key 的写操作按资源串行。并行上限受全局、租户、工具和供应商配额共同限制。","每个 Step 固定 step_id 与 input_hash；相同输入重投先查已提交结果。输入或验收条件变化时创建新 step_version，不覆盖旧执行事实。","工具返回后将 Observation 规范化为结构化结果，并按 acceptance_criteria 验收；HTTP 200 或模型自然语言声称成功都不等于业务成功。","外部调用发生在 DB 事务外；回写时在一个短事务内提交 Step Result、Operation 回执、Task state_version、TaskEvent 和 Outbox。","Step 失败只阻断依赖它的下游；独立分支是否继续由 partial_success_policy 决定，最终 Task 结果按 required_steps 和验收条件计算。"],"failure":["claim 前崩溃：消息可重新投递；新 Worker 原子 claim 后从持久化 State 继续。","外部调用前崩溃：租约过期后检查 Step Ledger，未执行的 Step 可安全重新 claim。","外部写调用后、本地结果提交前崩溃：Operation 状态设为 UNKNOWN_COMMIT，先按 operation_id / 外部单号对账；未确认前禁止盲目重放。","旧 Worker 在租约失效后恢复：其 fencing_token 已过期，所有状态写入必须失败；外部副作用仍由稳定幂等键保护。","CAS / state_version 冲突：丢弃旧快照，重新读取 Task、Step 和 Operation 最新状态后再决策，不得直接覆盖。","一个 Step 失败：仅阻断依赖该 Step 的后继节点；若 required Step 失败则 Task 不得标记 SUCCEEDED，按部分交付策略收敛为 PARTIAL 或 FAILED。"],"problemText":"长任务跨多个 Worker 和外部系统，单靠内存循环无法在进程重启后恢复；单靠最终答案也无法判断某个写操作是否已经发生。必须把 Task、Step 和外部 Operation 分开记录，才能在重复投递、并发执行和崩溃恢复时不重复副作用。","mechanismText":"任务计划先变成有依赖边的 DAG。没有依赖且读写资源互不冲突的 Step 可以并行；存在数据依赖的必须等待上游验收成功；对同一资源的写操作按 resource_key 串行。Worker 用数据库原子 claim 获取 lease_owner、lease_until 和递增 fencing_token。租约过期后其他 Worker 才能接管；旧 Worker 即使恢复，也必须因 fencing_token 过期而无法提交旧状态。\n\n每个 Step 有稳定 step_id 和 input_hash。执行前先查 Step Ledger：已成功且输入 Hash 未变化就复用结果；输入变化则生成新 Step 版本。对外部写操作，先创建稳定 operation_id / 幂等键，再调用第三方。工具返回后转成结构化 Observation，按业务验收条件判断成功，例如“订单状态确实变为 CANCELLED”，而不是只看 HTTP 200 或模型说“已完成”。\n\n结果提交时，Step 状态、结果引用、Task state_version、TaskEvent 和待发布 Outbox 在一个短数据库事务中提交；事务内绝不调用 LLM、Embedding 或第三方 HTTP。若外部系统已提交但 Worker 在本地落库前崩溃，恢复流程读取 Operation Ledger 并对账，不直接重放写请求。","implementationText":"Task 表存整体状态与版本；Step 表以 (task_id, step_id, step_version) 唯一标识步骤；Operation 表以 operation_id 唯一标识外部副作用；TaskEvent 记录状态事实，Outbox 负责可靠发布，二者不是同一张表。Worker claim 使用条件 UPDATE 或 SELECT FOR UPDATE SKIP LOCKED；状态更新使用 state_version CAS；租约续期必须验证 owner 和 fencing_token。大对象放对象存储，数据库只存 result_ref、Hash 和摘要。","failureText":"调用前崩溃：租约过期后从 READY Step 重新 claim。调用后、外部提交前崩溃：按 Operation Ledger 判断是否可重试。外部提交后、本地保存前崩溃：进入 RECONCILING 查询外部状态。旧 Worker 租约过期后恢复：fencing_token 不匹配，拒绝其状态写入。某个 Step 失败时只阻断依赖它的下游；独立 Step 是否继续由任务的 partial_success_policy 决定。"},"reliability":{"sequence":"任务受理时生成绝对 deadline_at（排队时间也计入）→ 每次下游调用计算剩余预算 → 按错误类别和副作用判定 Retry / Reconcile / Compensate / Fail → 在截止时间前停止新 Step → 对未决写操作对账 → 持久化最终状态。","model":"Operation Ledger：operation_id、task_id、step_id、tool_id、tenant_id、idempotency_key、input_hash、external_ref、status、attempt_count、last_error、next_retry_at、reconciliation_result、created_at、updated_at。状态：NOT_STARTED → IN_PROGRESS → SUCCEEDED / FAILED / UNKNOWN_COMMIT；需要补偿时 COMPENSATING → COMPENSATED。","tradeoff":"超时是调用方等待预算耗尽，不代表下游没有执行。对写操作，UNKNOWN_COMMIT 必须进入对账路径；不能用通用 Retry 装饰器处理所有工具。","metrics":"按依赖统计 timeout / 429 / 5xx、重试放大倍数、熔断打开时间、UNKNOWN_COMMIT 数、对账成功率、补偿成功率、队列积压和 P99（99 分位耗时：用于观察最慢的尾部请求）。","baseline":"可作为压测起点：连接超时约 1–2 秒；普通内部读调用总超时约 3–5 秒；外部工具按 SLA 配置 8–15 秒；单次调用最多 2–3 次重试，使用 0.5s / 1s / 2s 指数退避并加 Jitter。单任务并行工具数先限制在 3–5 个，再根据下游配额、Worker 数和连接池容量压测调整。它们是初始预算，不是所有依赖通用的硬编码值。","qas":[["90 秒 Deadline 是从哪里开始算？","应从任务正式受理并写入 deadline_at 时开始，排队时间也计入端到端预算。每个 Worker 根据绝对截止时间计算剩余预算，不能每一层重新获得完整 90 秒。具体时限按任务 SLA 配置，不把 90 秒当成所有任务通用值。"],["读超时和写超时的重试策略一样吗？","不一样。只读请求通常可在剩余 Deadline 内有限重试；写请求必须先确认幂等能力。响应丢失且可能已提交时进入 UNKNOWN_COMMIT，对账前不能再次创建副作用。"],["租约过期是不是就能让新 Worker 直接重跑？","不能。先检查 Step Ledger 和 Operation Ledger；如果外部写操作状态未知，先对账。新 Worker 还必须拿到新的 fencing_token，旧 Worker 的迟到写入必须被拒绝。"]],"trigger":"每次模型、Embedding、数据库、向量库、消息队列和外部工具调用前计算剩余 Deadline；收到连接失败、429、5xx、超时、熔断打开、租约丢失或 UNKNOWN_COMMIT 时进入可靠性决策。Deadline 从任务被系统正式受理时开始计时，因此包含排队等待。","decision":["任务正式受理时写入绝对 deadline_at；排队时间计入总预算。每次调用 timeout = min(依赖配置上限, deadline_at - now - cleanup_reserve)。","错误先分类：连接前失败、429、5xx、业务 4xx、Schema / 参数错误、只读超时、写超时、取消、UNKNOWN_COMMIT；错误类别决定是否可重试。","永久性 4xx、权限失败和参数错误不重试；429 尊重 Retry-After；连接前失败、可重试 5xx 和只读超时在剩余 Deadline 内有限重试。","写操作必须绑定稳定 operation_id / 幂等键。应用内幂等表只能防止本系统重复受理；只有第三方明确支持并正确实现幂等键，或存在可查询的唯一业务单号，才能保护外部副作用。响应丢失且可能已提交时转 UNKNOWN_COMMIT；确认未提交才重试，确认已提交则补记回执，无法确认则保持对账或人工介入。","指数退避使用 Full Jitter，并同时受 max_attempts、max_elapsed_time、单任务 retry_budget 和绝对 Deadline 限制；不能每层各自重试放大流量。","Circuit Breaker 按依赖 + 操作类型统计；OPEN 快速失败，冷却后 HALF_OPEN 放少量探测，连续成功达到恢复条件才 CLOSED。熔断不代表权限变化。","并发与背压分全局、租户、供应商、工具、DB 连接池层；队列设软 / 硬容量。达到硬阈值时限流或拒绝，不无限堆积。","Deadline 到期先停止新 Step；若有 UNKNOWN_COMMIT，Task 保持 RECONCILING。所有外部副作用状态收敛后，才决定 TIMED_OUT、PARTIAL 或 FAILED。"],"failure":["429：按 Retry-After 等待并检查剩余 Deadline；超过等待预算则限流失败，不立即重试。","连接前失败 / 只读超时：按 Retry Matrix 有限重试；达到上限后标记 Step FAILED。","写操作超时：转 UNKNOWN_COMMIT 并查询外部状态；不能确认时保留 RECONCILING，不能宣称 FAILED 或 TIMED_OUT。","下游持续 5xx：打开熔断器，停止向故障实例发送普通流量；只有经验证的备用能力才可切换。","重试预算耗尽：停止该 Step 的重试；Task 根据 required_steps 和 partial_success_policy 决定 PARTIAL / FAILED。","取消到达：停止调度新 Step；对在途写操作对账。不可逆副作用已经发生时，不能把 Task 伪装成完全 CANCELLED。"],"problemText":"调用方超时只表示没有在等待期限内收到结果，不代表下游没有执行。生产可靠性要区分“请求失败”“业务未提交”“业务已提交但响应丢失”和“提交状态未知”，否则通用重试会把不确定性放大成重复扣款、重复创建或重复发送。","mechanismText":"任务受理时写入绝对 deadline_at。每次调用前计算 remaining = deadline_at - now，再给下游分配 min(该依赖的 connect/read/total timeout, remaining - cleanup_reserve)。cleanup_reserve 用来提交最后状态、释放租约和写事件；当剩余时间不足以完成一个新步骤时，Controller 停止调度，而不是再发一个注定超时的请求。\n\n重试先按错误类别判断：参数错误、认证 / 授权失败、资源不存在等永久 4xx 不重试；429 按 Retry-After 等待并受 Deadline 限制；连接建立前失败、可重试 5xx 和只读超时可以指数退避 + 随机抖动有限重试。写操作必须有稳定 operation_id / 幂等键。应用内幂等表只能阻止本系统重复受理；只有第三方真实支持同一幂等键去重，或提供可查询的唯一业务单号，才能保护外部副作用。若两者都没有，响应丢失后的 UNKNOWN_COMMIT 不能自动重试，只能保持 RECONCILING 并升级人工处理。若第三方支持幂等键，可使用同一个键重放，但仍要按供应商的作用域、保留期和冲突语义处理。\n\n并发由多层预算共同决定：全局 Worker 容量、租户公平配额、模型供应商 RPM / TPM、单工具并发上限、数据库连接池和队列容量。DAG 只并行互不依赖且资源不冲突的步骤；同一 resource_key 的写操作串行。队列设置软 / 硬阈值：软阈值降低接收速率，硬阈值按套餐返回 429 / 503 或明确延迟受理，不能无限堆积。租约过期通过 fencing_token 防止旧 Worker 提交状态。","implementationText":"统一定义 Retry Matrix：错误类别、是否已建立连接、是否只读、是否有幂等键、是否可能提交、最大尝试次数、退避策略和剩余 Deadline。Operation Ledger 保存 operation_id、idempotency_key、input_hash、external_ref、status、attempt_count、next_retry_at 和 reconciliation_result。全局 / tenant / provider / tool 各自设置并发信号量；DB pool 连接数按所有 API / Worker 实例总和反推，预留管理和迁移连接。监控 queue_oldest_age、pool_wait、429、timeout、retry_amplification 和 UNKNOWN_COMMIT。","failureText":"只读请求超时且剩余预算足够时，按 Retry Matrix 有限重试；429 尊重 Retry-After；永久错误直接失败。写操作超时进入 UNKNOWN_COMMIT，禁止通用重试。Deadline 到期先停止新 Step；在途写操作仍需对账。用户取消时停止新调度，但不假定第三方已回滚。若补偿失败，保留 COMPENSATING 并持续重试或升级人工处理；只有所有未决副作用收敛后才写最终 Task 状态。"},"rag":{"sequence":"文档接入 → 文件安全校验 → 解析 / OCR（图片文字识别：把扫描件或图片中的文字提取出来） → 结构清洗 → 结构感知切块 → 元数据补全 → Embedding（文本向量：把文本编码成数字，用于查找语义相近的内容） 批处理 → Vector + BM25（关键词相关性算法：更擅长匹配编号、错误码、型号等精确词项） 建索引 → 版本发布。在线：Query 规范化 → ACL（访问控制列表：标记哪些用户或租户能读取某份文档） 过滤 → 双路召回 → RRF（倒数排名融合：按两路检索的名次合并结果，不直接混加不同量纲的分数） → 去重 / 邻块扩展 → Rerank（重排：对初步检索结果再次打分，挑出更相关的片段） → Token Budget（Token 预算：分配给系统提示、历史、检索证据、记忆和输出的 Token 配额） → 证据约束生成 → 引用校验。","model":"Document：doc_id、tenant_id、owner_id、active_version、desired_version、status、source_uri、content_hash、acl_version。Chunk：chunk_id、doc_id、doc_version、chunk_index、heading_path、page_no、text_ref、token_count、embedding_model_version、acl_snapshot_version。ACL Snapshot 仅用于审计构建时权限，不作为当前授权依据。Query Trace：query_id、original_query、rewritten_queries[]、acl_filter_version、vector_candidate_ids[]、bm25_candidate_ids[]、rrf_ranks、rerank_model_version、rerank_scores、selected_chunk_ids[]、evidence_coverage。","tradeoff":"召回阶段优化 Recall，宁可多取一些候选；重排阶段优化 Precision，只对候选集做昂贵的 Query-Document 联合打分。生成阶段只使用通过权限过滤且在 Token Budget 内的证据。","metrics":"离线：Recall@K = Top-K 命中 Gold Chunk 的查询数 / 有 Gold Evidence 的查询数；MRR = 各查询首个 Gold 命中排名倒数的均值；NDCG@K 按相关性等级折损累计。在线：candidate_empty_rate、evidence_coverage（被证据覆盖的子问题数 / 总子问题数）、citation_validity、rerank_score_calibration、source_freshness、ACL_violation_count、检索 P95。线上没有 Gold Chunk 时不得报告 Recall@K。","baseline":"可用于第一轮离线实验的起始配置：技术文档 Chunk 约 450–700 Tokens、Overlap 约 60–100；FAQ / 短段落约 150–300 Tokens、Overlap 约 20–40；Vector Top-K 约 30、BM25 Top-K 约 30、RRF k 可从 60 起测、Rerank 候选约 30–50、最终上下文约 5–8 个 Chunk。表格和代码块单独处理。最终参数必须按文档类型用 Recall@K、NDCG、引用正确率、P95（95 分位耗时：100 次请求中约 95 次在这个时间内完成） 和 Token 成本调优，不能把这组起始值说成普适最优。","qas":[["线上怎么知道 RAG 召回率低？","线上没有 Gold Chunk，不能直接计算 Recall@K。只能用候选是否为空、校准后的 rerank 分数、Top1/Top2 分差、子问题证据覆盖、来源有效性和引用支持性作为代理信号；真正的 Recall@K 在带标准 Chunk 的离线评测集上计算。"],["ACL 为什么要在召回前过滤？","否则未授权 Chunk 可能占据 Top-K，挤掉合法证据，并可能从日志或缓存泄露内容。向量和 BM25 两路必须应用同一租户 / 用户过滤；结果返回后还要二次检查当前 ACL。"],["为什么表格和代码不能按普通文本切块？","表格行离开表头就失去列含义，因此每个表格 Chunk 要重复列名并保留行关系；代码要按语法结构切，不能把函数签名和函数体拆散。扫描 PDF 则要保留页码并处理 OCR 置信度。"],["什么时候触发 Query Rewrite？","指代未补全、多子问题需要拆解、首轮无候选或证据质量代理未过门槛时才触发。保留原 Query 与改写 Query 并行召回，避免改写漂移；仍不足则澄清或拒答。"]],"trigger":"离线入库由文件上传、知识源变更、定时同步或删除事件触发。在线检索只在 RoutePlan 声明需要企业 / 私有知识，或用户明确要求依据指定资料时触发；普通通用知识问题不启动 RAG。Query Rewrite 不按固定轮次执行，只在指代未补全、多子问题、首轮候选为空或证据质量代理指标未达标时触发。","decision":["入库先校验文件类型、大小、恶意内容、租户归属、ACL 和内容 Hash；解析后按页评估文本抽取质量，扫描件或低文本密度页面进入 OCR。","切块保留结构：段落按标题 / 句子 / Token 边界；表格每块重复表头；代码按类 / 函数 / 语法块；每块保存 doc_id、doc_version、page_no 和 heading_path。","Embedding 批量处理按 Token 与供应商配额切批；校验维度、模型版本和 Chunk 数。索引版本保持 BUILDING，直到 Vector 与 BM25 清单均完整。","在线检索先用当前 tenant / user / resource ACL 与 active_version 过滤，再并行 Vector Top-K 和 BM25 Top-K；两路用 RRF 融合，去重后按需扩展邻块并精排。","线上没有 Gold Chunk，不能把 Recall@K 当成实时可观测值。证据充分性用候选非空、校准后的 rerank 分数、Top1/Top2 分差、子问题覆盖、来源有效性和冲突情况做代理判断。","Query Rewrite 只在指代未补全、多子问题、首轮无候选或证据代理指标不足时触发；原 Query 与改写 Query 并行召回，防止改写漂移。","Rerank 门槛按文档类型和 Reranker 版本在标注集校准；一次扩展 / 改写后仍不足则澄清或拒答，不编造引用、不拼接互相矛盾的证据。","文档新版本先在独立版本空间完整构建并校验 Chunk、Vector、BM25 和 ACL 清单，再原子切换 active_version；旧版本逻辑下线后异步清理。"],"failure":["解析失败：记录页级错误、解析器版本和 OCR 置信度；可单页重跑，未完整构建的文档版本不得发布。","Embedding 限流或超时：按批次尊重 Retry-After 重试；失败版本保持 BUILDING，不影响当前 active_version。","向量库不可用：可降级 BM25，但必须使用等价 ACL 过滤；BM25 也不可用或无法证明过滤有效时，明确报告检索不可用。","Reranker 超时：退回 RRF 排序并记录降级；若校准证据门槛因此无法满足，则澄清或拒答。","ACL 撤销：立即阻断后续读取并使相关缓存失效；索引物理清理异步执行，但不能在清理期间继续向用户返回旧 Chunk。","新索引未 READY：继续服务旧 active_version；删除先写 tombstone 阻断查询，再异步清理 Vector、BM25 和缓存。"],"problemText":"RAG 要解决的不只是“搜到相似文本”，而是找到当前用户有权访问、版本有效、能支持当前子问题并可回溯原文的证据。线上没有标准答案，不能直接声称知道 Recall@K；必须把离线召回指标和在线证据充分性判断分开。","mechanismText":"入库时先校验文件类型、大小、租户归属、恶意内容和内容 Hash。解析后保留标题层级、页码、表格表头、代码块和来源。切块按结构边界：普通段落按 Token 长度递归切分；表格按行分组并在每块重复表头；代码按类 / 函数 / 语法块切分；扫描件按页 OCR 并保留页号与识别置信度。每个 Chunk 绑定 doc_id、doc_version、tenant_id、owner_id、ACL 和 chunk_id。\n\n在线查询先补全实体和时间范围，再把同一 ACL 过滤条件同时应用到向量索引和 BM25。若底层向量库不能可靠执行租户过滤，则使用租户独立 namespace 或先取授权文档 ID 集合做候选约束；返回后再做服务端二次 ACL 校验，不能只在 Prompt 前过滤。两路召回后用 RRF 融合，公式为 score(d)=Σ 1/(k+rank_i(d))；k 可从 60 起测，但需用数据集验证。对融合后的候选去重、扩展必要邻块，再用 Cross-Encoder 对有限 Top-N 精排。\n\n线上证据是否足够不能看“Recall@K”，因为没有 Gold Chunk。可观测代理包括：是否有候选、精排分数是否超过该模型版本校准门槛、第一名与第二名分差、每个子问题是否有证据覆盖、来源是否可信 / 过期、证据之间是否冲突。分数门槛必须按文档类型和 Reranker 版本用标注集校准，不能跨模型复用。证据不足时先保留原 Query 做一次扩展 / 改写并并行召回；仍不足就明确说明缺证据或向用户澄清，不拼凑答案。","implementationText":"关系库保存 Document 元数据、ACL、active_version 和索引状态；原文件放对象存储；向量库和 BM25 是派生索引。新版本在独立 namespace 构建，校验 Chunk 数、Embedding 维度、向量与 BM25 覆盖清单后才原子切换 active_version。Query Trace 记录原 Query、改写 Query、ACL filter version、两路候选 ID、RRF rank、rerank score、最终 Chunk ID 和证据覆盖情况。引用校验至少检查引用 ID 存在、属于当前 active_version、用户仍有权限；关键结论再做 claim-to-evidence 支持性校验。","failureText":"解析失败按页隔离并可单页重跑；Embedding 限流按批次重试，未完成版本不发布。向量库不可用时可降级 BM25，但 BM25 必须使用相同 ACL；若无法证明权限过滤有效，则拒绝检索而不是全库搜索。ACL 撤销先立即阻止读取，再异步清理索引。Reranker 超时可退回 RRF 排名，但必须提高拒答门槛并记录降级。索引新版本未 READY 时继续服务旧 active_version；删除通过 tombstone 阻断新查询，再异步清理向量、BM25 和缓存。"},"delivery":{"sequence":"事件产生 → 按 task_id 写事件日志 → 分配 event_seq → WebSocket 推送 → 客户端 ACK / 保存 cursor → 断线重连 → 按 cursor 补发 → 最终状态持久化 → done 事件。","model":"TaskEvent：task_id、event_seq、event_id、event_type、aggregate_version、payload_ref、created_at。event_seq 在 task_id 范围内单调递增，(task_id,event_seq) 唯一；客户端保存 last_event_seq。OutboxEvent 是独立待投递记录，不能把 TaskEvent 和 Outbox 混为一表。","tradeoff":"实时推送和可靠交付分开设计。WebSocket 不承诺天然 exactly-once；通过持久化事件、序号、客户端去重和游标补发，做到可恢复的至少一次投递体验。","metrics":"首 Token 延迟、Token flush 间隔、事件发送失败率、重连率、补发事件数、慢消费者队列长度、取消响应耗时。","qas":[["为什么不承诺 WebSocket Exactly Once？","网络连接可能在服务端发送成功、客户端收到但 ACK 丢失时断开，也可能客户端收到重复帧。协议层无法单独提供端到端 exactly-once。我们用持久事件 + 单调序号 + 至少一次重放 + 客户端去重，保证最终可恢复且业务效果不重复。"],["Token 流和业务事件为什么要区分优先级？","Token delta 是可合并的展示数据，过多会造成网络和渲染开销；审批、工具完成、错误和终态是控制事件，丢失会导致客户端状态错误。队列过载时可以合并 delta，但必须保留关键控制事件。"]],"trigger":"触发时机：Agent 产生状态变化、工具调用状态、增量 Token、审批请求、错误或终态时生成事件。Token delta 按时间阈值或字符阈值 flush；状态变化和终态事件优先立即持久化并发送。","decision":["每次持久化 TaskEvent 时，在同一 DB 事务中锁定 Task 的 event_seq 计数或使用等价原子序列分配方式，确保同一 task_id 下严格单调且无重复。","TaskEvent 是业务事实；Outbox 是待发布记录；WebSocket / SSE 是传输通道。三者生命周期分离。","Token delta 属于可合并展示增量，可按时间窗 / 字符数合并；状态迁移、审批、工具结果、错误、取消和终态必须持久化。","客户端只应用 event_seq 大于 last_event_seq 的事件；ACK 代表客户端已收到某序号，不代表业务事务已提交。","重连时请求 event_seq > cursor 的事件并按序补发；游标早于保留期则返回 Task Snapshot 和新 cursor。","最终 Answer、Task terminal state、TaskEvent 和 Outbox 在同一事务提交；提交成功后才推送 done。推送失败不回滚已提交结果。","慢客户端使用有界队列；Token delta 可合并，控制事件不能静默丢弃。持续背压时断开订阅，任务仍继续执行。"],"failure":["发送失败：事件已经持久化时不回滚任务；重连后补发。","事件序号出现缺口：客户端请求缺失区间，服务端按事件日志补齐；若已超过保留期则返回当前快照和最新游标。","客户端重复 ACK：ACK 操作幂等，不影响任务状态。","连接断开：不触发任务取消；只有显式 Cancel API 才改变 cancel_requested。"],"problemText":"流式输出解决的是用户等待过程中的可见性，不是任务本身的可靠性。WebSocket 连接可能随时断开，浏览器可能重复收到事件，服务端可能已经提交最终结果却没能把 done 帧送出去。因此不能把“发出一个 WebSocket 消息”当成业务状态已经可靠交付。","mechanismText":"先区分三种数据：Token delta 是可合并的展示增量；TaskEvent 是持久化的业务状态事实；Outbox 是把事件可靠发布到消息系统的待投递记录。每个 TaskEvent 在数据库事务中分配单调递增 event_seq，唯一约束为 (task_id,event_seq)。客户端保存 last_event_seq，重连时查询 event_seq > cursor 的事件并按序补发；重复帧按序号丢弃。Token delta 可以按字符数 / 时间窗口合并，不必每个 Token 都落库；审批、工具完成、错误、取消和终态事件必须持久化。\n\n最终完成时，在一个 DB transaction 内提交最终 Answer、Task terminal state、TaskEvent 和 Outbox；事务提交后才发送 done。WebSocket 发送失败不回滚业务结果，客户端刷新后仍可从任务查询接口读取最终结果。若游标早于事件保留期，服务端返回最新 Task Snapshot 和新的 cursor。","implementationText":"TaskEvent 负责可重放历史，event_seq 在 task_id 范围内分配；Outbox 负责可靠推送，Inbox 可用于下游消费者去重；WebSocket 只是传输通道。客户端 ACK 代表已收到到哪个序号，不代表业务事务提交。慢客户端使用有界队列，Token delta 可合并；控制事件不能静默丢弃。","failureText":"发送失败但 TaskEvent 已提交时不回滚 Task；客户端用 last_event_seq 重连补发。重复事件按 event_seq 去重；游标过期则返回 Snapshot。用户关闭浏览器只断开订阅，不自动取消任务；显式 Cancel API 才写 cancel_requested_at。"},"consistency":{"sequence":"业务事务（Task / Step / Message / Memory 主记录）+ TaskEvent + Outbox → Commit → Relay 至消息系统 → Consumer Inbox 去重 → 更新派生索引 / Cache → desired_version 与 indexed_version 对账 → 修复或重建。","model":"TaskEvent：不可变任务事实，(task_id,event_seq) UNIQUE；OutboxEvent：event_id UNIQUE、aggregate_type、aggregate_id、aggregate_version、event_type、payload_ref、created_at、published_at、retry_count；InboxEvent：(consumer_name,event_id) UNIQUE、processed_at、result_ref。aggregate_version 用于业务聚合并发，event_seq 用于单个 Task 的客户端事件顺序，二者不可混用。","tradeoff":"关系数据库保存业务事实；向量索引、BM25、缓存和搜索索引是可重建派生视图。跨系统不伪造分布式强事务，使用事务 Outbox + 至少一次投递 + 幂等消费者 + 对账实现业务最终一致。","metrics":"Outbox backlog、最老未发布事件年龄、消费延迟、重复事件拦截数、索引版本滞后、DLQ 数量、对账修复量、事务冲突率。","baseline":"数据库连接池按总连接预算分配：数据库 max_connections 先扣除管理、迁移和监控连接，再按 API / Worker 实例数分配 pool_size 与 max_overflow。Outbox 消费采用小批量、短事务和可配置并发；批量大小通过消费延迟、锁等待和 DB CPU 压测决定。索引状态至少记录 desired_version 与 indexed_version。","qas":[["TaskEvent、Outbox 和 Inbox 有什么区别？","TaskEvent 是不可变业务历史，支持审计和客户端游标补发；Outbox 是与业务事务一起提交的待发布事件；Inbox 是消费者已处理 event_id 的去重记录。它们不是同一张表，也不能互相替代。"],["两个 Worker 同时更新 Task 怎么办？","读取 state_version 后更新时带 WHERE state_version = expected_version；只有一个更新成功，另一个得到冲突后重新读最新状态。Worker claim 还要使用原子条件更新 / SKIP LOCKED 和 fencing_token。"],["数据库和向量库如何保证一致？","不做跨系统强事务。关系库记录文档版本和 desired_version，Outbox 驱动向量 / BM25 构建，索引写成功后更新 indexed_version；只有新版本两路索引完整才切 active_version。定时对账发现落后就重放或重建。"],["为什么不能在数据库事务里调用 Embedding？","Embedding 是外部网络调用，耗时和失败不可控；事务会长时间持锁并占连接。事务只写主记录和 Outbox，Embedding 由异步 Worker 执行，失败独立重试。"]],"trigger":"触发时机：任何会改变主业务事实、并需要同步更新派生系统的事务，都在本地事务内写 Outbox。消费者收到事件后更新 Vector、BM25（关键词相关性算法：更擅长匹配编号、错误码、型号等精确词项）、Cache、Memory 等派生视图；定时对账扫描负责发现漏消费、乱序和数据漂移。","decision":["事实源：Task、Step、Operation、Approval、Document 元数据和 Memory 主记录以关系库为准；对象存储保存大对象；Vector、BM25、Cache 是派生视图。","状态更新使用 state_version CAS；同一事务内写主记录、TaskEvent 和 OutboxEvent。事务不包含消息发布、Embedding、LLM 或第三方 HTTP。","Outbox Relay 只有收到 Broker ACK 后才标记 published；Relay 在 ACK 后、标记前崩溃会重复发布，因此消费者必须幂等。","消费者先在本地事务中插入 Inbox 唯一键，再执行本地业务更新；业务更新成功与 Inbox 标记同事务提交。跨外部系统副作用另建 Operation / Outbox。","aggregate_version 小于当前版本的事件丢弃；大于当前版本 + 1 的事件暂缓并补齐缺失版本或重建快照，不能让乱序旧事件覆盖新状态。","派生索引使用 doc_id + version / memory_id + version 做幂等 upsert / delete；desired_version 与 indexed_version 不一致时重试或重建。","DLQ 保存原始事件、错误类别、重试次数和最后错误；人工重放 / 跳过必须有权限、审计和幂等保护。"],"failure":["DB 事务失败：主状态、TaskEvent 和 Outbox 一起回滚，不会出现状态已变但无待发布事件。","Broker 已 ACK 但 Outbox 未标记：Relay 会重发；Inbox 唯一键阻止重复业务处理。","事件乱序或缺失：按 aggregate_version 缓冲、补齐或重建；不能只按消息到达顺序覆盖数据。","向量 / BM25 写入失败：主事实不回滚，indexed_version 保持落后并进入重试 / DLQ；对账任务负责修复。","DLQ 长期积压：按 oldest_event_age 告警；人工重放或跳过必须记录操作者、原因和目标版本。"],"problemText":"关系库、消息队列、对象存储、向量库、BM25 和缓存没有一个覆盖所有系统的本地事务。真正要保证的是主业务事实不丢、事件不丢、重复投递不重复产生业务效果、派生视图最终追上事实源，并且每个不一致都能被发现和修复。","mechanismText":"先定义事实源：Task、Step、Operation、Approval、Document 元数据和 Memory 主记录保存在关系库；对象文件保存在对象存储；向量索引、BM25 和缓存是可重建派生视图。数据库事务只覆盖本库的快速写操作，不在事务中调用 LLM、Embedding 或外部 HTTP。\n\n任务状态变化时，在同一个 DB transaction 内完成：①按 state_version 条件更新 Task；②插入不可变 TaskEvent 并分配该 task_id 下单调递增的 event_seq；③插入 Outbox 待发布事件。任何一步失败则整个事务回滚。Outbox Relay 发布后若在标记 published 前崩溃，消息可能重复，因此消费者用 Inbox 的 (consumer_name,event_id) 唯一约束去重。消费者处理成功与 Inbox 记录在同一个本地事务提交；若跨外部系统，还要为该消费者建立自己的 Operation / Outbox 流程。\n\n乱序事件用 aggregate_version 处理：版本小于当前版本的事件丢弃；版本大于当前版本 + 1 时暂缓并补齐缺失事件或重建快照，不能让旧事件覆盖新状态。TaskEvent 是业务事件历史，可用于客户端游标补发和审计；Outbox 是待投递队列；Inbox 是消费去重账本，三者用途不同。\n\n数据库并发控制采用唯一约束 + 短事务 + CAS / 行锁组合。Task 更新使用 WHERE state_version = expected_version；Worker claim 使用原子条件更新或 SKIP LOCKED；幂等键以 (tenant_id,user_id,idempotency_key) 建唯一索引；事件以 (task_id,event_seq) 唯一；步骤以 (task_id,step_id,step_version) 唯一。高冲突聚合可按 aggregate_id 串行消费。","implementationText":"核心表至少包括 tasks、task_steps、operations、approvals、messages、task_events、outbox_events、inbox_events、idempotency_records、documents、memories。索引覆盖租户 + 主键查询、status + next_retry_at、outbox published_at + created_at、task_id + event_seq 和各唯一幂等键。大文本 / 工具结果放对象存储，DB 存 URI、Hash、版本和摘要。TaskEvent 可按时间分区并设置保留期；审计数据与普通调试日志分开保留。\n\n连接池容量按所有 API / Worker 实例的 pool_size 总和核算，不能每个实例单独按 DB max_connections 配满；为迁移、监控和管理员连接预留容量。鉴权、幂等和任务状态的 read-after-write 读主库；报表和非关键分析可读副本。Schema 迁移采用 expand → dual-compatible deploy → backfill → switch → contract，保证滚动发布期间新旧版本兼容。","failureText":"DB 事务失败时 TaskEvent 和 Outbox 一起回滚，不会出现状态变了但没有事件。Relay 重复投递由 Inbox 拦截；事件乱序由 aggregate_version 拒绝旧写并等待缺失版本；派生索引失败不回滚主事实，记录 indexed_version 落后并重试 / 重建。Outbox 积压时按 oldest_event_age 告警并限制新任务受理。数据库连接池耗尽时快速失败或背压，不能无限等待占满 Worker。"},"memory":{"sequence":"Trace（链路追踪：用一个 ID 串起请求经过的各个服务和调用） / 用户反馈采集 → 隐私过滤 → 经验摘要 → 质量与可信度评估 → 相似记忆去重 → 主存储事务 + Outbox（事务发件箱：与业务数据在同一事务写入的待发布事件表） → Embedding（文本向量：把文本编码成数字，用于查找语义相近的内容） / 索引 → 检索排序 → Token Budget（Token 预算：分配给系统提示、历史、检索证据、记忆和输出的 Token 配额） 注入 → 新任务反馈更新。","model":"Memory：memory_id、tenant_id、user_id、memory_type、content_ref、source_trace_id、source_message_id、outcome、quality_score、source_type（USER_CONFIRMED / SYSTEM_VERIFIED / MODEL_INFERRED）、applicability_scope、version、expires_at、deleted_at、embedding_model_version、reuse_count、last_used_at。用户明确确认的偏好、系统验证的任务经验和模型推断候选必须分开存储。","tradeoff":"原始 Trace 是审计证据，不等于长期记忆。长期记忆只保存对未来决策有价值的摘要；记忆写入异步化，用户请求成功不依赖 Embedding 索引即时完成，但待处理事件必须可靠持久化。","metrics":"Memory Precision@K、Memory Hit Rate、命中后任务成功率、重复记忆率、过期记忆命中率、记忆写入延迟、用户纠错 / 删除率。","baseline":"Memory 不按“所有 Trace 永久保存”设计。原始 Trace 按审计与合规周期保留；长期记忆按类型设置 TTL：任务经验看复用和质量，用户偏好允许用户查看 / 修正 / 删除，失败模式按最近命中和修复成功率衰减。记忆注入先做 tenant / user 过滤，再按质量、结果、时效和相似度排序，最后受 Token Budget 限制。","qas":[["失败经验什么时候可以写入长期记忆？","不能因为 Task FAILED 就自动记一条“失败经验”。必须先有可定位的错误签名、根因证据和经过回归验证的修复策略；否则只保留 Trace 供排查，不把猜测写成经验。"],["用户偏好和模型推断怎么区分？","分别保存 source_type 和 confidence_source。用户明确说“以后都用表格”属于用户确认；模型从一次请求推断“用户喜欢表格”只能是低可信候选，不能覆盖用户明确偏好。"]],"trigger":"触发时机：任务进入 SUCCEEDED / PARTIAL / FAILED 等终态后，或用户明确纠正偏好、评价结果、确认某项长期事实时，触发记忆候选提炼。普通中间 Token、未经验证的工具输出和短期临时信息不直接写长期记忆。","decision":["只从任务终态后的已验证 Trace、用户明确纠正 / 确认、或已完成根因验证的失败案例生成长期记忆；中间 Token 和未经验证的工具输出不直接入库。","先过滤 Secret、凭证、支付信息及不应长期保留的敏感数据；记忆范围限定为 tenant / user / task 类型所需的最小范围。","成功经验必须关联业务验收结果；Failure Pattern 必须具备错误签名、根因证据和回归验证过的修复动作；根因未确认只留 Trace。","去重先按 tenant_id + user_id + memory_type + entity_key，再用语义相似度辅助；适用条件不同的记忆不得仅因文本相似而合并。","主记忆记录与 Outbox 同事务提交；Embedding 异步完成。检索前先按 tenant / user scope、deleted_at、expires_at 和当前权限过滤。","排序考虑来源类型、质量、业务结果、适用条件、时效和当前任务相关性；注入受 Context Token Budget 限制。","用户明确纠正优先于模型推断；删除先立即逻辑屏蔽并发清理事件，再异步清除向量、缓存和副本，直到对账确认完成。"],"failure":["Embedding 失败：主记忆已持久化，索引状态保持 PENDING；后台重试，不阻塞原 Task 终态。","质量门控失败：不创建长期记忆，只保留 Trace 供审计 / 排查。","失败根因未验证：不得写 Failure Pattern；等待人工或回归证据补齐。","记忆冲突：优先保留来源和版本；用户明确确认覆盖模型推断，无法消歧时不自动合并。","用户删除：主记录立即标记 deleted_at 并过滤检索；异步清理所有派生索引和缓存，删除未完成期间不得重新注入。"],"problemText":"Memory 不是把所有对话永久存起来，也不是第二个向量知识库。Trace 记录发生过什么，Memory 只保留未来任务可能复用的经验、稳定偏好和经过验证的失败教训。如果不做质量门控，模型的一次误判就可能被写成长期事实，后续每次检索又把错误不断强化。","mechanismText":"记忆候选只在三个场景产生：任务进入终态后，从已验证 Trace 提炼任务经验；用户明确纠正 / 确认稳定偏好时更新用户记忆；某个失败模式已完成根因确认且修复方案经过回归验证时，才沉淀 Failure Pattern。不能把每条中间 Token、未经验证的工具输出或模型猜测直接写成长期记忆。\n\n提炼时先做敏感信息和 Secret 过滤，再判断未来复用价值。成功经验必须关联业务验收结果；失败经验要保存错误签名、触发条件、已验证修复动作和适用范围，不能只保存“上次失败了”。去重先按 tenant / user / memory_type / 实体键查重，再用语义相似度辅助；相似但适用条件不同的记忆不能合并。写入关系库主记录和 Outbox 后异步 Embedding。检索时先按租户 / 用户权限过滤，再考虑记忆类型、来源可信度、结果质量、时间有效性、适用条件和当前任务相关性。","implementationText":"Memory 主表保存 memory_id、tenant_id、user_id、memory_type、source_trace_id、source_message_id、outcome、quality_score、confidence_source、applicability_scope、version、expires_at、deleted_at。用户确认的偏好与模型推断的偏好分开标记；用户纠错优先于推断记录。Embedding 索引只保存派生表示，关系库是事实源。删除先写 deleted_at 并立即从检索过滤，再异步清理向量、缓存和副本。","failureText":"任务成功不等待 Memory Embedding；主记录与 Outbox 持久化后异步重试。质量门控失败则不写入；根因未确认的失败只留 Trace，不升级为长期 Failure Pattern。用户删除 / 撤销授权时，主记录立即逻辑删除并屏蔽检索，后台对账确认所有派生索引清理完成。"},"evaluation":{"sequence":"固定数据集与版本 → 离线执行 → 采集 Trace（链路追踪：用一个 ID 串起请求经过的各个服务和调用） → 计算任务 / 检索 / 工具 / 安全 / 成本指标 → 与基线配对比较 → 质量 Gate → Canary（金丝雀发布：先让少量真实流量使用新版本，再决定是否扩大范围） → 线上观测 → 回滚或扩大流量。","model":"EvaluationCase：case_id、dataset_version、task_type、risk_tier、input、expected_entities、required_slots、allowed_data_sources、expected_tool_calls、forbidden_side_effects、gold_chunks、acceptance_assertions。EvaluationRun：agent_version、prompt_version、model_version、tool_registry_version、policy_version、index_version、config_hash、seed、trace_id、judge_version、metrics。","tradeoff":"单一 LLM Judge（大模型评审器：按标准评价答案，但不能替代业务事实校验） 分数容易受模型偏差影响。采用确定性指标、规则检查、人工抽样和模型评审组合；质量、延迟、成本、安全必须一起看。","metrics":"Task Success（全部 required assertions 通过的有效 Case 比例）、Partial Rate、Routing Accuracy、Tool Selection Accuracy、Recovery Rate（可恢复故障中最终恢复成功的比例）、离线 RAG Recall@K / NDCG、Citation Support Rate、Abstention Accuracy、Memory Precision@K、P95 / P99、Token Cost、Safety Violation Rate、Duplicate Side-effect Rate。所有指标按 task_type 和 risk_tier 分层报告。","qas":[["为什么需要线上评测，离线数据集不够吗？","离线集覆盖已知场景，线上流量会出现新表达、新工具组合、知识更新和分布漂移。线上采用隐私合规的指标与抽样 Trace，监控真实成功率、延迟、成本和失败模式，再将可复现问题沉淀为新的离线 Case。"],["如何避免 LLM Judge 自己偏好某种答案风格？","Judge 需要 rubric、参考答案 / 证据、结构化评分维度和版本控制；对关键指标做人工双标校准，定期测 Judge 与人工的一致性。Judge 只评估它能判断的维度，业务状态和权限正确性优先使用确定性校验。"]],"trigger":"触发时机：Prompt、模型、工具、检索索引、路由策略或关键配置变更时触发离线回归；发布前跑质量 Gate；线上 Canary 与持续抽样评测监控真实分布漂移。严重事故修复后增加针对性回归样本。","decision":["每个 Case 先定义机器可判定的 acceptance_assertions；没有验收条件的 Case 不纳入自动 Task Success 分母。","Task Success = 全部 required assertions 通过的 Case 数 / 有效且具备验收条件的 Case 总数；PARTIAL 单独报告，不计为 SUCCEEDED。","工具任务优先检查真实业务状态和副作用次数；RAG 离线先用 Gold Chunk 算 Recall@K / MRR / NDCG，再固定证据评估忠实度与引用支持性。","同一批 Case 做配对比较，固定 dataset、Prompt、Model、Tool、Policy、Index 版本；报告差值、置信区间和任务类型 / 风险等级子集。","线上没有 Gold Chunk 时用 evidence coverage、citation validity、abstention correctness 等代理指标；不能把它们标成 Recall@K。","发布 Gate 同时检查 Task Success、安全违规、重复副作用、P95 / P99、Token 成本和队列等待；越权与重复写入设硬门禁。","Canary 阈值按既定 SLO 和历史基线定义；关键安全门禁任一触发即停止放量，不能用总体平均分上涨抵消高风险子集退化。"],"failure":["验收条件缺失：Case 标记为不可自动评分并补充标注，不用 Judge 猜测通过与否。","Judge 不可用：保留确定性指标和人工抽样；Evaluation Run 标记 INCOMPLETE，不得通过质量 Gate。","数据分布漂移：按任务类型、风险等级、租户场景和语言分层补充线上失败样本，并保留数据集版本。","总体指标提升但高风险子集退化：按子集 Gate 阻断发布；越权或重复副作用发生时立即暂停 Canary。"],"problemText":"Agent 的输出具有随机性，单次 Demo 成功不能说明系统可靠。更麻烦的是，最终回答错了不一定是模型生成错：可能是路由选错、RAG（检索增强生成：先从知识库找证据，再让模型基于证据回答） 没召回、工具返回异常、状态恢复丢步骤，或者评测标准本身不清楚。评测必须能把“结果不好”拆解成可定位的阶段性问题。","mechanismText":"每个 Case 在评测前定义可判定的验收条件。工具类任务以外部业务状态和字段断言为主，例如资源是否创建、状态是否正确、是否重复产生副作用；RAG 先用 Gold Chunk 计算 Recall@K / MRR / NDCG，再固定证据评估答案忠实度和引用支持性；开放式回答用明确 Rubric、人工抽样和 LLM Judge 组合。Task Success 的分母是所有进入评测且有明确验收条件的 Case，分子是所有必需条件通过的 Case；部分成功单独记 Partial，不混入 Success。\n\n离线比较固定 dataset_version、prompt / model / tool / index / policy 版本，使用同一批 Case 做配对比较；报告总体值和关键子集，不只看平均分。线上 Canary 先观察任务成功率、权限违规、重复副作用、P95 / P99、Token 成本和队列等待；安全违规和重复写入是硬门禁，不能用答案质量平均分上涨抵消。","implementationText":"每个 Case 保存 input、expected_entities、required_slots、allowed_data_sources、expected_tool_calls、forbidden_side_effects、gold_chunks、acceptance_assertions 和风险等级。Evaluation Run 绑定所有依赖版本与 Trace ID。RAG 离线指标按 query 计算并按文档类型 / 问题类型分层；线上用 evidence coverage、citation validity、abstention correctness 等代理指标。Judge 需要固定 Rubric，并定期与人工双标样本对齐。","failureText":"验收条件不明确的 Case 不纳入自动 Task Success 分母，先补标注。Judge 不可用时保留确定性指标，但评测标记 incomplete，不能当作通过。总体分数提升但高风险子集退化、权限违规增加或重复副作用出现时阻断发布；Canary 超过门槛则暂停放量并回滚。"},"ops":{"sequence":"配置与 Secret 注入 → 启动依赖检查 / DB Migration → Readiness → API 与 Worker 独立扩缩容 → 指标 / 日志 / Trace（链路追踪：用一个 ID 串起请求经过的各个服务和调用） → 告警与自动恢复 → 备份 / PITR（数据库时间点恢复：利用备份和日志恢复到指定历史时刻） → 灾备演练。","model":"Release Manifest：application_version、config_version、db_schema_version、prompt_version、model_route_version、tool_registry_version、policy_version、index_version、feature_flags、compatibility_matrix、rollback_target。每次发布可追溯到代码、配置和依赖版本。","tradeoff":"API 层处理短请求和事件订阅，Worker 承担长时 Agent / RAG（检索增强生成：先从知识库找证据，再让模型基于证据回答） / Memory 任务；两类服务独立扩缩容，避免长任务占满 API 连接。健康检查区分进程存活与依赖就绪。","metrics":"CPU / Memory、事件循环阻塞、DB Pool 使用率、慢查询、队列深度、Worker 利用率、模型 429、Embedding 吞吐、向量查询 P95、错误预算消耗。","qas":[["为什么要把 Readiness 和 Liveness 分开？","Liveness 失败通常意味着进程自身不可恢复，需要重启；Readiness 失败意味着实例暂时不应接收新流量，例如数据库迁移未完成或关键依赖不可用。把依赖短暂抖动直接做 Liveness 会造成重启风暴。"],["扩容 Worker 为什么不能只看 CPU？","Agent Worker 经常在等待模型、数据库或外部 API，CPU 低也可能队列严重积压。扩容决策要综合 oldest message age、queue depth、任务平均耗时、下游 TPM / RPM、连接池和租户配额；否则扩容反而把下游打爆。"]],"trigger":"触发时机：部署发布、扩缩容、依赖异常、队列积压、资源阈值、SLO 告警、证书 / Secret 轮换、数据库迁移和灾备演练时触发运维控制流程。","decision":["Readiness 判断实例是否可接收新请求；Liveness 只判断进程是否失去响应。短暂下游故障优先降级 / 摘流，不通过重启制造雪崩。","API 按请求并发、P95、连接数和事件订阅压力扩缩容；Worker 按可执行队列量、oldest_age、任务耗时和下游配额扩缩容。","连接池按所有 API / Worker 实例的 pool_size + overflow 总和核算，先扣除管理、迁移和监控连接并预留余量。","数据库迁移采用 expand → 双版本兼容部署 → backfill → 切换读写 → contract；每一步都定义回滚条件。","告警阈值由 SLO、错误预算和历史基线定义；至少覆盖队列最老消息年龄、Outbox 积压、DB pool_wait、锁等待、供应商 429、UNKNOWN_COMMIT 和恢复失败。","RPO / RTO 由业务影响等级和灾备合同定义，不使用全系统统一数字；备份只有在隔离环境恢复演练成功后才算有效。","发布清单必须绑定应用、Schema、Prompt、模型、工具目录、策略和索引版本；Canary 观察安全、质量、延迟和成本后再扩大流量。"],"failure":["Worker 滚动发布：停止 claim 新任务；在途 Step 到安全提交点后退出，超过宽限期由新 Worker 通过租约和 fencing_token 接管。","数据库不可用：停止接收无法可靠持久化的写任务；恢复后先检查主状态、Outbox 和 Inbox，再恢复消费。","模型供应商故障：仅切换到经过能力和安全验证的备用模型；记录模型路由版本并运行关键回归，不静默改变行为。","Schema 迁移失败：按兼容矩阵回滚应用或前向修复；不得在旧代码仍运行时删除旧字段。","恢复演练失败：灾备状态标记不合格，修复并重新演练；不得把备份任务成功等同于业务恢复成功。"],"problemText":"生产运维不是部署成功就结束。Agent 系统同时依赖 API、Worker、数据库、消息队列、模型供应商、Embedding（文本向量：把文本编码成数字，用于查找语义相近的内容） 和向量检索；这些组件的负载形态不同，故障也会互相放大。只看 CPU 或进程是否存活，无法判断用户任务是否真的能被及时执行和恢复。","mechanismText":"API 和 Worker 分开伸缩。API 的压力指标是请求并发、连接数和 P95；Worker 的压力指标是队列最老消息年龄、可执行任务数、任务耗时和下游配额占用。CPU 低不代表 Worker 空闲：它可能在等待 LLM / HTTP。扩容前先核对数据库连接池、供应商 RPM / TPM 和单工具并发上限，避免扩容把压力转移到下游。\n\nLiveness 只判断进程是否卡死；Readiness 判断实例能否接收新流量。依赖短暂故障通常让 Readiness 失败或触发降级，不应直接触发进程重启。数据库 Schema 使用 expand-contract 迁移，滚动发布期间新旧代码都能读写兼容结构。备份只有在隔离环境恢复演练并验证 RPO / RTO 后才算有效。","implementationText":"连接池按“所有实例的 pool_size 总和 + overflow + 管理 / 迁移连接”核算，必须低于数据库可用连接预算并留出故障余量。监控 pool_wait、active_connections、锁等待、慢查询、事务时长、队列 oldest_age、Worker lease 过期和供应商 429。任务事件与 Trace 按保留策略分区 / 归档；密钥放 Secret Manager 并支持轮换。发布清单绑定应用、Schema、Prompt、模型、工具目录、策略和索引版本。","failureText":"Worker 发布时先停止 claim 新任务，在途 Step 到安全提交点后退出；超过关闭宽限期由租约接管和 Checkpoint 恢复。数据库不可用时停止接收无法可靠落库的任务。模型供应商故障时按路由策略切换或降级，并记录实际模型版本。备份未经过恢复演练不能宣称具备灾备能力。"}};
+let activeId="ingress";
+const byId=Object.fromEntries(modules.map(m=>[m.id,m]));
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function renderCard(m, target){
+  const el=document.createElement("button");el.className="module-card"+(m.id===activeId?" active":"");el.dataset.id=m.id;
+  el.innerHTML=`<div class="card-top"><strong>${m.n} / ${esc(m.title)}</strong><span class="tag">${esc(m.group)}</span></div><p>${esc(m.why)}</p><div class="mini-tags"><span class="tag repo">核心实现</span><span class="tag prod">生产机制</span></div>`;
+  el.addEventListener("click",()=>selectModule(m.id));target.appendChild(el);
+}
+function renderGrid(){
+  ["moduleGrid","moduleGrid2"].forEach(id=>{const el=document.getElementById(id);if(!el)return;el.innerHTML="";modules.forEach(m=>renderCard(m,el));});
+}
+function detailHTML(m){
+  const d=deepDive[m.id]||{sequence:"",model:"",tradeoff:"",metrics:"",qas:[]};
+  return `<div class="statusline"><span class="status repo">系统设计与实现</span><span class="status extend">生产运行机制</span></div>
+  <h3>${m.n} / ${esc(m.title)}</h3><p class="lede">${esc(m.group)} · ${esc(m.why)}</p>
+  <div class="deep-block sequence"><h4>① 端到端数据流</h4><p>${esc(d.sequence)}</p></div>
+  <div class="deep-block trigger"><h4>② 触发时机：什么时候启动这个模块？</h4><p>${esc(d.trigger||"由上游状态迁移或业务事件触发。")}</p></div>
+  <div class="deep-block mechanism"><h4>③ 决策机制：系统为什么这样判断？</h4><p>${esc(d.mechanismText||"")}</p></div>
+  <div class="deep-block"><h4>④ 要解决的核心矛盾</h4><p>${esc(d.problemText||"")}</p></div>
+  <div class="deep-block implementation"><h4>⑤ 技术如何串成可运行的链路</h4><p>${esc(d.implementationText||"")}</p></div>
+  <div class="deep-block"><h4>⑥ 核心数据模型 / 关键字段</h4><p>${esc(d.model)}</p></div>
+  ${d.baseline?`<div class="deep-block baseline"><h4>⑦ 可落地的参数起点 / 配置策略</h4><p>${esc(d.baseline)}</p></div>`:""}
+  <div class="deep-block"><h4>⑧ 为什么这样设计：取舍与边界</h4><p>${esc(d.tradeoff)}</p></div>
+  <div class="deep-block failure"><h4>⑨ 异常发生时，系统如何收敛？</h4><p>${esc(d.failureText||"")}</p></div>
+  <details class="reference-list"><summary>展开本模块的检查清单（用于复习，不替代上面的机制解释）</summary>
+    <h4>判断条件速查</h4><ul>${(d.decision||[]).map(x=>`<li>${esc(x)}</li>`).join("")}</ul>
+    <h4>异常场景速查</h4><ul>${(d.failure||[]).map(x=>`<li>${esc(x)}</li>`).join("")}</ul>
+  </details>
+  <h4>⑩ 面试官连续追问（点击展开）</h4>
+  <div class="qa-list">${d.qas.map((qa,i)=>`<details class="qa"><summary><span class="qa-num">Q${i+1}</span>${esc(qa[0])}</summary><div class="qa-answer">${esc(qa[1])}</div></details>`).join("")}</div>
+  <div class="deep-block metrics"><h4>⑪ 怎么验证设计真的有效</h4><p>${esc(d.metrics)}</p></div>
+  <h4>⑫ 相关代码模块</h4><p class="module-note">${esc(m.repoText)}</p>
+  <div class="codepaths">${m.repo.map(p=>`<a href="https://github.com/lidanlinvv/Experiment_Agent/blob/main/${p}" target="_blank" rel="noreferrer">${esc(p)}</a>`).join("")}</div>
+  <div class="quote"><b>面试表达：</b>${esc(m.pitch)}</div>`;
+}
+function selectModule(id){
+  activeId=id;const m=byId[id];if(!m)return;
+  ["detail","detail2"].forEach(k=>{const e=document.getElementById(k);if(e)e.innerHTML=detailHTML(m);});
+  document.querySelectorAll(".module-card").forEach(e=>e.classList.toggle("active",e.dataset.id===id));
+  document.querySelectorAll(".flow-node").forEach(e=>e.classList.toggle("selected",e.dataset.id===id));
+}
+function showView(name){
+  document.querySelectorAll(".view").forEach(e=>e.classList.add("hidden"));
+  const v=document.getElementById("view-"+name);if(v)v.classList.remove("hidden");
+  document.querySelectorAll(".tab").forEach(e=>e.classList.toggle("active",e.dataset.view===name));
+  if(name==="modules")selectModule(activeId);
+  if(name==="overview")selectModule(activeId);
+}
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.view)));
+document.querySelectorAll(".flow-node").forEach(b=>b.addEventListener("click",()=>{selectModule(b.dataset.id);showView("overview");})); document.querySelectorAll(".cross-tag").forEach(b=>b.addEventListener("click",()=>{selectModule(b.dataset.id);showView("overview");}));
+document.getElementById("search").addEventListener("input",e=>{
+  const q=e.target.value.trim().toLowerCase();
+  document.querySelectorAll(".module-card").forEach(card=>{
+    const m=byId[card.dataset.id];const hay=[m.title,m.group,m.why,...m.prod,...m.problem,...m.prodExtra,m.repoText].join(" ").toLowerCase();
+    card.classList.toggle("hidden",q&&!hay.includes(q));
+  });
+  if(q){
+    const first=modules.find(m=>[m.title,m.group,m.why,...m.prod,...m.problem,...m.prodExtra,m.repoText].join(" ").toLowerCase().includes(q));
+    if(first)selectModule(first.id);
+  }
+});
+renderGrid();selectModule("ingress");
+</script>
+</body>
+</html>
